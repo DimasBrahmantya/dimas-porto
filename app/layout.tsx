@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
 });
 
 const inter = Inter({
@@ -18,8 +20,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dimas Brahmantya Aryasena | Portfolio",
-  description: "Portfolio of Dimas Brahmantya Aryasena - Front End Developer and UI/UX Designer",
+  title: "Dimas Brahmantya Aryasena | Front-End & UI/UX Developer",
+  description: "Portfolio Neo-Brutalist Dimas Brahmantya Aryasena - Front End Developer & UI/UX Designer",
 };
 
 export default function RootLayout({
@@ -29,10 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      lang="id"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${inter.variable} scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-neutral-950 text-neutral-50">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-[#fafafa] text-neutral-900 antialiased selection:bg-black selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }
