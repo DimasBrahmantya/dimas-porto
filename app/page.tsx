@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { desc } from "framer-motion/client";
 import { 
   GraduationCap, 
   Briefcase, 
@@ -251,51 +252,82 @@ export default function Portfolio() {
               {
                 title: "SIMRS Rawat Jalan",
                 type: "Tugas Akhir",
-                year: "2024",
+                year: "2026",
                 desc: "Sistem untuk pendaftaran rawat jalan di rumah sakit, dengan fitur tambahan seperti manajemen jadwal dokter, data dokter, dan monitoring.",
-                tech: ["Next.js", "MongoDB"]
+                tech: ["Next.js", "MongoDB"],
+                link: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git"
               },
               {
                 title: "Secure Hub",
                 type: "Tugas Kuliah",
-                year: "2024",
+                year: "2025",
                 desc: "Sistem deteksi tautan (link) aman untuk menghindari phishing. Dibangun menggunakan arsitektur modern.",
-                tech: ["Next.js", "NestJS", "MongoDB"]
+                tech: ["Next.js", "NestJS", "MongoDB"],
+                link: "https://github.com/DimasBrahmantya/Secure-Hub.git"
               },
               {
                 title: "Website Pemilihan Umum",
                 type: "University Project",
                 year: "2023",
                 desc: "Sistem e-voting menggunakan framework Vue.js dan Laravel.",
-                tech: ["Laravel", "Vue.js"]
+                tech: ["Laravel", "Vue.js"],
+                link: "https://github.com/DimasBrahmantya"
               },
               {
                 title: "Sistem Pendaftaran Rawat Jalan",
                 type: "Tugas Magang",
-                year: "2023",
+                year: "2025",
                 desc: "Membuat Sistem pendaftaran rawat jalan pada rumah sakit (RSUD Grati).",
-                tech: ["Laravel", "MySQL"]
+                tech: ["Laravel", "MySQL"],
+                link: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git"
               },
               {
                 title: "Design UI/UX Smart Laundry",
                 type: "Academic",
                 year: "2025",
                 desc: "Developed the UI/UX conceptual design for a seamless laundry booking application.",
-                tech: ["Figma", "UI/UX"]
+                tech: ["Figma", "UI/UX"],
+                link: "https://figma.com"
               },
               {
                 title: "Design UI/UX Sale Pisang",
                 type: "E-Commerce",
                 year: "2024",
                 desc: "Designed a UI/UX concept for a local e-commerce platform selling banana-based products.",
-                tech: ["Figma", "UI/UX"]
+                tech: ["Figma", "UI/UX"],
+                link: "https://figma.com"
               },
               {
                 title: "Design UI/UX Readly",
                 type: "Academic",
                 year: "2024",
                 desc: "Created UI/UX for an online library application.",
-                tech: ["Figma", "UI/UX"]
+                tech: ["Figma", "UI/UX"],
+                link: "https://figma.com"
+              },
+              {
+                title: "Remadja.Inc",
+                type: "E-Commerce",
+                year: "2026",
+                desc: "Landing Page for clothing brand.",
+                tech: ["Next.js"],
+                link: "https://remadja-inc.vercel.app/"
+              },
+              {
+                title: "Portfolio Rismanyah",
+                type: "Academis",
+                year: "2026",
+                desc: "Landing Page for a portfolio.",
+                tech: ["Next.js"],
+                link: "https://rismansyah-portofolio.vercel.app/"
+              },
+              {
+                title: "Portfolio Dimas",
+                type: "Academic",
+                year: "2026",
+                desc: "Landing Page for a portfolio.",
+                tech: ["Next.js"],
+                link: "https://dimas-portfolio-smoky.vercel.app/"
               }
             ].map((project, idx) => (
               <motion.div 
@@ -309,9 +341,20 @@ export default function Portfolio() {
                     <h3 className="text-xl font-bold text-neutral-100 group-hover:text-indigo-300 transition-colors">{project.title}</h3>
                     <p className="text-sm text-indigo-400 mt-1">{project.type} &bull; {project.year}</p>
                   </div>
-                  <div className="p-2 bg-neutral-800 rounded-lg group-hover:bg-indigo-500/20 transition-colors">
-                    <ExternalLink className="w-5 h-5 text-neutral-400 group-hover:text-indigo-400" />
-                  </div>
+                  {project.link ? (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="p-2 bg-neutral-800 rounded-lg group-hover:bg-indigo-500/20 transition-colors z-10 relative"
+                    >
+                      <ExternalLink className="w-5 h-5 text-neutral-400 group-hover:text-indigo-400" />
+                    </a>
+                  ) : (
+                    <div className="p-2 bg-neutral-800 rounded-lg opacity-40 cursor-not-allowed">
+                      <ExternalLink className="w-5 h-5 text-neutral-400" />
+                    </div>
+                  )}
                 </div>
                 <p className="text-neutral-400 text-sm leading-relaxed mb-6">
                   {project.desc}
