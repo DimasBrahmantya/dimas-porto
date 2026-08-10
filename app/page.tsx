@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import FloatingShapes from "@/components/FloatingShapes";
 import { 
   GraduationCap, 
   Briefcase, 
@@ -13,7 +14,6 @@ import {
   Lightbulb,
   UserCheck,
   Mail,
-  MessageCircle,
   ArrowUpRight,
   Sparkles,
   Terminal,
@@ -24,7 +24,8 @@ import {
   FolderGit2,
   X,
   Send,
-  Loader2
+  Loader2,
+  MessageCircle
 } from "lucide-react";
 
 interface Project {
@@ -40,7 +41,7 @@ interface Project {
 const projectsData: Project[] = [
   {
     title: "SIMRS Rawat Jalan",
-    type: "Tugas Akhir",
+    type: "Final Tasks",
     category: "webapp",
     year: "2026",
     desc: "Sistem pendaftaran rawat jalan rumah sakit dengan manajemen jadwal dokter, rekapitulasi data pasien, dan monitoring antrean.",
@@ -67,7 +68,7 @@ const projectsData: Project[] = [
   },
   {
     title: "Sistem Pendaftaran RSUD Grati",
-    type: "Tugas Magang",
+    type: "Intern Tasks",
     category: "webapp",
     year: "2025",
     desc: "Pengembangan modul pendaftaran pasien rawat jalan langsung di RSUD Grati Kabupaten Pasuruan.",
@@ -215,70 +216,72 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#fafafa] text-neutral-900 selection:bg-black selection:text-white font-sans relative overflow-x-hidden">
       
-      {/* Subtle Background Grid */}
+      {/* Subtle Background Grid & Snowy Motion */}
       <div className="fixed inset-0 bg-neo-grid opacity-70 pointer-events-none -z-10"></div>
       <div className="fixed inset-0 bg-neo-dots opacity-40 pointer-events-none -z-10"></div>
+      <FloatingShapes />
 
       {/* TOP MONOCHROME NAVBAR */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b-4 border-black px-4 lg:px-8 py-3">
+      <motion.header 
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b-4 border-black px-4 lg:px-8 py-3"
+      >
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           
           {/* Logo Badge */}
-          <a href="#" className="flex items-center gap-2 group">
+          <motion.a 
+            href="#" 
+            whileHover={{ scale: 1.05, rotate: -1 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 group"
+          >
             <div className="bg-black text-white font-extrabold text-lg tracking-wider px-3.5 py-1 border-2 border-black neo-shadow group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform">
-              DB.DEV
+              DimasBas
             </div>
-            <span className="hidden sm:inline-block font-mono text-xs font-extrabold bg-neutral-100 text-black px-2.5 py-1 border-2 border-black">
-              NEO-MONO v2.0
-            </span>
-          </a>
+          </motion.a>
 
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-1 font-mono text-sm font-extrabold">
-            <a href="#about" className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black">
-              TENTANG
-            </a>
-            <a href="#experience" className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black">
-              PENGALAMAN
-            </a>
-            <a href="#skills" className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black">
-              SKILLS
-            </a>
-            <a href="#projects" className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black">
-              PROJECTS
-            </a>
-            <a href="#contact" className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black">
-              KONTAK
-            </a>
+            {["about", "experience", "skills", "projects", "contact"].map((link) => (
+              <motion.a 
+                key={link}
+                href={`#${link}`}
+                whileHover={{ scale: 1.06, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="px-3 py-1.5 hover:bg-black hover:text-white transition-colors border-2 border-transparent hover:border-black uppercase"
+              >
+                {link === "about" ? "TENTANG" : link === "experience" ? "PENGALAMAN" : link.toUpperCase()}
+              </motion.a>
+            ))}
           </nav>
 
           {/* Status Badge & CTA */}
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-2 bg-white border-2 border-black px-3 py-1 text-xs font-mono font-bold">
-              <span className="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
-              <span>AVAILABLE FOR FREELANCE</span>
-            </div>
-
-            <button
+            <motion.button
               onClick={() => setIsModalOpen(true)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               className="neo-btn bg-black text-white font-mono font-bold text-xs sm:text-sm px-4 py-2 border-2 border-black neo-shadow flex items-center gap-1.5"
             >
               <span>HUBUNGI SAYA</span>
               <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* HERO SECTION */}
-      <section className="relative pt-12 pb-20 px-4 lg:px-8 max-w-6xl mx-auto">
+      <section className="relative z-10 pt-12 pb-20 px-4 lg:px-8 max-w-6xl mx-auto">
         
         {/* Floating Sticker Badges */}
         <div className="flex flex-wrap gap-2 mb-6 font-mono text-xs font-extrabold">
           <motion.span 
             initial={{ opacity: 0, y: -20, rotate: -2 }}
             animate={{ opacity: 1, y: 0, rotate: -2 }}
-            className="bg-black text-white border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5"
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="bg-black text-white border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5 cursor-default"
           >
             <Sparkles className="w-3.5 h-3.5" />
             FRONT-END DEVELOPER
@@ -288,7 +291,8 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: -20, rotate: 2 }}
             animate={{ opacity: 1, y: 0, rotate: 2 }}
             transition={{ delay: 0.1 }}
-            className="bg-white text-black border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5"
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="bg-white text-black border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5 cursor-default"
           >
             <Monitor className="w-3.5 h-3.5" />
             UI/UX DESIGNER
@@ -298,19 +302,21 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: -20, rotate: -1 }}
             animate={{ opacity: 1, y: 0, rotate: -1 }}
             transition={{ delay: 0.2 }}
-            className="bg-black text-white border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5"
+            whileHover={{ scale: 1.08, rotate: 0 }}
+            className="bg-black text-white border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5 cursor-default"
           >
             <GraduationCap className="w-3.5 h-3.5" />
-            UMM INFORMATICS (IPK 3.63)
+            UMM INFORMATICS (IPK 3.80)
           </motion.span>
         </div>
 
         {/* Big Brutalist Title Container */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="bg-white border-4 border-black p-6 sm:p-10 neo-shadow-lg relative overflow-hidden mb-10"
+          initial={{ opacity: 0, y: 30, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          whileHover={{ y: -4 }}
+          className="bg-white border-4 border-black p-6 sm:p-10 neo-shadow-lg relative overflow-hidden mb-10 transition-shadow"
         >
           {/* Top Window Header */}
           <div className="flex items-center justify-between border-b-3 border-black pb-4 mb-6">
@@ -318,62 +324,69 @@ export default function Portfolio() {
               <span className="w-3.5 h-3.5 rounded-full bg-black border border-black"></span>
               <span className="w-3.5 h-3.5 rounded-full bg-neutral-300 border border-black"></span>
               <span className="w-3.5 h-3.5 rounded-full bg-white border border-black"></span>
-              <span className="font-mono text-xs font-bold text-neutral-700 ml-2">DIMAS_PORTFOLIO.RAW</span>
+              <span className="font-mono text-xs font-bold text-neutral-700 ml-2">DIMAS PORTFOLIO</span>
             </div>
-            <span className="font-mono text-xs bg-black text-white px-2 py-0.5 font-bold border border-black hidden sm:inline-block">
-              BLACK & WHITE NEO-BRUTALISM
-            </span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-black leading-none mb-6">
             Dimas <br className="hidden sm:inline" />
-            <span className="bg-black text-white px-2 sm:px-3 border-2 border-black inline-block mt-1 sm:mt-0 neo-shadow">
+            <motion.span 
+              whileHover={{ scale: 1.03 }}
+              className="bg-black text-white px-2 sm:px-3 border-2 border-black inline-block mt-1 sm:mt-0 neo-shadow"
+            >
               Brahmantya
-            </span>{" "}
+            </motion.span>{" "}
             Aryasena
           </h1>
 
           <p className="text-base sm:text-xl text-neutral-800 font-sans leading-relaxed max-w-3xl mb-8">
-            Mahasiswa Teknik Informatika UMM dengan passion tinggi dalam menyusun antarmuka digital yang presisi & responsif. Berfokus pada <strong className="bg-black text-white px-1.5 font-bold">Front-End Development</strong> serta <strong className="border-b-2 border-black font-bold">UI/UX Design</strong> modern.
+            Lulusan Teknik Informatika UMM dengan passion tinggi dalam menyusun antarmuka digital yang presisi & responsif. Berfokus pada <strong className="bg-black text-white px-1.5 font-bold">Front-End Developer</strong> serta <strong className="border-b-2 border-black font-bold">UI/UX Design</strong> modern.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 font-mono font-bold">
-            <a
+            <motion.a
               href="#projects"
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
               className="neo-btn bg-black text-white border-3 border-black text-sm sm:text-base px-6 py-3.5 neo-shadow flex items-center gap-2"
             >
               <FolderGit2 className="w-5 h-5" />
               LIHAT PORTFOLIO
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#about"
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.95 }}
               className="neo-btn bg-white text-black border-3 border-black text-sm sm:text-base px-6 py-3.5 neo-shadow flex items-center gap-2"
             >
               <UserCheck className="w-5 h-5" />
               TENTANG SAYA
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
-          <div className="bg-white border-3 border-black p-4 neo-shadow">
-            <div className="text-3xl sm:text-4xl font-extrabold text-black">10+</div>
-            <div className="text-xs sm:text-sm font-extrabold text-neutral-700 mt-1 uppercase">Project Selesai</div>
-          </div>
-          <div className="bg-white border-3 border-black p-4 neo-shadow">
-            <div className="text-3xl sm:text-4xl font-extrabold text-black">10+</div>
-            <div className="text-xs sm:text-sm font-extrabold text-neutral-700 mt-1 uppercase">Tech Stack</div>
-          </div>
-          <div className="bg-white border-3 border-black p-4 neo-shadow">
-            <div className="text-3xl sm:text-4xl font-extrabold text-black">3.63</div>
-            <div className="text-xs sm:text-sm font-extrabold text-neutral-700 mt-1 uppercase">IPK Akademik</div>
-          </div>
-          <div className="bg-white border-3 border-black p-4 neo-shadow">
-            <div className="text-3xl sm:text-4xl font-extrabold text-black">RSUD</div>
-            <div className="text-xs sm:text-sm font-extrabold text-neutral-700 mt-1 uppercase">Grati (Magang)</div>
-          </div>
+          {[
+            { value: "10+", label: "Project Selesai" },
+            { value: "10+", label: "Tech Stack" },
+            { value: "3.80", label: "IPK" },
+            { value: "RSUD", label: "Grati (Ex Intern)" },
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.4 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="bg-white border-3 border-black p-4 neo-shadow transition-transform cursor-default"
+            >
+              <div className="text-3xl sm:text-4xl font-extrabold text-black">{stat.value}</div>
+              <div className="text-xs sm:text-sm font-extrabold text-neutral-700 mt-1 uppercase">{stat.label}</div>
+            </motion.div>
+          ))}
         </div>
 
       </section>
@@ -399,63 +412,77 @@ export default function Portfolio() {
       </div>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="py-16 px-4 lg:px-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section id="about" className="relative z-10 py-16 px-4 lg:px-8 max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-8"
+        >
           <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
             <UserCheck className="w-6 h-6" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
             Tentang <span className="bg-black text-white px-2 border-2 border-black">Saya</span>
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Bio Card */}
-          <div className="lg:col-span-2 bg-white border-4 border-black p-6 sm:p-8 neo-shadow-lg">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -3 }}
+            className="lg:col-span-2 bg-white border-4 border-black p-6 sm:p-8 neo-shadow-lg"
+          >
             <div className="flex items-center gap-2 mb-4 font-mono text-xs font-bold text-black border-b-2 border-black pb-2">
               <Terminal className="w-4 h-4" />
               <span>BIO_PROFILE.TXT</span>
             </div>
             
             <p className="text-neutral-900 text-base sm:text-lg leading-relaxed mb-6 font-sans">
-              Saya adalah seorang Mahasiswa Teknik Informatika yang aktif di Universitas Muhammadiyah Malang, memiliki kemampuan kerja dalam tim dengan semangat untuk mempelajari hal baru. Dapat beradaptasi dengan keterampilan bahasa pemrogaman baru sesuai kebutuhan dengan cepat. Memiliki fokus pada bagian <span className="bg-black text-white font-bold px-1.5">Front End Development</span> dan <span className="border-b-2 border-black font-bold">UI/UX Design</span>.
+              Saya adalah seorang Lulusan Teknik Informatika di Universitas Muhammadiyah Malang, memiliki kemampuan kerja dalam tim dengan semangat untuk mempelajari hal baru. Dapat beradaptasi dengan keterampilan bahasa pemrogaman baru sesuai kebutuhan dengan cepat. Memiliki fokus pada bagian <span className="bg-black text-white font-bold px-1.5">Front End Developer</span> dan <span className="border-b-2 border-black font-bold">UI/UX Design</span>.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
-              <div className="bg-[#fafafa] border-2 border-black p-3.5 flex items-start gap-3 neo-shadow-sm">
-                <span className="bg-black text-white text-xs font-extrabold px-1.5 py-0.5">01</span>
-                <div>
-                  <div className="font-extrabold text-black uppercase">Cepat Beradaptasi</div>
-                  <div className="text-neutral-700 mt-0.5 font-sans">Memahami framework & tools baru dalam waktu singkat.</div>
-                </div>
-              </div>
-              <div className="bg-[#fafafa] border-2 border-black p-3.5 flex items-start gap-3 neo-shadow-sm">
-                <span className="bg-black text-white text-xs font-extrabold px-1.5 py-0.5">02</span>
-                <div>
-                  <div className="font-extrabold text-black uppercase">Kerja Sama Tim</div>
-                  <div className="text-neutral-700 mt-0.5 font-sans">Pengalaman kolaborasi proyek akademik & industri.</div>
-                </div>
-              </div>
-              <div className="bg-[#fafafa] border-2 border-black p-3.5 flex items-start gap-3 neo-shadow-sm">
-                <span className="bg-black text-white text-xs font-extrabold px-1.5 py-0.5">03</span>
-                <div>
-                  <div className="font-extrabold text-black uppercase">Problem Solving</div>
-                  <div className="text-neutral-700 mt-0.5 font-sans">Analisis kebutuhan pengguna & solusi kode bersih.</div>
-                </div>
-              </div>
-              <div className="bg-[#fafafa] border-2 border-black p-3.5 flex items-start gap-3 neo-shadow-sm">
-                <span className="bg-black text-white text-xs font-extrabold px-1.5 py-0.5">04</span>
-                <div>
-                  <div className="font-extrabold text-black uppercase">UI/UX Mindset</div>
-                  <div className="text-neutral-700 mt-0.5 font-sans">Desain intuitif berorientasi pada kemudahan user.</div>
-                </div>
-              </div>
+              {[
+                { num: "01", title: "Cepat Beradaptasi", desc: "Memahami framework & tools baru dalam waktu singkat." },
+                { num: "02", title: "Kerja Sama Tim", desc: "Pengalaman kolaborasi proyek akademik & industri." },
+                { num: "03", title: "Problem Solving", desc: "Analisis kebutuhan pengguna & solusi kode bersih." },
+                { num: "04", title: "UI/UX Mindset", desc: "Desain intuitif berorientasi pada kemudahan user." },
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.num}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.4 }}
+                  whileHover={{ x: 5, scale: 1.02 }}
+                  className="bg-[#fafafa] border-2 border-black p-3.5 flex items-start gap-3 neo-shadow-sm cursor-default"
+                >
+                  <span className="bg-black text-white text-xs font-extrabold px-1.5 py-0.5">{item.num}</span>
+                  <div>
+                    <div className="font-extrabold text-black uppercase">{item.title}</div>
+                    <div className="text-neutral-700 mt-0.5 font-sans">{item.desc}</div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Details Dossier */}
-          <div className="bg-black text-white border-4 border-black p-6 neo-shadow flex flex-col justify-between">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -3 }}
+            className="bg-black text-white border-4 border-black p-6 neo-shadow flex flex-col justify-between"
+          >
             <div>
               <div className="font-mono text-xs font-bold border-b-2 border-white pb-2 mb-4 uppercase tracking-wider text-neutral-300">
                 [ DOSSIER DATA ]
@@ -469,7 +496,7 @@ export default function Portfolio() {
                 <div>
                   <span className="text-neutral-400 block font-bold">STATUS:</span>
                   <span className="font-bold text-sm bg-white text-black px-2 py-0.5 inline-block border border-white">
-                    Mahasiswa Aktif UMM
+                    Freshgraduate Informatics
                   </span>
                 </div>
                 <div>
@@ -483,48 +510,62 @@ export default function Portfolio() {
                 <div>
                   <span className="text-neutral-400 block font-bold">IPK:</span>
                   <span className="font-extrabold text-sm bg-white text-black px-2 py-0.5 inline-block border border-white">
-                    3.63 / 4.00
+                    3.80 / 4.00
                   </span>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 border-t-2 border-neutral-700 pt-4">
-              <button
+              <motion.button
                 onClick={() => setIsModalOpen(true)}
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
                 className="neo-btn w-full bg-white text-black text-center font-mono font-extrabold text-xs py-3 border-2 border-white block neo-shadow-white uppercase"
               >
                 HUBUNGI SAYA VIA EMAIL
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
 
       {/* EXPERIENCE & EDUCATION SECTION */}
-      <section id="experience" className="py-16 px-4 lg:px-8 max-w-6xl mx-auto">
+      <section id="experience" className="relative z-10 py-16 px-4 lg:px-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Work Experience */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 mb-6"
+            >
               <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
                 <Briefcase className="w-6 h-6" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold uppercase">
                 Pengalaman <span className="bg-black text-white px-2 border-2 border-black">Kerja</span>
               </h2>
-            </div>
+            </motion.div>
 
-            <div className="bg-white border-4 border-black p-6 neo-shadow-lg relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -4 }}
+              className="bg-white border-4 border-black p-6 neo-shadow-lg relative"
+            >
               <div className="flex justify-between items-start gap-4 mb-3 pb-3 border-b-2 border-black">
                 <div>
-                  <h3 className="font-extrabold text-lg text-black">Magang, Fullstack Web Developer</h3>
+                  <h3 className="font-extrabold text-lg text-black">Fullstack Web Developer</h3>
                   <p className="font-mono text-sm font-extrabold text-neutral-700">RSUD Grati Kabupaten Pasuruan</p>
                 </div>
                 <span className="bg-black text-white font-mono text-xs font-bold px-2.5 py-1 border-2 border-black shrink-0">
-                  MAGANG
+                  Ex-Intern
                 </span>
               </div>
 
@@ -533,40 +574,64 @@ export default function Portfolio() {
               </p>
 
               <div className="flex flex-wrap gap-2 font-mono text-xs font-bold">
-                <span className="bg-neutral-100 border-2 border-black text-black px-2 py-1">Laravel</span>
-                <span className="bg-neutral-100 border-2 border-black text-black px-2 py-1">PHP</span>
-                <span className="bg-neutral-100 border-2 border-black text-black px-2 py-1">MySQL</span>
-                <span className="bg-neutral-100 border-2 border-black text-black px-2 py-1">SIMRS</span>
+                {["Laravel", "PHP", "MySQL", "SIMRS"].map((tech) => (
+                  <motion.span 
+                    key={tech}
+                    whileHover={{ scale: 1.1, rotate: 2 }}
+                    className="bg-neutral-100 border-2 border-black text-black px-2 py-1 cursor-default"
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Education */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 mb-6"
+            >
               <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
                 <GraduationCap className="w-6 h-6" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold uppercase">
                 Riwayat <span className="bg-black text-white px-2 border-2 border-black">Pendidikan</span>
               </h2>
-            </div>
+            </motion.div>
 
             <div className="space-y-4">
-              <div className="bg-white border-4 border-black p-6 neo-shadow">
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
+                className="bg-white border-4 border-black p-6 neo-shadow"
+              >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-extrabold text-lg text-black">Universitas Muhammadiyah Malang</h3>
                   <span className="bg-black text-white font-mono text-xs font-bold px-2 py-0.5 border border-black">
-                    2022 - SEKARANG
+                    2022 - 2026
                   </span>
                 </div>
-                <p className="font-mono text-sm text-neutral-800 font-extrabold mb-2">Teknik Informatika (IPK 3.63)</p>
+                <p className="font-mono text-sm text-neutral-800 font-extrabold mb-2">Teknik Informatika (IPK 3.80)</p>
                 <p className="text-neutral-700 text-xs font-sans">
                   Fokus akademik pada Rekayasa Perangkat Lunak, Pengembangan Web, dan UI/UX Design.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="bg-white border-4 border-black p-6 neo-shadow">
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                whileHover={{ y: -4 }}
+                className="bg-white border-4 border-black p-6 neo-shadow"
+              >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-extrabold text-lg text-black">SMAN 2 Kota Pasuruan</h3>
                   <span className="bg-neutral-200 text-black font-mono text-xs font-bold px-2 py-0.5 border border-black">
@@ -574,7 +639,7 @@ export default function Portfolio() {
                   </span>
                 </div>
                 <p className="font-mono text-sm text-neutral-800 font-extrabold">Jurusan MIPA</p>
-              </div>
+              </motion.div>
             </div>
           </div>
 
@@ -582,15 +647,20 @@ export default function Portfolio() {
       </section>
 
       {/* SKILLS SECTION */}
-      <section id="skills" className="py-16 px-4 lg:px-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section id="skills" className="relative z-10 py-16 px-4 lg:px-8 max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-8"
+        >
           <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
             <Code2 className="w-6 h-6" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
             Skill & <span className="bg-black text-white px-2 border-2 border-black">Tech Stack</span>
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -602,10 +672,14 @@ export default function Portfolio() {
             </h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {techStack.map((tech) => (
+              {techStack.map((tech, index) => (
                 <motion.div
                   key={tech.name}
-                  whileHover={{ scale: 1.05, y: -4 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  whileHover={{ scale: 1.1, y: -6, rotate: 2 }}
                   className="bg-white border-3 border-black p-3 flex flex-col items-center justify-center text-center neo-shadow cursor-default transition-all"
                 >
                   <div className="w-10 h-10 mb-2 flex items-center justify-center p-1">
@@ -633,20 +707,25 @@ export default function Portfolio() {
             <div className="bg-white border-4 border-black p-6 neo-shadow space-y-3">
               {[
                 { name: "Design UI/UX", icon: Monitor },
-                { name: "Front-End Web Development", icon: Code2 },
+                { name: "Front-End Web Developer", icon: Code2 },
                 { name: "Problem Solving & Analytical", icon: Lightbulb },
                 { name: "Team Collaboration & Agile", icon: Users },
                 { name: "Technical Communication", icon: MessageSquare }
-              ].map((skill) => (
-                <div
+              ].map((skill, index) => (
+                <motion.div
                   key={skill.name}
-                  className="flex items-center gap-3 bg-[#fafafa] border-2 border-black p-3 font-mono text-xs font-extrabold text-black neo-shadow-sm"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08, duration: 0.3 }}
+                  whileHover={{ x: 6, scale: 1.02 }}
+                  className="flex items-center gap-3 bg-[#fafafa] border-2 border-black p-3 font-mono text-xs font-extrabold text-black neo-shadow-sm cursor-default"
                 >
                   <div className="p-1.5 border border-black bg-black text-white">
                     <skill.icon className="w-4 h-4" />
                   </div>
                   <span>{skill.name}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -655,59 +734,45 @@ export default function Portfolio() {
       </section>
 
       {/* PROJECTS SECTION WITH FILTER TABS */}
-      <section id="projects" className="py-16 px-4 lg:px-8 max-w-6xl mx-auto">
+      <section id="projects" className="relative z-10 py-16 px-4 lg:px-8 max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-3">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-3"
+          >
             <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
               <Database className="w-6 h-6" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
               Koleksi <span className="bg-black text-white px-2 border-2 border-black">Project</span>
             </h2>
-          </div>
+          </motion.div>
 
           {/* Neo Filter Tabs */}
           <div className="flex flex-wrap gap-2 font-mono text-xs font-extrabold">
-            <button
-              onClick={() => setFilter("all")}
-              className={`px-3.5 py-1.5 border-2 border-black transition-transform ${
-                filter === "all"
-                  ? "bg-black text-white neo-shadow -translate-y-0.5"
-                  : "bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              SEMUA ({projectsData.length})
-            </button>
-            <button
-              onClick={() => setFilter("webapp")}
-              className={`px-3.5 py-1.5 border-2 border-black transition-transform ${
-                filter === "webapp"
-                  ? "bg-black text-white neo-shadow -translate-y-0.5"
-                  : "bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              WEB APP ({projectsData.filter((p) => p.category === "webapp").length})
-            </button>
-            <button
-              onClick={() => setFilter("uiux")}
-              className={`px-3.5 py-1.5 border-2 border-black transition-transform ${
-                filter === "uiux"
-                  ? "bg-black text-white neo-shadow -translate-y-0.5"
-                  : "bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              UI/UX DESIGN ({projectsData.filter((p) => p.category === "uiux").length})
-            </button>
-            <button
-              onClick={() => setFilter("academic")}
-              className={`px-3.5 py-1.5 border-2 border-black transition-transform ${
-                filter === "academic"
-                  ? "bg-black text-white neo-shadow -translate-y-0.5"
-                  : "bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              AKADEMIK ({projectsData.filter((p) => p.category === "academic").length})
-            </button>
+            {(["all", "webapp", "uiux", "academic"] as const).map((cat) => (
+              <motion.button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
+                className={`px-3.5 py-1.5 border-2 border-black transition-all ${
+                  filter === cat
+                    ? "bg-black text-white neo-shadow -translate-y-0.5"
+                    : "bg-white text-black hover:bg-neutral-100"
+                }`}
+              >
+                {cat === "all"
+                  ? `SEMUA (${projectsData.length})`
+                  : cat === "webapp"
+                  ? `WEB APP (${projectsData.filter((p) => p.category === "webapp").length})`
+                  : cat === "uiux"
+                  ? `UI/UX DESIGN (${projectsData.filter((p) => p.category === "uiux").length})`
+                  : `AKADEMIK (${projectsData.filter((p) => p.category === "academic").length})`}
+              </motion.button>
+            ))}
           </div>
         </div>
 
@@ -718,11 +783,12 @@ export default function Portfolio() {
               <motion.div
                 key={project.title}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white border-4 border-black p-6 neo-shadow flex flex-col justify-between relative group hover:-translate-y-1 transition-transform"
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ y: -6, scale: 1.01 }}
+                className="bg-white border-4 border-black p-6 neo-shadow flex flex-col justify-between relative group transition-all"
               >
                 <div>
                   {/* Top Type & Year Tag */}
@@ -732,15 +798,17 @@ export default function Portfolio() {
                     </span>
 
                     {project.link ? (
-                      <a
+                      <motion.a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
                         className="bg-white text-black p-2 border-2 border-black hover:bg-black hover:text-white transition-colors neo-shadow-sm"
                         title="Buka Project"
                       >
                         <ArrowUpRight className="w-4 h-4" />
-                      </a>
+                      </motion.a>
                     ) : null}
                   </div>
 
@@ -756,12 +824,13 @@ export default function Portfolio() {
                 {/* Tech Pill List */}
                 <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-black font-mono text-xs font-extrabold">
                   {project.tech.map((t) => (
-                    <span
+                    <motion.span
                       key={t}
-                      className="bg-neutral-100 border border-black text-black px-2 py-0.5"
+                      whileHover={{ scale: 1.08, rotate: -2 }}
+                      className="bg-neutral-100 border border-black text-black px-2 py-0.5 cursor-default"
                     >
                       #{t}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
@@ -771,18 +840,30 @@ export default function Portfolio() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-16 px-4 lg:px-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-8">
+      <section id="contact" className="relative z-10 py-16 px-4 lg:px-8 max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-8"
+        >
           <div className="bg-black text-white p-2.5 border-2 border-black neo-shadow">
             <Mail className="w-6 h-6" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight">
             Hubungi <span className="bg-black text-white px-2 border-2 border-black">Saya</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Copy Email Banner */}
-        <div className="bg-white border-4 border-black p-6 sm:p-8 neo-shadow-lg mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          whileHover={{ y: -3 }}
+          className="bg-white border-4 border-black p-6 sm:p-8 neo-shadow-lg mb-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
           <div>
             <span className="font-mono text-xs font-extrabold uppercase tracking-wider block mb-1 text-neutral-600">
               ⚡️ INTERESTED IN WORKING TOGETHER?
@@ -792,8 +873,10 @@ export default function Portfolio() {
             </h3>
           </div>
 
-          <button
+          <motion.button
             onClick={handleCopyEmail}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-black text-white font-mono font-extrabold text-xs sm:text-sm px-5 py-3 border-2 border-black neo-shadow flex items-center gap-2 shrink-0"
           >
             {copied ? (
@@ -807,17 +890,22 @@ export default function Portfolio() {
                 <span>SALIN EMAIL</span>
               </>
             )}
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Social Links Cards Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 font-mono font-extrabold text-xs">
           
           {/* Instagram */}
-          <a
+          <motion.a
             href="https://instagram.com/dimasbas_"
             target="_blank"
             rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-white border-3 border-black p-5 neo-shadow flex flex-col items-center text-center group"
           >
             <div className="bg-black text-white p-3 border-2 border-black mb-3 group-hover:rotate-6 transition-transform">
@@ -825,13 +913,19 @@ export default function Portfolio() {
             </div>
             <span className="text-black text-sm">INSTAGRAM</span>
             <span className="text-neutral-600 mt-1 font-bold">@dimasbas_</span>
-          </a>
+          </motion.a>
 
           {/* GitHub */}
-          <a
+          <motion.a
             href="https://github.com/DimasBrahmantya"
             target="_blank"
             rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.08 }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-white border-3 border-black p-5 neo-shadow flex flex-col items-center text-center group"
           >
             <div className="bg-black text-white p-3 border-2 border-black mb-3 group-hover:-rotate-6 transition-transform">
@@ -839,13 +933,19 @@ export default function Portfolio() {
             </div>
             <span className="text-black text-sm">GITHUB</span>
             <span className="text-neutral-600 mt-1 font-bold">DimasBrahmantya</span>
-          </a>
+          </motion.a>
 
           {/* LinkedIn */}
-          <a
+          <motion.a
             href="https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/"
             target="_blank"
             rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.16 }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-white border-3 border-black p-5 neo-shadow flex flex-col items-center text-center group"
           >
             <div className="bg-black text-white p-3 border-2 border-black mb-3 group-hover:rotate-6 transition-transform">
@@ -853,13 +953,19 @@ export default function Portfolio() {
             </div>
             <span className="text-black text-sm">LINKEDIN</span>
             <span className="text-neutral-600 mt-1 truncate max-w-full font-bold">dimas-brahmantya</span>
-          </a>
+          </motion.a>
 
           {/* WhatsApp */}
-          <a
+          <motion.a
             href="https://wa.me/6281235829634"
             target="_blank"
             rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.24 }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-white border-3 border-black p-5 neo-shadow flex flex-col items-center text-center group"
           >
             <div className="bg-black text-white p-3 border-2 border-black mb-3 group-hover:-rotate-6 transition-transform">
@@ -867,11 +973,17 @@ export default function Portfolio() {
             </div>
             <span className="text-black text-sm">WHATSAPP</span>
             <span className="text-neutral-600 mt-1 font-bold">081235829634</span>
-          </a>
+          </motion.a>
 
           {/* Direct Email Pop-up Button */}
-          <button
+          <motion.button
             onClick={() => setIsModalOpen(true)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.32 }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="neo-btn bg-white border-3 border-black p-5 neo-shadow flex flex-col items-center text-center group col-span-2 sm:col-span-1 text-left"
           >
             <div className="bg-black text-white p-3 border-2 border-black mb-3 group-hover:rotate-6 transition-transform">
@@ -879,25 +991,27 @@ export default function Portfolio() {
             </div>
             <span className="text-black text-sm">DIRECT EMAIL</span>
             <span className="text-neutral-600 mt-1 truncate max-w-full font-bold">Buka Form Email</span>
-          </button>
+          </motion.button>
 
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t-4 border-black bg-white py-8 px-4 font-mono text-xs text-center text-neutral-800 mt-12 font-bold">
+      <footer className="border-t-4 border-black bg-white py-8 px-4 font-mono text-xs text-center text-neutral-800 mt-12 font-bold relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            &copy; {new Date().getFullYear()} <strong className="text-black">DIMAS BRAHMANTYA ARYASENA</strong> &bull; MONOCHROME NEO-BRUTALISM EDITION
+            &copy; {new Date().getFullYear()} <strong className="text-black">DIMAS BRAHMANTYA ARYASENA</strong>
           </div>
 
-          <button
+          <motion.button
             onClick={scrollToTop}
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.94 }}
             className="neo-btn bg-black text-white font-extrabold px-3.5 py-2 border-2 border-black flex items-center gap-1 neo-shadow-sm"
           >
             <span>KEMBALI KE ATAS</span>
             <ChevronUp className="w-4 h-4" />
-          </button>
+          </motion.button>
         </div>
       </footer>
 
@@ -929,13 +1043,15 @@ export default function Portfolio() {
                   <Mail className="w-4 h-4" />
                   <span>KIRIM_PESAN.FORM</span>
                 </div>
-                <button
+                <motion.button
                   onClick={() => setIsModalOpen(false)}
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
                   className="bg-black text-white p-1 border border-black hover:bg-neutral-800 transition-colors neo-btn"
                   title="Tutup Modal"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
 
               {/* Destination Banner */}
@@ -1028,18 +1144,22 @@ export default function Portfolio() {
 
                   {/* Form Action Buttons */}
                   <div className="pt-2 flex items-center justify-end gap-3 font-mono font-extrabold text-xs">
-                    <button
+                    <motion.button
                       type="button"
                       disabled={isSubmitting}
                       onClick={() => setIsModalOpen(false)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className="px-4 py-3 border-2 border-black bg-white text-black hover:bg-neutral-100 transition-colors neo-btn disabled:opacity-50"
                     >
                       BATAL
-                    </button>
+                    </motion.button>
                     
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={isSubmitting}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
                       className="px-6 py-3 border-2 border-black bg-black text-white hover:bg-neutral-800 transition-colors neo-btn neo-shadow flex items-center gap-2 disabled:opacity-50"
                     >
                       {isSubmitting ? (
@@ -1053,7 +1173,7 @@ export default function Portfolio() {
                           <Send className="w-4 h-4" />
                         </>
                       )}
-                    </button>
+                    </motion.button>
                   </div>
 
                 </form>
