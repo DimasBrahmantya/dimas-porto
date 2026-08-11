@@ -272,7 +272,9 @@ export default function Portfolio() {
         </div>
       </motion.header>
 
-      {/* HERO SECTION */}
+      {/* MAIN CONTENT */}
+      <main>
+        {/* HERO SECTION */}
       <section className="relative z-10 pt-12 pb-20 px-4 lg:px-8 max-w-6xl mx-auto">
         
         {/* Floating Sticker Badges */}
@@ -995,6 +997,7 @@ export default function Portfolio() {
 
         </div>
       </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="border-t-4 border-black bg-white py-8 px-4 font-mono text-xs text-center text-neutral-800 mt-12 font-bold relative z-10">
