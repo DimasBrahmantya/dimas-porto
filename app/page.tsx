@@ -286,7 +286,7 @@ export default function Portfolio() {
             className="bg-black text-white border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5 cursor-default"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            FRONT-END DEVELOPER
+            Full Stack Developer
           </motion.span>
 
           <motion.span 
@@ -297,7 +297,7 @@ export default function Portfolio() {
             className="bg-white text-black border-2 border-black px-3 py-1.5 neo-shadow flex items-center gap-1.5 cursor-default"
           >
             <Monitor className="w-3.5 h-3.5" />
-            UI/UX DESIGNER
+            Web Developer
           </motion.span>
 
           <motion.span 
@@ -342,7 +342,7 @@ export default function Portfolio() {
           </h1>
 
           <p className="text-base sm:text-xl text-neutral-800 font-sans leading-relaxed max-w-3xl mb-8">
-            Lulusan Teknik Informatika UMM dengan passion tinggi dalam menyusun antarmuka digital yang presisi & responsif. Berfokus pada <strong className="bg-black text-white px-1.5 font-bold">Front-End Developer</strong> serta <strong className="border-b-2 border-black font-bold">UI/UX Design</strong> modern.
+            Lulusan Teknik Informatika UMM dengan passion tinggi dalam menyusun antarmuka digital yang presisi & responsif. Berfokus pada <strong className="bg-black text-white px-1.5 font-bold">Full Stack Developer</strong> serta <strong className="border-b-2 border-black font-bold">Web Developer</strong> .
           </p>
 
           {/* Action Buttons */}
@@ -447,7 +447,7 @@ export default function Portfolio() {
             </div>
             
             <p className="text-neutral-900 text-base sm:text-lg leading-relaxed mb-6 font-sans">
-              Saya adalah seorang Lulusan Teknik Informatika di Universitas Muhammadiyah Malang, memiliki kemampuan kerja dalam tim dengan semangat untuk mempelajari hal baru. Dapat beradaptasi dengan keterampilan bahasa pemrogaman baru sesuai kebutuhan dengan cepat. Memiliki fokus pada bagian <span className="bg-black text-white font-bold px-1.5">Front End Developer</span> dan <span className="border-b-2 border-black font-bold">UI/UX Design</span>.
+              Saya adalah seorang Lulusan Teknik Informatika di Universitas Muhammadiyah Malang, memiliki kemampuan kerja dalam tim dengan semangat untuk mempelajari hal baru. Dapat beradaptasi dengan keterampilan bahasa pemrogaman baru sesuai kebutuhan dengan cepat. Memiliki fokus pada bagian <span className="bg-black text-white font-bold px-1.5">Full Stack Developer</span> dan <span className="border-b-2 border-black font-bold">Web Developer</span>.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
@@ -622,7 +622,7 @@ export default function Portfolio() {
                 </div>
                 <p className="font-mono text-sm text-neutral-800 font-extrabold mb-2">Teknik Informatika (IPK 3.80)</p>
                 <p className="text-neutral-700 text-xs font-sans">
-                  Fokus akademik pada Rekayasa Perangkat Lunak, Pengembangan Web, dan UI/UX Design.
+                  Fokus akademik pada Rekayasa Perangkat Lunak, Full Stack Developer, Pengembangan Web, dan UI/UX Design.
                 </p>
               </motion.div>
 
@@ -708,8 +708,8 @@ export default function Portfolio() {
 
             <div className="bg-white border-4 border-black p-6 neo-shadow space-y-3">
               {[
-                { name: "Design UI/UX", icon: Monitor },
-                { name: "Front-End Web Developer", icon: Code2 },
+                { name: "Full Stack Developer", icon: Monitor },
+                { name: "Web Developer", icon: Code2 },
                 { name: "Problem Solving & Analytical", icon: Lightbulb },
                 { name: "Team Collaboration & Agile", icon: Users },
                 { name: "Technical Communication", icon: MessageSquare }
