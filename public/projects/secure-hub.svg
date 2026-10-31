@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-sec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#140727"/>
+      <stop offset="50%" stop-color="#240c42"/>
+      <stop offset="100%" stop-color="#090214"/>
+    </linearGradient>
+    <linearGradient id="rose-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <pattern id="grid-sec" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(244, 63, 94, 0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg-sec)"/>
+  <rect width="100%" height="100%" fill="url(#grid-sec)"/>
+
+  <circle cx="600" cy="180" r="150" fill="#f43f5e" opacity="0.1" filter="blur(40px)"/>
+  <circle cx="200" cy="280" r="160" fill="#8b5cf6" opacity="0.1" filter="blur(50px)"/>
+
+  <!-- Terminal / Security Scanner Mockup -->
+  <g transform="translate(180, 70)">
+    <rect width="520" height="310" rx="16" fill="#0d041a" stroke="rgba(244, 63, 94, 0.3)" stroke-width="2"/>
+    <rect width="520" height="38" rx="16" fill="#1c0a33"/>
+    <circle cx="24" cy="19" r="5" fill="#f43f5e"/>
+    <circle cx="42" cy="19" r="5" fill="#eab308"/>
+    <circle cx="60" cy="19" r="5" fill="#22c55e"/>
+    <text x="260" y="24" fill="#d8b4fe" font-size="11" font-family="monospace" text-anchor="middle">secure-hub://threat-detector.v1</text>
+
+    <!-- Terminal Code Simulation -->
+    <g transform="translate(30, 60)" font-family="monospace" font-size="11">
+      <text x="0" y="20" fill="#f43f5e">&gt; [CORE] Initializing anti-phishing heuristic model...</text>
+      <text x="0" y="45" fill="#a855f7">&gt; [NESTJS] Microservice connected via gRPC port 50051</text>
+      <text x="0" y="70" fill="#38bdf8">&gt; [INSPECT] URL: https://paypa1-security-login.xyz/auth</text>
+      <rect x="0" y="85" width="460" height="55" rx="8" fill="rgba(244, 63, 94, 0.15)" stroke="#f43f5e" stroke-width="1"/>
+      <text x="15" y="110" fill="#f43f5e" font-weight="bold">[ALERT] MALICIOUS PHISHING LINK DETECTED (CONFIDENCE: 99.4%)</text>
+      <text x="15" y="128" fill="#fecdd3">Action: Traffic isolated, DNS Sinkhole triggered.</text>
+      
+      <!-- Metrics row -->
+      <g transform="translate(0, 155)">
+        <rect x="0" y="0" width="145" height="50" rx="6" fill="#1a0a2e" stroke="rgba(244, 63, 94, 0.2)"/>
+        <text x="12" y="20" fill="#cbd5e1" font-size="9">Scan Latency</text>
+        <text x="12" y="40" fill="#22c55e" font-size="16" font-weight="bold">14ms</text>
+
+        <rect x="155" y="0" width="145" height="50" rx="6" fill="#1a0a2e" stroke="rgba(244, 63, 94, 0.2)"/>
+        <text x="167" y="20" fill="#cbd5e1" font-size="9">Rules Active</text>
+        <text x="167" y="40" fill="#e879f9" font-size="16" font-weight="bold">12,480</text>
+
+        <rect x="310" y="0" width="150" height="50" rx="6" fill="#1a0a2e" stroke="rgba(244, 63, 94, 0.2)"/>
+        <text x="322" y="20" fill="#cbd5e1" font-size="9">Shield Status</text>
+        <text x="322" y="40" fill="#38bdf8" font-size="16" font-weight="bold">SECURED</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Left Floating Badge: Shield -->
+  <g transform="translate(60, 140)">
+    <rect width="180" height="160" rx="16" fill="#090214" stroke="#f43f5e" stroke-width="2" opacity="0.95" filter="drop-shadow(0 15px 25px rgba(0,0,0,0.8))"/>
+    <!-- Shield Icon -->
+    <path d="M 90 30 L 120 45 L 120 75 Q 90 100, 90 105 Q 90 100, 60 75 L 60 45 Z" fill="rgba(244, 63, 94, 0.2)" stroke="#f43f5e" stroke-width="3"/>
+    <circle cx="90" cy="65" r="8" fill="#fb7185"/>
+    <text x="90" y="125" fill="#ffffff" font-size="15" font-weight="bold" font-family="sans-serif" text-anchor="middle">SECURE HUB</text>
+    <text x="90" y="142" fill="#f43f5e" font-size="11" font-family="monospace" text-anchor="middle">SECURITY 2025</text>
+    <rect x="35" y="150" width="110" height="4" rx="2" fill="url(#rose-glow)"/>
+  </g>
+</svg>
+

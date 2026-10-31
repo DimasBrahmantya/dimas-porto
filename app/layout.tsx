@@ -27,7 +27,27 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+<<<<<<< Updated upstream
       <body className="min-h-full flex flex-col">{children}</body>
+=======
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-sans bg-[#060b13] text-slate-100 antialiased selection:bg-cyan-500 selection:text-black">
+        {children}
+      </body>
+>>>>>>> Stashed changes
     </html>
   );
 }

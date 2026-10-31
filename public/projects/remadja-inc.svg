@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-remadja" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="50%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="yellow-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <pattern id="grid-remadja" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(250, 204, 21, 0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg-remadja)"/>
+  <rect width="100%" height="100%" fill="url(#grid-remadja)"/>
+
+  <circle cx="580" cy="180" r="160" fill="#facc15" opacity="0.08" filter="blur(50px)"/>
+
+  <!-- High-fashion Landing Page Mockup -->
+  <g transform="translate(180, 70)">
+    <rect width="520" height="310" rx="16" fill="#09090b" stroke="rgba(250, 204, 21, 0.3)" stroke-width="2"/>
+    <rect width="520" height="38" rx="16" fill="#18181b"/>
+    <circle cx="24" cy="19" r="5" fill="#71717a"/>
+    <circle cx="42" cy="19" r="5" fill="#71717a"/>
+    <circle cx="60" cy="19" r="5" fill="#71717a"/>
+    <text x="260" y="24" fill="#e4e4e7" font-size="11" font-family="monospace" text-anchor="middle">remadja-inc.vercel.app</text>
+
+    <!-- Content -->
+    <g transform="translate(35, 55)">
+      <!-- Big typography -->
+      <text x="0" y="35" fill="#facc15" font-size="28" font-weight="900" font-family="sans-serif" letter-spacing="2">REMADJA.INC</text>
+      <text x="0" y="55" fill="#a1a1aa" font-size="11" font-family="sans-serif">STREETWEAR &amp; CONTEMPORARY ARCHIVE COLLECTION</text>
+
+      <!-- Fashion Card Grid -->
+      <g transform="translate(0, 75)">
+        <rect x="0" y="0" width="135" height="155" rx="8" fill="#18181b" stroke="#27272a"/>
+        <rect x="12" y="12" width="111" height="90" rx="4" fill="#27272a"/>
+        <text x="12" y="120" fill="#ffffff" font-size="10" font-weight="bold">Oversized Hoodie</text>
+        <text x="12" y="138" fill="#facc15" font-size="11" font-weight="bold">IDR 349K</text>
+
+        <rect x="150" y="0" width="135" height="155" rx="8" fill="#18181b" stroke="#27272a"/>
+        <rect x="162" y="12" width="111" height="90" rx="4" fill="#27272a"/>
+        <text x="162" y="120" fill="#ffffff" font-size="10" font-weight="bold">Boxy Fit Cargo</text>
+        <text x="162" y="138" fill="#facc15" font-size="11" font-weight="bold">IDR 289K</text>
+
+        <rect x="300" y="0" width="145" height="155" rx="8" fill="#27272a" stroke="#facc15" stroke-dasharray="4"/>
+        <text x="372" y="70" fill="#facc15" font-size="22" text-anchor="middle">+</text>
+        <text x="372" y="95" fill="#e4e4e7" font-size="11" font-weight="bold" text-anchor="middle">NEW DROP</text>
+        <text x="372" y="112" fill="#a1a1aa" font-size="9" text-anchor="middle">SUMMER '26</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Left Floating Badge -->
+  <g transform="translate(60, 140)">
+    <rect width="180" height="160" rx="16" fill="#09090b" stroke="#facc15" stroke-width="2" opacity="0.95" filter="drop-shadow(0 15px 25px rgba(0,0,0,0.8))"/>
+    <text x="90" y="60" fill="#facc15" font-size="26" font-weight="900" font-family="sans-serif" text-anchor="middle">RMDJ</text>
+    <text x="90" y="105" fill="#ffffff" font-size="13" font-weight="bold" font-family="sans-serif" text-anchor="middle">REMADJA.INC</text>
+    <text x="90" y="125" fill="#facc15" font-size="10" font-family="monospace" text-anchor="middle">E-COMMERCE 2026</text>
+    <rect x="35" y="135" width="110" height="4" rx="2" fill="url(#yellow-glow)"/>
+  </g>
+</svg>
+

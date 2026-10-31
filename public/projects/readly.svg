@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-readly" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c2340"/>
+      <stop offset="50%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="blue-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <pattern id="grid-readly" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg-readly)"/>
+  <rect width="100%" height="100%" fill="url(#grid-readly)"/>
+
+  <circle cx="580" cy="180" r="150" fill="#38bdf8" opacity="0.12" filter="blur(40px)"/>
+
+  <!-- Tablet / E-Reader Mockup -->
+  <g transform="translate(260, 60)">
+    <rect width="440" height="320" rx="20" fill="#0b1727" stroke="#38bdf8" stroke-width="2" filter="drop-shadow(0 20px 30px rgba(0,0,0,0.8))"/>
+    <!-- Screen Header -->
+    <rect width="440" height="40" rx="20" fill="#132742"/>
+    <text x="25" y="25" fill="#ffffff" font-size="13" font-weight="bold">READLY</text>
+    <text x="85" y="25" fill="#93c5fd" font-size="10">Koleksi Buku &bull; Bookmark &bull; E-Reader Mode</text>
+    <circle cx="415" cy="20" r="8" fill="#38bdf8"/>
+
+    <!-- Reader Interface Mockup -->
+    <g transform="translate(25, 60)">
+      <!-- Book Cover 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="85" height="120" rx="6" fill="#1d4ed8" stroke="#60a5fa"/>
+        <text x="42" y="55" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">CLEAN CODE</text>
+        <text x="42" y="70" fill="#bfdbfe" font-size="7" text-anchor="middle">Robert C. Martin</text>
+        <rect x="0" y="130" width="85" height="5" rx="2" fill="#38bdf8"/>
+        <text x="0" y="148" fill="#94a3b8" font-size="8">Progress: 68%</text>
+      </g>
+
+      <!-- Book Cover 2 -->
+      <g transform="translate(100, 0)">
+        <rect width="85" height="120" rx="6" fill="#047857" stroke="#34d399"/>
+        <text x="42" y="55" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">DESIGN SYSTEM</text>
+        <text x="42" y="70" fill="#a7f3d0" font-size="7" text-anchor="middle">Alla Kholmatova</text>
+        <rect x="0" y="130" width="85" height="5" rx="2" fill="#34d399"/>
+        <text x="0" y="148" fill="#94a3b8" font-size="8">Progress: 42%</text>
+      </g>
+
+      <!-- Book Cover 3 -->
+      <g transform="translate(200, 0)">
+        <rect width="85" height="120" rx="6" fill="#b91c1c" stroke="#f87171"/>
+        <text x="42" y="55" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">NEXT.JS ARCH</text>
+        <text x="42" y="70" fill="#fecaca" font-size="7" text-anchor="middle">Modern Web</text>
+        <rect x="0" y="130" width="85" height="5" rx="2" fill="#f87171"/>
+        <text x="0" y="148" fill="#94a3b8" font-size="8">Progress: 95%</text>
+      </g>
+
+      <!-- Right Column: Reader Insights -->
+      <g transform="translate(300, 0)">
+        <rect width="90" height="155" rx="8" fill="#132742" stroke="rgba(56, 189, 248, 0.2)"/>
+        <text x="12" y="24" fill="#ffffff" font-size="9" font-weight="bold">Membaca Hari Ini</text>
+        <text x="12" y="50" fill="#38bdf8" font-size="18" font-weight="bold">45 Min</text>
+        <text x="12" y="78" fill="#cbd5e1" font-size="8">Streak: 12 Hari 🔥</text>
+        <rect x="12" y="95" width="66" height="26" rx="6" fill="#38bdf8"/>
+        <text x="45" y="112" fill="#0c2340" font-size="9" font-weight="bold" text-anchor="middle">Lanjut Baca</text>
+      </g>
+
+      <!-- Night mode bar -->
+      <rect x="0" y="175" width="390" height="60" rx="8" fill="#07111e"/>
+      <text x="15" y="200" fill="#e2e8f0" font-size="10" font-weight="bold">Interactive Annotations &amp; Highlighting</text>
+      <text x="15" y="218" fill="#64748b" font-size="9">Fitur catatan kaki instan dan sinkronisasi audio reader.</text>
+    </g>
+  </g>
+
+  <!-- Left Floating Badge -->
+  <g transform="translate(50, 140)">
+    <rect width="180" height="160" rx="16" fill="#091322" stroke="#38bdf8" stroke-width="2" opacity="0.95" filter="drop-shadow(0 15px 25px rgba(0,0,0,0.8))"/>
+    <!-- Book open icon -->
+    <path d="M 90 40 Q 70 30, 60 35 L 60 75 Q 75 70, 90 80 Q 105 70, 120 75 L 120 35 Q 110 30, 90 40 Z" fill="none" stroke="#38bdf8" stroke-width="3"/>
+    <text x="90" y="110" fill="#ffffff" font-size="15" font-weight="bold" font-family="sans-serif" text-anchor="middle">READLY</text>
+    <text x="90" y="128" fill="#38bdf8" font-size="10" font-family="monospace" text-anchor="middle">ACADEMIC &bull; 2024</text>
+    <rect x="35" y="138" width="110" height="4" rx="2" fill="url(#blue-glow)"/>
+  </g>
+</svg>
+
