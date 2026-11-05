@@ -58,15 +58,6 @@ const projectsData: Project[] = [
     link: "https://github.com/DimasBrahmantya/Secure-Hub.git"
   },
   {
-    title: "Website Pemilihan Umum",
-    type: "University Project",
-    category: "academic",
-    year: "2023",
-    desc: "Sistem e-voting kampus terenkripsi untuk proses pemilu mahasiswa yang cepat, efisien, dan transparan.",
-    tech: ["Laravel", "Vue.js", "MySQL"],
-    link: "https://github.com/DimasBrahmantya"
-  },
-  {
     title: "Sistem Pendaftaran RSUD Grati",
     type: "Intern Tasks",
     category: "webapp",
@@ -82,7 +73,7 @@ const projectsData: Project[] = [
     year: "2025",
     desc: "Desain konseptual aplikasi pemesanan dan pelacakan layanan laundry online berbasis mobile.",
     tech: ["Figma", "UI/UX Design", "Prototyping"],
-    link: "https://figma.com"
+    link: "https://www.figma.com/proto/RyEi7OnUZznUxftePXkO9z/Smart-Laundry?t=XAZ5QO5jvXmE61a0-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=15-6&starting-point-node-id=15%3A6"
   },
   {
     title: "Design UI/UX Sale Pisang",
@@ -91,7 +82,7 @@ const projectsData: Project[] = [
     year: "2024",
     desc: "Niche e-commerce mobile app experience design untuk penjualan produk oleh-oleh khas olahan pisang.",
     tech: ["Figma", "Design System", "Wireframing"],
-    link: "https://figma.com"
+    link: "https://www.figma.com/proto/pO33hTo6vxXsdHI7UqNmmZ/sale-pisang-malang-web?node-id=1-3&t=W7Y9gv62eyJxhlzF-1"
   },
   {
     title: "Design UI/UX Readly",
@@ -100,7 +91,7 @@ const projectsData: Project[] = [
     year: "2024",
     desc: "Antarmuka perpustakaan digital interaktif dengan pembaca e-book terintegrasi.",
     tech: ["Figma", "UI/UX Design"],
-    link: "https://figma.com"
+    link: "https://www.figma.com/proto/1N5KSdQzk4vyZIJL2QAwh7/imk-prototype-2?node-id=1-50&p=f&t=n2lqnXmQFQP3q64s-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A50"
   },
   {
     title: "Remadja.Inc Landing Page",
@@ -371,7 +362,7 @@ export default function Portfolio() {
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
           {[
-            { value: "10+", label: "Project Selesai" },
+            { value: "9", label: "Project Selesai" },
             { value: "10+", label: "Tech Stack" },
             { value: "3.80", label: "IPK" },
             { value: "RSUD", label: "Grati (Ex Intern)" },
