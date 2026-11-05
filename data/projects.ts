@@ -20,7 +20,7 @@ export const projectsData: Project[] = [
       "Manajemen hak akses role bertingkat (Admin, Loket Pendaftaran, Dokter, Petugas Poli)"
     ],
     tech: ["Next.js", "MongoDB", "TailwindCSS", "Node.js", "REST API"],
-    image: "/projects/simrs.svg",
+    image: "/projects/simrs.png",
     link: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
     githubUrl: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
     liveUrl: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
@@ -45,7 +45,7 @@ export const projectsData: Project[] = [
       "Panel riwayat pelaporan ancaman siber dan audit log keamanan"
     ],
     tech: ["Next.js", "NestJS", "MongoDB", "TypeScript", "TailwindCSS"],
-    image: "/projects/secure-hub.svg",
+    image: "/projects/securehub.png",
     link: "https://github.com/DimasBrahmantya/Secure-Hub.git",
     githubUrl: "https://github.com/DimasBrahmantya/Secure-Hub.git",
     liveUrl: "https://github.com/DimasBrahmantya/Secure-Hub.git",
@@ -70,7 +70,7 @@ export const projectsData: Project[] = [
       "Sinkronisasi database loket dengan sistem administrasi RSUD Grati"
     ],
     tech: ["Laravel", "MySQL", "Bootstrap", "PHP", "JavaScript"],
-    image: "/projects/rsud-grati.svg",
+    image: "/projects/rsud.png",
     link: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
     githubUrl: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
     liveUrl: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
@@ -95,10 +95,10 @@ export const projectsData: Project[] = [
       "High-fidelity interactive clickable prototype di Figma"
     ],
     tech: ["Figma", "UI/UX Design", "Prototyping", "Wireframing", "User Research"],
-    image: "/projects/smart-laundry.svg",
-    link: "https://figma.com",
-    githubUrl: "https://figma.com",
-    liveUrl: "https://figma.com",
+    image: "/projects/laundry.png",
+    link: "https://www.figma.com/proto/RyEi7OnUZznUxftePXkO9z/Smart-Laundry?node-id=15-6&p=f&t=BFnwWDWCeQl0zySa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=15%3A6",
+    githubUrl: "",
+    liveUrl: "https://www.figma.com/proto/RyEi7OnUZznUxftePXkO9z/Smart-Laundry?node-id=15-6&p=f&t=BFnwWDWCeQl0zySa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=15%3A6",
     highlight: true
   },
   {
@@ -120,9 +120,9 @@ export const projectsData: Project[] = [
       "Tombol Call-to-Action (CTA) terintegrasi ke WhatsApp Business & Marketplace"
     ],
     tech: ["Next.js", "Framer Motion", "TailwindCSS", "TypeScript"],
-    image: "/projects/remadja-inc.svg",
+    image: "/projects/remadja.png",
     link: "https://remadja-inc.vercel.app/",
-    githubUrl: "https://github.com/DimasBrahmantya",
+    githubUrl: "https://github.com/DimasBrahmantya/remadja-inc",
     liveUrl: "https://remadja-inc.vercel.app/",
     highlight: false
   },
@@ -145,10 +145,10 @@ export const projectsData: Project[] = [
       "Desain sistem konsisten menggunakan Figma Auto-Layout"
     ],
     tech: ["Figma", "Design System", "Wireframing", "Mobile UI"],
-    image: "/projects/sale-pisang.svg",
-    link: "https://figma.com",
-    githubUrl: "https://figma.com",
-    liveUrl: "https://figma.com",
+    image: "/projects/sale.png",
+    link: "https://www.figma.com/proto/pO33hTo6vxXsdHI7UqNmmZ/sale-pisang-malang-web?node-id=1-3&p=f&t=VbTr62KlYEpm4D01-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+    githubUrl: "",
+    liveUrl: "https://www.figma.com/proto/pO33hTo6vxXsdHI7UqNmmZ/sale-pisang-malang-web?node-id=1-3&p=f&t=VbTr62KlYEpm4D01-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
     highlight: false
   },
   {
@@ -170,10 +170,10 @@ export const projectsData: Project[] = [
       "Komponen desain ergonomis berstandar aksesibilitas WCAG"
     ],
     tech: ["Figma", "UI/UX Design", "Design System", "Information Architecture"],
-    image: "/projects/readly.svg",
-    link: "https://figma.com",
-    githubUrl: "https://figma.com",
-    liveUrl: "https://figma.com",
+    image: "/projects/readly.png",
+    link: "https://www.figma.com/proto/dgaeEnl2KOLXDfcm1klSyY/IMK-Prototype?node-id=0-137&p=f&t=qPIvXnIm4UGve2yu-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=0%3A137",
+    githubUrl: "",
+    liveUrl: "https://www.figma.com/proto/dgaeEnl2KOLXDfcm1klSyY/IMK-Prototype?node-id=0-137&p=f&t=qPIvXnIm4UGve2yu-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=0%3A137",
     highlight: false
   },
   {
@@ -194,9 +194,9 @@ export const projectsData: Project[] = [
       "Waktu muat halaman cepat dengan optimasi Next.js Static Export"
     ],
     tech: ["Next.js", "React", "TailwindCSS", "Vercel"],
-    image: "/projects/portfolio-rismansyah.svg",
+    image: "/projects/risman.png",
     link: "https://rismansyah-portofolio.vercel.app/",
-    githubUrl: "https://github.com/DimasBrahmantya",
+    githubUrl: "https://github.com/DimasBrahmantya/porto-aris",
     liveUrl: "https://rismansyah-portofolio.vercel.app/",
     highlight: false
   },
@@ -218,10 +218,10 @@ export const projectsData: Project[] = [
       "Formulir kontak terintegrasi dengan validasi email instan"
     ],
     tech: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript"],
-    image: "/projects/portfolio-dimas.svg",
+    image: "/projects/dimas.png",
     link: "https://dimas-portfolio-smoky.vercel.app/",
     githubUrl: "https://github.com/DimasBrahmantya/dimas-porto",
-    liveUrl: "https://dimas-portfolio-smoky.vercel.app/",
+    liveUrl: "https://dimasbas.vercel.app/",
     highlight: false
   }
 ];
