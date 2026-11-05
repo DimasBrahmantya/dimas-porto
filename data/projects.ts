@@ -23,7 +23,7 @@ export const projectsData: Project[] = [
     image: "/projects/simrs.png",
     link: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
     githubUrl: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
-    liveUrl: "https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git",
+    liveUrl: "",
     highlight: true
   },
   {
@@ -48,7 +48,7 @@ export const projectsData: Project[] = [
     image: "/projects/securehub.png",
     link: "https://github.com/DimasBrahmantya/Secure-Hub.git",
     githubUrl: "https://github.com/DimasBrahmantya/Secure-Hub.git",
-    liveUrl: "https://github.com/DimasBrahmantya/Secure-Hub.git",
+    liveUrl: "",
     highlight: true
   },
   {
@@ -73,7 +73,7 @@ export const projectsData: Project[] = [
     image: "/projects/rsud.png",
     link: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
     githubUrl: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
-    liveUrl: "https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git",
+    liveUrl: "",
     highlight: true
   },
   {
@@ -219,7 +219,7 @@ export const projectsData: Project[] = [
     ],
     tech: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript"],
     image: "/projects/dimas.png",
-    link: "https://dimas-portfolio-smoky.vercel.app/",
+    link: "https://dimasbas.vercel.app/",
     githubUrl: "https://github.com/DimasBrahmantya/dimas-porto",
     liveUrl: "https://dimasbas.vercel.app/",
     highlight: false
