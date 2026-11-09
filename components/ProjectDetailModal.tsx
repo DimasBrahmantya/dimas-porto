@@ -11,7 +11,6 @@ import {
   Calendar,
   Layers,
   CheckCircle2,
-  Sparkles,
   UserCheck
 } from "lucide-react";
 
@@ -69,10 +68,11 @@ export default function ProjectDetailModal({
             {/* Top Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/80 border border-slate-700/80 text-slate-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-500/20 transition-all flex items-center justify-center cursor-pointer shadow-lg"
+              aria-label="Tutup dialog detail proyek"
+              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/80 border border-slate-700/80 text-slate-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-500/20 transition-all flex items-center justify-center cursor-pointer shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               title="Tutup (ESC)"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
 
             {/* Scrollable Content */}
@@ -105,7 +105,7 @@ export default function ProjectDetailModal({
               {/* Title & Role Lockup */}
               <div>
                 <div className="flex items-center gap-2 mb-2 font-mono text-xs text-cyan-400 font-semibold tracking-wider uppercase">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <Layers className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
                   <span>PROJECT DETAIL ARCHIVE</span>
                 </div>
                 <h2 className="text-2xl sm:text-4xl font-black text-white uppercase font-heading tracking-tight">

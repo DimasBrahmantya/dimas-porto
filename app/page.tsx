@@ -10,16 +10,18 @@ import {
   GraduationCap,
   Briefcase,
   ExternalLink,
+  Code2,
   Copy,
   Check,
   X,
   Send,
   Loader2,
   MessageCircle,
-  Sparkles,
+  UserCheck,
   ArrowRight,
   ChevronUp,
-  Play,FolderGit2} from "lucide-react";
+  FolderGit2
+} from "lucide-react";
 
 // Projects data is loaded from @/data/projects.ts (supports Supabase & detailed views)
 
@@ -202,8 +204,9 @@ export default function Portfolio() {
           onClick={() => scrollToSection("home")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="pointer-events-auto flex items-center gap-2 group cursor-pointer focus:outline-none"
+          className="pointer-events-auto flex items-center gap-2 group cursor-pointer rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           title="Ke Layar Awal"
+          aria-label="Ke layar beranda awal"
         >
           <div className="w-10 h-10 rounded-xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md flex items-center justify-center font-mono font-black text-base shadow-[0_0_20px_rgba(255,255,255,0.08)] group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all">
             <span className="bg-gradient-to-br from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
@@ -216,14 +219,16 @@ export default function Portfolio() {
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="pointer-events-auto flex items-center gap-1 p-1 rounded-full bg-[#081220]/85 backdrop-blur-md border border-cyan-500/25 shadow-[0_0_30px_rgba(6,182,212,0.18)] font-mono text-[11px] sm:text-xs font-bold tracking-wider"
+          className="pointer-events-auto flex items-center gap-1 p-1 rounded-full bg-[#081220]/85 backdrop-blur-md border border-cyan-500/25 shadow-[0_0_30px_rgba(6,182,212,0.18)] font-mono text-xs font-bold tracking-wider"
+          aria-label="Navigasi Utama"
         >
           <button
             onClick={() => {
               setActiveTab("profil");
               scrollToSection("profil");
             }}
-            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer ${
+            aria-label="Buka bagian Profil"
+            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeTab === "profil"
                 ? "bg-white text-black font-extrabold shadow-[0_0_18px_rgba(255,255,255,0.6)]"
                 : "text-slate-400 hover:text-white"
@@ -237,7 +242,8 @@ export default function Portfolio() {
               setActiveTab("project");
               scrollToSection("project");
             }}
-            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer ${
+            aria-label="Buka bagian Proyek"
+            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeTab === "project"
                 ? "bg-white text-black font-extrabold shadow-[0_0_18px_rgba(255,255,255,0.6)]"
                 : "text-slate-400 hover:text-white"
@@ -251,7 +257,8 @@ export default function Portfolio() {
               setActiveTab("contact");
               scrollToSection("contact");
             }}
-            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer ${
+            aria-label="Buka bagian Kontak"
+            className={`px-3 sm:px-4 py-1.5 rounded-full transition-all duration-300 uppercase cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
               activeTab === "contact"
                 ? "bg-white text-black font-extrabold shadow-[0_0_18px_rgba(255,255,255,0.6)]"
                 : "text-slate-400 hover:text-white"
@@ -267,58 +274,56 @@ export default function Portfolio() {
             onClick={() => setIsModalOpen(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-semibold tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] flex items-center gap-1.5 cursor-pointer"
+            aria-label="Buka dialog formulir pesan langsung"
+            className="px-3.5 py-1.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-semibold tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
-            <Send className="w-3.5 h-3.5" />
+            <Send className="w-3.5 h-3.5" aria-hidden="true" />
             <span className="hidden sm:inline">CONNECT</span>
           </motion.button>
         </div>
       </header>
 
-      {/* ========================================================================= */}
-      {/* SECTION 1: HERO / GAME MENU TITLE SCREEN                                 */}
-      {/* ========================================================================= */}
+      {/* Hero Section */}
       <section
         id="home"
         className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 pt-24 pb-16 z-10 max-w-6xl mx-auto"
       >
         <div className="w-full flex flex-col items-center text-center my-auto">
           
-          {/* Main Title Lockup with CLEAR Photo Arch (NO RED OVERLAY) */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-10 w-full">
+          {/* Main Title Lockup */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-8 w-full">
             
-            {/* Left: Sleek Card Arch with Dimas photo - Clear, vivid, natural lighting */}
+            {/* Left: Refined Portrait Card */}
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className="relative group"
             >
-              <div className="w-48 h-52 sm:w-60 sm:h-64 md:w-68 md:h-72 rounded-3xl md:rounded-l-[4.5rem] md:rounded-r-2xl p-2.5 flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-[#0c182c] border border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.18)] transition-all duration-500 group-hover:shadow-[0_0_55px_rgba(6,182,212,0.35)] group-hover:border-cyan-400/60">
-                <div className="relative w-full h-full rounded-2xl md:rounded-l-[4rem] md:rounded-r-xl overflow-hidden bg-slate-950">
+              <div className="w-48 h-52 sm:w-60 sm:h-64 md:w-68 md:h-72 rounded-3xl md:rounded-l-[4rem] md:rounded-r-2xl p-2 flex items-center justify-center overflow-hidden bg-slate-900 border border-slate-700/80 shadow-2xl transition-all duration-300 group-hover:border-cyan-500/50">
+                <div className="relative w-full h-full rounded-2xl md:rounded-l-[3.5rem] md:rounded-r-xl overflow-hidden bg-slate-950">
                   <Image
                     src="/IMG_0035.JPG"
                     alt="Dimas Brahmantya Aryasena"
                     fill
                     sizes="(max-width: 768px) 256px, 320px"
-                    className="object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-700 brightness-105 contrast-105"
+                    className="object-cover object-top scale-105 group-hover:scale-108 transition-transform duration-500"
                     priority
                   />
-                  {/* Subtle clean cinematic vignette only at bottom edge (no red overlay) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
             </motion.div>
 
-            {/* Right: Typography PORTFOLIO 2026 + Badge */}
+            {/* Right: Typography PORTFOLIO 2026 + Identity Badge */}
             <motion.div 
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className="flex flex-col items-center md:items-start text-center md:text-left"
             >
               <div className="flex items-baseline gap-3">
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] font-heading">
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black uppercase tracking-tight text-white font-heading">
                   PORTFOLIO
                 </h1>
                 <span className="text-3xl sm:text-5xl lg:text-6xl font-light text-slate-400 font-mono">
@@ -326,95 +331,85 @@ export default function Portfolio() {
                 </span>
               </div>
 
-              {/* Subtitle Badge: ■ FRONT-END DEVELOPER */}
-              <div className="flex items-center gap-2 mt-3 px-3 py-1.5 rounded-md bg-slate-900/80 border border-slate-700/60 font-mono text-xs sm:text-sm text-slate-300 font-bold tracking-wider">
-                <span className="inline-block w-2 h-2 rounded-xs bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
-                <span className="uppercase text-cyan-200">FULL STACK DEVELOPER, WEB DEVELOPER & FRONT-END DEVELOPER </span>
+              {/* Subtitle Badge */}
+              <div className="flex items-center gap-2 mt-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 font-mono text-xs sm:text-sm text-cyan-300 font-semibold tracking-wider">
+                <span className="uppercase">FULL STACK DEVELOPER &bull; WEB DEVELOPER</span>
               </div>
 
-              <p className="mt-4 text-xs sm:text-sm text-slate-400 max-w-md font-sans leading-relaxed">
-                Dimas Brahmantya Aryasena &bull; Lulusan Teknik Informatika UMM (IPK 3.80).
+              <p className="mt-4 text-xs sm:text-sm text-slate-300 max-w-md font-sans leading-relaxed">
+                Dimas Brahmantya Aryasena, Lulusan Teknik Informatika UMM (IPK 3.80). Berfokus pada pembangunan aplikasi web berskala produksi, antarmuka modern, dan arsitektur sistem yang tangguh.
               </p>
             </motion.div>
           </div>
 
-          {/* Game Menu List (START / PROJECTS / CONTACT / OPTIONS) */}
+          {/* Action CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center gap-2.5 font-mono font-bold tracking-widest text-xs sm:text-sm select-none"
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="flex flex-wrap items-center justify-center gap-3 pt-2"
           >
             <motion.button
-              onClick={() => scrollToSection("profil")}
-              whileHover={{ scale: 1.1, x: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-2 text-slate-200 hover:text-cyan-300 transition-colors py-1.5 px-6 rounded-full hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30 cursor-pointer"
+              onClick={() => scrollToSection("project")}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Menuju ke bagian proyek unggulan"
+              className="px-6 py-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-mono font-bold text-xs tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <Play className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400 fill-cyan-400" />
-              <span>START</span>
+              <FolderGit2 className="w-4 h-4" aria-hidden="true" />
+              <span>LIHAT PROYEK UNGGULAN</span>
             </motion.button>
 
             <motion.button
-              onClick={() => scrollToSection("project")}
-              whileHover={{ scale: 1.1, x: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors py-1.5 px-6 rounded-full hover:bg-slate-800/40 border border-transparent hover:border-slate-700/50 cursor-pointer"
+              onClick={() => scrollToSection("profil")}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Menuju ke bagian profil dan keahlian"
+              className="px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-slate-600 font-mono font-bold text-xs tracking-wider transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <FolderGit2 className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400" />
-              <span>PROJECTS</span>
+              <span>PROFIL &amp; KEAHLIAN</span>
             </motion.button>
 
-            <Link href="/projects">
+            <Link href="/projects" aria-label="Buka katalog arsip proyek lengkap">
               <motion.div
-                whileHover={{ scale: 1.05, x: 3 }}
-                whileTap={{ scale: 0.95 }}
-                className="group flex items-center gap-1.5 text-cyan-400/90 hover:text-cyan-300 transition-colors py-1 px-4 rounded-full hover:bg-cyan-500/10 border border-cyan-500/20 hover:border-cyan-400/40 cursor-pointer font-mono text-[11px] sm:text-xs tracking-wider"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="px-5 py-2.5 rounded-full bg-slate-900/60 hover:bg-cyan-950/30 text-cyan-300 hover:text-white border border-cyan-500/30 hover:border-cyan-400/50 font-mono text-xs font-semibold tracking-wider transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
-                <Sparkles className="w-3 h-3 text-cyan-400" />
-                <span>PROJECT ARCHIVE (PAGE)</span>
+                <span>ARSIP LENGKAP</span>
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
               </motion.div>
             </Link>
 
             <motion.button
-              onClick={() => scrollToSection("contact")}
-              whileHover={{ scale: 1.1, x: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-2 text-slate-400 hover:text-white transition-colors py-1.5 px-6 rounded-full hover:bg-slate-800/40 border border-transparent hover:border-slate-700/50 cursor-pointer"
-            >
-              <Send className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400" />
-              <span>CONTACT PERSON</span>
-            </motion.button>
-
-            <motion.button
               onClick={() => setIsModalOpen(true)}
-              whileHover={{ scale: 1.1, x: 5 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors py-1 px-4 cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Buka formulir untuk mengirim pesan langsung"
+              className="px-5 py-2.5 rounded-full bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition-all font-mono text-xs font-semibold tracking-wider flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <span>OPTIONS</span>
+              <Send className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>KIRIM PESAN</span>
             </motion.button>
           </motion.div>
 
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* SECTION 2: PROFIL / CHARACTER SHEET (Screen 2 from reference)            */}
-      {/* ========================================================================= */}
+      {/* Profile Section */}
       <section
         id="profil"
         className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 py-24 z-10 max-w-6xl mx-auto"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Greeting, Glowing Halo Avatar, & Floating Embers */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+          {/* Right Column (Desktop) / Top Column (Mobile): Greeting & Portrait */}
+          <div className="lg:col-span-5 order-1 lg:order-2 flex flex-col items-center text-center">
             <div className="mb-4">
               <span className="font-mono text-xs tracking-widest text-slate-400 uppercase block mb-1">
                 HELLO, I AM
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-white tracking-tight glow-text-cyan font-heading">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-white tracking-tight font-heading">
                 DIMAS
                 <span className="block text-slate-300 text-2xl sm:text-3xl font-bold font-mono mt-0.5">
                   BRAHMANTYA ARYASENA
@@ -422,51 +417,44 @@ export default function Portfolio() {
               </h2>
             </div>
 
-            {/* Atmospheric Halo Glow Avatar with Embers */}
+            {/* Clean Framed Portrait */}
             <div className="relative mt-2 mb-6 group">
-              {/* Cyan halo aura */}
-              <div className="absolute inset-0 rounded-full bg-cyan-500/25 filter blur-3xl scale-125 -z-10 animate-pulse pointer-events-none" />
-              
-              {/* Fiery ember particles */}
-              <div className="ember-particle w-2 h-2 top-1/4 left-2" style={{ animationDelay: "0.2s" }} />
-              <div className="ember-particle w-1.5 h-1.5 top-2/3 right-3" style={{ animationDelay: "1.1s" }} />
-              <div className="ember-particle w-2 h-2 bottom-6 left-1/3" style={{ animationDelay: "2.4s" }} />
-
-              <div className="w-56 h-68 sm:w-64 sm:h-80 rounded-3xl overflow-hidden border border-cyan-500/35 bg-[#091322] shadow-[0_0_35px_rgba(6,182,212,0.3)] relative">
+              <div className="w-56 h-68 sm:w-64 sm:h-80 rounded-3xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-xl relative transition-all duration-300 group-hover:border-cyan-500/50">
                 <Image
                   src="/IMG_4403.JPG"
                   alt="Dimas Portrait"
                   fill
                   sizes="(max-width: 768px) 256px, 320px"
-                  className="object-cover object-top brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-top brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050b14] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#060b13]/70 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
             {/* Action button to scroll to projects */}
             <motion.button
               onClick={() => scrollToSection("project")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-cyan-500 text-black font-mono font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:bg-cyan-400 transition-all cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              aria-label="Lihat proyek unggulan"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-cyan-500 text-black font-mono font-bold text-xs tracking-wider shadow-md hover:bg-cyan-400 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <span>EXPLORE PROJECTS</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>LIHAT PROYEK</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </motion.button>
           </div>
 
-          {/* Right Column: About, Software Skills (Colored Icons), Education & Experience */}
-          <div className="lg:col-span-7 flex flex-col gap-5">
+          {/* Left Column (Desktop) / Bottom Column (Mobile): About, Software Skills, Education & Experience */}
+          <div className="lg:col-span-7 order-2 lg:order-1 flex flex-col gap-5">
             
             {/* 1. ABOUT ME */}
             <div className="game-panel p-5 rounded-2xl">
               <h3 className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5" />
+                <UserCheck className="w-4 h-4" aria-hidden="true" />
                 <span>ABOUT ME</span>
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-sans">
-                Lulusan Teknik Informatika di Universitas Muhammadiyah Malang dengan IPK 3.80. Memiliki kemampuan kerja tim yang adaptif serta daya serap cepat terhadap perkembangan teknologi antarmuka web modern. Berfokus pada posisi <strong className="text-cyan-300">Front-End Developer</strong>, <strong className="text-white">Web Developer</strong>, dan <strong className="text-rose-300">Full Stack Developer</strong>.
+                Lulusan Teknik Informatika di Universitas Muhammadiyah Malang dengan IPK 3.80. Memiliki kemampuan kerja tim yang adaptif serta daya serap cepat terhadap perkembangan teknologi antarmuka web modern. Berfokus pada posisi <strong className="text-cyan-300 font-semibold">Front-End Developer</strong>, <strong className="text-white font-semibold">Web Developer</strong>, dan <strong className="text-rose-300 font-semibold">Full Stack Developer</strong>.
               </p>
             </div>
 
@@ -474,29 +462,32 @@ export default function Portfolio() {
             <div className="game-panel p-5 rounded-2xl">
               <h3 className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest mb-3 flex items-center justify-between">
                 <span>SOFTWARE SKILLS &amp; TECH STACK</span>
-                <span className="text-[10px] text-slate-500 font-normal">OFFICIAL TOOLS</span>
+                <span className="text-xs text-slate-400 font-normal">OFFICIAL TOOLS</span>
               </h3>
 
               {/* App icon grid matching reference visual style */}
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
                 {softwareSkills.map((tech) => (
                   <div
                     key={tech.name}
-                    className={`p-2.5 rounded-xl border ${tech.bg} backdrop-blur-md flex items-center gap-2.5 hover:scale-105 hover:border-cyan-400/80 transition-all cursor-default shadow-sm group`}
+                    className={`p-2 rounded-xl border ${tech.bg} backdrop-blur-md flex items-center gap-2 hover:scale-105 hover:border-cyan-400/80 transition-all cursor-default shadow-sm group`}
                   >
-                    <div className="w-7 h-7 shrink-0 flex items-center justify-center p-0.5 rounded-lg bg-black/40">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                    <div className="w-6 h-6 shrink-0 flex items-center justify-center p-0.5 rounded-lg bg-black/40">
+                      <Image
                         src={tech.icon}
-                        alt={tech.name}
+                        alt=""
+                        width={24}
+                        height={24}
+                        unoptimized
+                        aria-hidden="true"
                         className="w-full h-full object-contain filter group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all"
                       />
                     </div>
-                    <div className="min-w-0">
-                      <span className="block font-mono text-[11px] font-bold text-slate-200 truncate group-hover:text-white">
+                    <div className="min-w-0 flex-1">
+                      <span className="block font-mono text-[11px] font-bold text-slate-100 truncate group-hover:text-white" title={tech.name}>
                         {tech.name}
                       </span>
-                      <span className="block font-mono text-[9px] text-slate-500 truncate">
+                      <span className="block font-mono text-[10px] text-slate-400 truncate">
                         {tech.category}
                       </span>
                     </div>
@@ -509,65 +500,56 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Education */}
               <div className="game-panel p-4 rounded-2xl">
-                <h4 className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <GraduationCap className="w-4 h-4 text-cyan-400" />
+                <h4 className="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <GraduationCap className="w-4 h-4 text-cyan-400" aria-hidden="true" />
                   <span>EDUCATION</span>
                 </h4>
                 <div className="space-y-2.5 font-mono text-xs">
                   <div>
-                    <span className="text-cyan-400 font-bold text-[10px] block">&bull; 2022 - 2026</span>
+                    <span className="text-cyan-400 font-bold text-xs block">&bull; 2022 - 2026</span>
                     <p className="text-white font-bold text-xs">Univ. Muhammadiyah Malang</p>
-                    <p className="text-slate-400 text-[11px] font-sans">Teknik Informatika &bull; IPK 3.80</p>
+                    <p className="text-slate-300 text-xs font-sans">Teknik Informatika &bull; IPK 3.80</p>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-bold text-[10px] block">&bull; 2019 - 2022</span>
+                    <span className="text-slate-400 font-bold text-xs block">&bull; 2019 - 2022</span>
                     <p className="text-slate-200 font-bold text-xs">SMAN 2 Kota Pasuruan</p>
-                    <p className="text-slate-400 text-[11px] font-sans">Jurusan MIPA</p>
+                    <p className="text-slate-300 text-xs font-sans">Jurusan MIPA</p>
                   </div>
                 </div>
               </div>
 
               {/* Experience */}
               <div className="game-panel p-4 rounded-2xl">
-                <h4 className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <Briefcase className="w-4 h-4 text-rose-400" />
+                <h4 className="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <Briefcase className="w-4 h-4 text-rose-400" aria-hidden="true" />
                   <span>EXPERIENCE</span>
                 </h4>
                 <div className="font-mono text-xs">
-                  <span className="text-rose-400 font-bold text-[10px] block">&bull; EX-INTERN 2025</span>
+                  <span className="text-rose-400 font-bold text-xs block">&bull; EX-INTERN 2025</span>
                   <p className="text-white font-bold text-xs">RSUD Grati Kab. Pasuruan</p>
-                  <p className="text-slate-300 text-[11px] mt-1 font-sans leading-snug">
+                  <p className="text-slate-300 text-xs mt-1 font-sans leading-snug">
                     Fullstack Web Developer: Mengembangkan modul pendaftaran rawat jalan SIMRS berbasis Laravel &amp; MySQL.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* 4. LANGUAGE [COMMUNICATION] & METRICS */}
+            {/* 4. LANGUAGE [COMMUNICATION] & CAPABILITIES */}
             <div className="game-panel p-4 rounded-2xl">
-              <h4 className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center justify-between">
-                <span>LANGUAGE [COMMUNICATION]</span>
-                <span className="text-[10px] text-cyan-400">PROFICIENCY</span>
+              <h4 className="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider mb-2.5 flex items-center justify-between">
+                <span>LANGUAGE &amp; COMMUNICATION</span>
+                <span className="text-xs text-cyan-400 font-normal">PROFICIENCY</span>
               </h4>
-              <div className="space-y-2 font-mono text-xs">
-                <div>
-                  <div className="flex justify-between text-[11px] mb-1">
-                    <span className="text-slate-300">INDONESIA (NATIVE)</span>
-                    <span className="text-cyan-400 font-bold">100%</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-cyan-400 rounded-full" style={{ width: "100%" }} />
-                  </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800 flex flex-col gap-1">
+                  <span className="text-white font-bold text-xs font-mono">Bahasa Indonesia</span>
+                  <span className="text-cyan-300 text-xs font-mono">Penutur Asli (Native)</span>
+                  <span className="text-slate-400 text-xs">Komunikasi formal &amp; kolaborasi teknis</span>
                 </div>
-
-                <div>
-                  <div className="flex justify-between text-[11px] mb-1">
-                    <span className="text-slate-300">ENGLISH (COMMUNICATION)</span>
-                    <span className="text-cyan-400 font-bold">80%</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-cyan-400 rounded-full" style={{ width: "80%" }} />
-                  </div>
+                <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800 flex flex-col gap-1">
+                  <span className="text-white font-bold text-xs font-mono">Bahasa Inggris</span>
+                  <span className="text-cyan-300 text-xs font-mono">Kemahiran Kerja (Professional Working)</span>
+                  <span className="text-slate-400 text-xs">Dokumentasi teknis, riset, dan kolaborasi tim</span>
                 </div>
               </div>
             </div>
@@ -577,9 +559,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* SECTION 3: RECAP PROJECT (Screen 3 from reference)                       */}
-      {/* ========================================================================= */}
+      {/* Projects Showcase Section */}
       <section
         id="project"
         className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 py-24 z-10 max-w-6xl mx-auto"
@@ -590,18 +570,18 @@ export default function Portfolio() {
             RECAP PROJECT <span className="text-cyan-400">2026</span>
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
-            SHOWCASE WEB APPLICATION &bull; UI/UX DESIGN &bull; ACADEMIC
+            SHOWCASE WEB APPLICATION &bull; UI/UX DESIGN
           </p>
 
           {/* Filter Pills */}
           <div className="flex flex-wrap justify-center gap-2 mt-5 font-mono text-xs">
-            {(["all", "webapp", "uiux", "academic"] as const).map((cat) => (
+            {(["all", "webapp", "uiux"] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
                 className={`px-4 py-1.5 rounded-full transition-all uppercase tracking-wider cursor-pointer ${
                   filter === cat
-                    ? "bg-cyan-500 text-black font-extrabold shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                    ? "bg-cyan-500 text-black font-extrabold shadow-md"
                     : "bg-slate-900/70 text-slate-400 hover:text-white border border-slate-800"
                 }`}
               >
@@ -609,63 +589,111 @@ export default function Portfolio() {
                   ? `ALL (${projectsData.length})`
                   : cat === "webapp"
                   ? `WEB APP (${projectsData.filter((p) => p.category === "webapp").length})`
-                  : cat === "uiux"
-                  ? `UI/UX (${projectsData.filter((p) => p.category === "uiux").length})`
-                  : `ACADEMIC (${projectsData.filter((p) => p.category === "academic").length})`}
+                  : `UI/UX (${projectsData.filter((p) => p.category === "uiux").length})`}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Projects Grid (Bento/Poster Cards) */}
+        {/* Projects Grid with Flagship Visual Hierarchy */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id || project.title}
-              className="game-panel game-panel-hover rounded-2xl p-5 flex flex-col justify-between relative group"
-            >
-              <div>
-                {/* Top Meta */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800/80 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider">
-                    {project.type} &bull; {project.year}
-                  </span>
+          {filteredProjects.map((project, idx) => {
+            const isFlagship = idx === 0 && Boolean(project.highlight);
 
-                  {(project.link || project.githubUrl || project.liveUrl) && (
-                    <a
-                      href={project.link || project.githubUrl || project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-7 h-7 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 border border-slate-700 transition-all cursor-pointer"
-                      title="Buka Project"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+            return (
+              <div
+                key={project.id || project.title}
+                className={`portfolio-card portfolio-card-hover rounded-2xl p-5 flex flex-col justify-between relative group ${
+                  isFlagship ? "md:col-span-2 lg:col-span-2 border-cyan-500/40 bg-[#091526]" : ""
+                }`}
+              >
+                <div>
+                  {/* Top Meta */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {isFlagship && (
+                        <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-400 text-black uppercase tracking-wider">
+                          FLAGSHIP WORK
+                        </span>
+                      )}
+                      <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-800/80 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider">
+                        {project.type} &bull; {project.year}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Buka repositori GitHub untuk ${project.title}`}
+                          className="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 border border-slate-700 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                          title={`Buka Repositori GitHub ${project.title}`}
+                        >
+                          <Code2 className="w-4 h-4" aria-hidden="true" />
+                        </a>
+                      )}
+                      {(project.liveUrl || (!project.githubUrl && project.link)) && (
+                        <a
+                          href={project.liveUrl || project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Buka live demo proyek ${project.title}`}
+                          className="w-8 h-8 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 flex items-center justify-center text-cyan-300 hover:text-white border border-cyan-400/50 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+                          title={`Buka Live Demo ${project.title}`}
+                        >
+                          <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className={isFlagship ? "grid grid-cols-1 md:grid-cols-2 gap-4 items-start" : ""}>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold uppercase text-white mb-2 font-heading group-hover:text-cyan-300 transition-colors">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-slate-300 font-sans text-xs leading-relaxed mb-4">
+                        {project.desc}
+                      </p>
+
+                      {isFlagship && project.role && (
+                        <p className="text-cyan-300/90 font-mono text-xs mb-3">
+                          Peran: {project.role}
+                        </p>
+                      )}
+                    </div>
+
+                    {isFlagship && project.image && (
+                      <div className="relative aspect-video rounded-xl overflow-hidden border border-slate-700/80 bg-slate-950 mb-3 md:mb-0">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 500px"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold uppercase text-white mb-2 font-heading group-hover:text-cyan-300 transition-colors">
-                  {project.title}
-                </h3>
-
-                <p className="text-slate-300 font-sans text-xs leading-relaxed mb-4">
-                  {project.desc}
-                </p>
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800 font-mono text-xs text-slate-300 mt-4">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300"
+                    >
+                      #{t}
+                    </span>
+                  ))}
+                </div>
               </div>
-
-              {/* Tech tags */}
-              <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800 font-mono text-[10px] text-slate-400">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Link to Dedicated Projects Page */}
@@ -680,24 +708,22 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* SECTION 4: CONTACT PERSON & OUTRO (Screen 4 from reference)              */}
-      {/* ========================================================================= */}
+      {/* Contact Section */}
       <section
         id="contact"
         className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 py-24 z-10 max-w-6xl mx-auto"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Circular Photo Frame with Social List (Ref image screen 4) */}
+          {/* Left Column: Avatar & Social List */}
           <div className="lg:col-span-5 flex flex-col items-center text-center">
             <span className="font-mono text-xs font-bold text-cyan-400 tracking-widest uppercase mb-4">
               CONTACT ME
             </span>
 
-            {/* Circular Avatar with Glowing Ring */}
-            <div className="relative mb-5">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-tr from-cyan-500 via-rose-500 to-blue-500 shadow-[0_0_35px_rgba(6,182,212,0.35)]">
+            {/* Refined Circular Portrait */}
+            <div className="relative mb-5 group">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1.5 bg-slate-900 border-2 border-slate-700 group-hover:border-cyan-400/60 shadow-xl transition-all duration-300">
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-950">
                   <Image
                     src="/dsc_6847.JPG"
@@ -708,11 +734,11 @@ export default function Portfolio() {
                   />
                 </div>
               </div>
-              <div className="mt-2 text-center">
+              <div className="mt-3 text-center">
                 <span className="font-mono text-xs font-bold text-white tracking-widest block uppercase">
                   DIMAS BRAHMANTYA
                 </span>
-                <span className="font-mono text-[10px] text-slate-400">2026 EDITION</span>
+                <span className="font-mono text-xs text-slate-400">2026 EDITION</span>
               </div>
             </div>
 
@@ -722,58 +748,62 @@ export default function Portfolio() {
                 href="https://instagram.com/dimasbas_"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-pink-500/50 hover:bg-pink-950/20 transition-all text-slate-300 hover:text-white"
+                aria-label="Kunjungi profil Instagram Dimas (@dimasbas_)"
+                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-pink-500/50 hover:bg-pink-950/20 transition-all text-slate-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-6 h-6 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center text-[10px] font-bold">
+                  <span className="w-6 h-6 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center text-xs font-bold" aria-hidden="true">
                     IG
                   </span>
                   <span className="font-bold">@dimasbas_</span>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-60" aria-hidden="true" />
               </a>
 
               <a
                 href="https://github.com/DimasBrahmantya"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-slate-400/50 hover:bg-slate-800/40 transition-all text-slate-300 hover:text-white"
+                aria-label="Kunjungi profil GitHub Dimas (DimasBrahmantya)"
+                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-slate-400/50 hover:bg-slate-800/40 transition-all text-slate-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-6 h-6 rounded-lg bg-white/10 text-white flex items-center justify-center text-[10px] font-bold">
+                  <span className="w-6 h-6 rounded-lg bg-white/10 text-white flex items-center justify-center text-xs font-bold" aria-hidden="true">
                     GH
                   </span>
                   <span className="font-bold">DimasBrahmantya</span>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-60" aria-hidden="true" />
               </a>
 
               <a
                 href="https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-blue-500/50 hover:bg-blue-950/20 transition-all text-slate-300 hover:text-white"
+                aria-label="Kunjungi profil LinkedIn Dimas Brahmantya"
+                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-blue-500/50 hover:bg-blue-950/20 transition-all text-slate-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-[10px] font-bold">
+                  <span className="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold" aria-hidden="true">
                     IN
                   </span>
                   <span className="font-bold truncate max-w-[150px]">dimas-brahmantya</span>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-60" aria-hidden="true" />
               </a>
 
               <a
                 href="https://wa.me/6281235829634"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all text-slate-300 hover:text-white"
+                aria-label="Kirim pesan WhatsApp ke Dimas (081235829634)"
+                className="game-panel p-2.5 rounded-xl flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-950/20 transition-all text-slate-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
                 <div className="flex items-center gap-2.5">
-                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  <MessageCircle className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                   <span className="font-bold">081235829634</span>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                <ExternalLink className="w-3.5 h-3.5 opacity-60" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -795,7 +825,7 @@ export default function Portfolio() {
 
             {/* Direct Inbox Card with Copy Feature */}
             <div className="game-panel p-4 rounded-2xl mb-5">
-              <span className="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">
+              <span className="font-mono text-xs font-bold text-slate-300 uppercase tracking-widest block mb-1">
                 DIRECT INBOX
               </span>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -807,16 +837,17 @@ export default function Portfolio() {
                   onClick={handleCopyEmail}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-cyan-500 hover:text-black text-slate-200 border border-slate-700 hover:border-cyan-400 font-mono text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
+                  aria-label="Salin alamat email Dimas ke papan klip"
+                  className="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-cyan-500 hover:text-black text-slate-200 border border-slate-700 hover:border-cyan-400 font-mono text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5" />
+                      <Check className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>COPIED!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>SALIN EMAIL</span>
                     </>
                   )}
@@ -830,9 +861,10 @@ export default function Portfolio() {
                 onClick={() => setIsModalOpen(true)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 rounded-full bg-cyan-500 text-black font-extrabold tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:bg-cyan-400 transition-all flex items-center gap-2 cursor-pointer"
+                aria-label="Buka formulir untuk mengirim pesan langsung"
+                className="px-6 py-3 rounded-full bg-cyan-500 text-black font-extrabold tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:bg-cyan-400 transition-all flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4" aria-hidden="true" />
                 <span>KIRIM PESAN LANGSUNG</span>
               </motion.button>
 
@@ -840,30 +872,31 @@ export default function Portfolio() {
                 onClick={() => scrollToSection("home")}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-5 py-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-2 cursor-pointer"
+                aria-label="Gulir kembali ke atas halaman"
+                className="px-5 py-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-700/60 transition-all flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
               >
-                <ChevronUp className="w-4 h-4" />
+                <ChevronUp className="w-4 h-4" aria-hidden="true" />
                 <span>KEMBALI KE ATAS</span>
               </motion.button>
             </div>
 
             {/* Bottom Preview Cards (Featured works from screen 4) */}
             <div className="pt-4 border-t border-slate-800/80">
-              <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest block mb-2.5">
+              <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-2.5">
                 FEATURED PORTFOLIO HIGHLIGHTS
               </span>
-              <div className="grid grid-cols-3 gap-2.5 font-mono text-[11px]">
+              <div className="grid grid-cols-3 gap-2.5 font-mono text-xs">
                 <div className="game-panel p-2.5 rounded-xl border-cyan-500/20">
                   <span className="text-cyan-400 font-bold block">SIMRS 2026</span>
-                  <span className="text-slate-400 text-[10px]">Healthcare App</span>
+                  <span className="text-slate-300 text-xs">Healthcare App</span>
                 </div>
                 <div className="game-panel p-2.5 rounded-xl border-rose-500/20">
                   <span className="text-rose-400 font-bold block">SECURE HUB</span>
-                  <span className="text-slate-400 text-[10px]">Anti-Phishing</span>
+                  <span className="text-slate-300 text-xs">Anti-Phishing</span>
                 </div>
                 <div className="game-panel p-2.5 rounded-xl border-blue-500/20">
                   <span className="text-blue-400 font-bold block">SMART LAUNDRY</span>
-                  <span className="text-slate-400 text-[10px]">Figma UI/UX</span>
+                  <span className="text-slate-300 text-xs">Figma UI/UX</span>
                 </div>
               </div>
             </div>
@@ -874,15 +907,16 @@ export default function Portfolio() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-800/80 py-8 px-4 text-center font-mono text-xs text-slate-500 relative z-10">
+      <footer className="border-t border-slate-800/80 py-8 px-4 text-center font-mono text-xs text-slate-400 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>&copy; {new Date().getFullYear()} DIMAS BRAHMANTYA ARYASENA &bull; PORTFOLIO 2026</p>
           <button
             onClick={() => scrollToSection("home")}
-            className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 cursor-pointer"
+            aria-label="Gulir kembali ke layar beranda awal"
+            className="flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 cursor-pointer rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
             <span>KEMBALI KE AWAL</span>
-            <ChevronUp className="w-4 h-4" />
+            <ChevronUp className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
       </footer>
@@ -909,14 +943,15 @@ export default function Portfolio() {
               {/* Header */}
               <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                 <div className="flex items-center gap-2 font-mono text-xs font-bold text-cyan-400">
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4" aria-hidden="true" />
                   <span>INTEREST MESSAGE ME</span>
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                  aria-label="Tutup formulir kirim pesan"
+                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
@@ -928,7 +963,7 @@ export default function Portfolio() {
 
               {isSubmitted ? (
                 <div className="p-8 text-center font-mono py-10">
-                  <Check className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-bounce" />
+                  <Check className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-bounce" aria-hidden="true" />
                   <h4 className="text-xl font-bold mb-2 uppercase text-white">PESAN TERKIRIM!</h4>
                   <p className="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto">
                     Terima kasih! Pesan telah berhasil terkirim langsung ke inbox Dimas Brahmantya.
@@ -947,7 +982,7 @@ export default function Portfolio() {
                       placeholder="Masukkan nama Anda..."
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 transition-colors disabled:opacity-50"
+                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -962,7 +997,7 @@ export default function Portfolio() {
                       placeholder="nama@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 transition-colors disabled:opacity-50"
+                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -976,7 +1011,7 @@ export default function Portfolio() {
                       placeholder="Tawaran Project / Kolaborasi / Diskusi"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 transition-colors disabled:opacity-50"
+                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -991,7 +1026,7 @@ export default function Portfolio() {
                       placeholder="Tuliskan pesan Anda di sini..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 transition-colors resize-none disabled:opacity-50"
+                      className="w-full rounded-xl bg-slate-900/90 border border-slate-700/80 p-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-colors resize-none disabled:opacity-50"
                     />
                   </div>
 
@@ -1000,24 +1035,24 @@ export default function Portfolio() {
                       type="button"
                       disabled={isSubmitting}
                       onClick={() => setIsModalOpen(false)}
-                      className="px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                     >
                       BATAL
                     </button>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                      className="px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center gap-2 disabled:opacity-50 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                           <span>MENGIRIM...</span>
                         </>
                       ) : (
                         <>
                           <span>KIRIM PESAN</span>
-                          <Send className="w-3.5 h-3.5" />
+                          <Send className="w-3.5 h-3.5" aria-hidden="true" />
                         </>
                       )}
                     </button>

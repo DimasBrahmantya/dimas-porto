@@ -2,6 +2,35 @@ import { Project } from "@/types/project";
 
 export const projectsData: Project[] = [
   {
+    id: "loyalty-card",
+    slug: "loyalty-card",
+    title: "LoyaltyCard SaaS",
+    type: "SaaS Product",
+    category: "webapp",
+    year: "2026",
+    role: "Full-Stack Engineer & System Architect",
+    desc: "Platform kartu loyalitas digital multi-tenant modern berbasis web untuk UMKM dengan pemindaian QR otomatis kasir, PostgreSQL Row Level Security (RLS), dan akses instan tanpa login.",
+    fullDescription: 
+      "LoyaltyCard adalah platform Software-as-a-Service (SaaS) kartu stempel loyalitas digital multi-tenant modern yang dirancang untuk memberdayakan pelaku UMKM (seperti kafe, barbershop, salon, dan laundry) dalam mempertahankan retensi pelanggan tanpa kartu stempel kertas konvensional yang mudah hilang atau rusak.\n\nSistem ini dirancang dengan pendekatan zero-friction: pelanggan tidak diwajibkan mengunduh aplikasi seluler atau mendaftar akun. Pelanggan cukup membuka tautan token acak berkekuatan kriptografi 192-bit (/c/[token]) yang memuat kartu loyalitas interaktif dan QR code identitas unik. Di sisi operasional kasir, sistem menyediakan pemindai QR berbasis kamera web dengan fitur auto-stamp otomatis, umpan balik audio chime, dan mutasi data atomik yang terlindungi dari race condition melalui PostgreSQL Stored Procedures (RPC).\n\nKeamanan dan privasi data multi-tenant diisolasi secara ketat pada level kernel basis data menggunakan PostgreSQL Row Level Security (RLS) pada Supabase, didukung sistem Role-Based Access Control (RBAC) antara Owner dan Staf Kasir, kustomisasi identitas brand toko (logo auto-cutout, warna tema, target stempel, & reward), serta kepatuhan penuh terhadap UU Perlindungan Data Pribadi (UU PDP No. 27/2022).",
+    features: [
+      "Pemindai QR kamera kasir otomatis (Auto-Stamp) dengan audio chime & haptic feedback",
+      "Akses kartu instan pelanggan tanpa registrasi/aplikasi via token kriptografi 192-bit (/c/[token])",
+      "Isolasi multi-tenant mutlak di level basis data menggunakan PostgreSQL Row Level Security (RLS)",
+      "Role-Based Access Control (RBAC) ketat antara Pemilik Usaha (Owner) dan Staf Kasir",
+      "Mutasi stempel, pembatalan (void), dan penukaran reward atomik via PostgreSQL Stored Procedures (RPC)",
+      "Kustomisasi identitas brand lengkap (logo auto-cutout, warna tema toko, ikon stempel, & target reward)",
+      "Navigasi cepat direct-access kartu pelanggan langsung dari daftar pelanggan admin",
+      "Pengujian integritas & konkurensi basis data in-memory menggunakan PGlite WebAssembly",
+      "Kepatuhan regulasi perlindungan data pribadi sesuai prinsip UU PDP No. 27/2022"
+    ],
+    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL RLS", "TailwindCSS", "shadcn/ui", "Zod"],
+    image: "/projects/loyaltycard.png",
+    link: "https://loyaltycard-sable.vercel.app/",
+    githubUrl: "https://github.com/DimasBrahmantya/loyaltycard",
+    liveUrl: "https://loyaltycard-sable.vercel.app/",
+    highlight: true
+  },
+  {
     id: "simrs-rawat-jalan",
     slug: "simrs-rawat-jalan",
     title: "SIMRS Rawat Jalan",
@@ -181,17 +210,17 @@ export const projectsData: Project[] = [
     slug: "portfolio-rismansyah",
     title: "Portfolio Rismansyah",
     type: "Personal Project",
-    category: "academic",
+    category: "webapp",
     year: "2026",
-    role: "Web Developer",
-    desc: "Website portofolio interaktif yang disesuaikan untuk showcase karya profesional.",
+    role: "Front-End Developer",
+    desc: "Website portofolio interaktif dan modern untuk memvisualisasikan karya profesional serta profil rekayasa perangkat lunak.",
     fullDescription: 
-      "Website portofolio yang dirancang khusus untuk memamerkan profil profesional, jejak karier, dan karya rekayasa perangkat lunak milik rekan sejawat. Mengedepankan struktur tata letak modular, tipografi bersih, transisi halaman instan, serta integrasi formulir kontak langsung.",
+      "Website portofolio profesional yang dibangun khusus untuk memamerkan profil, rekam jejak, dan karya perangkat lunak rekanan (Rismansyah). Mengedepankan struktur tata letak yang bersih, transisi interaktif, performa muat halaman yang instan, serta integrasi tautan proyek dan kontak langsung.",
     features: [
-      "Struktur showcase proyek dengan kartu interaktif dan preview tautan",
-      "Timeline riwayat pendidikan dan pengalaman organisasi/kerja",
-      "Desain adaptif dan responsif di berbagai resolusi layar",
-      "Waktu muat halaman cepat dengan optimasi Next.js Static Export"
+      "Katalog showcase karya dengan kartu interaktif dan tautan preview langsung",
+      "Penyajian riwayat pengalaman kerja, pendidikan, dan keahlian teknis",
+      "Antarmuka responsif yang nyaman dibuka di smartphone maupun desktop",
+      "Performa muat halaman instan berbasis Next.js dan Tailwind CSS"
     ],
     tech: ["Next.js", "React", "TailwindCSS", "Vercel"],
     image: "/projects/risman.png",
@@ -205,17 +234,18 @@ export const projectsData: Project[] = [
     slug: "portfolio-dimas",
     title: "Portfolio Dimas",
     type: "Personal Site",
-    category: "academic",
+    category: "webapp",
     year: "2026",
-    role: "Creator & Lead Developer",
-    desc: "Website portofolio pribadi versi monochrome neo-brutalism.",
+    role: "Full Stack & UI Developer",
+    desc: "Website portofolio pribadi berbasis Next.js dengan arsitektur antarmuka modern, standar aksesibilitas tinggi, dan katalog proyek terstruktur.",
     fullDescription: 
-      "Eksplorasi gaya desain web neo-brutalism monochrome kontemporer yang menggabungkan kontras tegas, tipografi proporsional, border tebal, aksen neon cyan futuristik, dan animasi partikel mengambang untuk merefleksikan identitas sebagai pengembang aplikasi web dan antarmuka masa kini.",
+      "Website portofolio personal yang dirancang untuk merefleksikan identitas dan kapabilitas teknis Dimas Brahmantya sebagai Full Stack Developer. Mengedepankan filosofi antarmuka yang bersih, performa rendering tinggi, kepatuhan aksesibilitas WCAG, katalog proyek terperinci, serta formulir kontak interaktif yang terhubung langsung ke inbox email.",
     features: [
-      "Tema estetika game HUD neo-brutalism dengan aksen cyan glow",
-      "Navigasi kapsul mengambang dengan deteksi scroll aktif otomatis",
-      "Animasi partikel embers mengambang interaktif",
-      "Formulir kontak terintegrasi dengan validasi email instan"
+      "Arsitektur Next.js modern dengan tata letak responsif dan optimasi performa",
+      "Katalog proyek terstruktur lengkap dengan filter kategori dan modal detail",
+      "Navigasi kapsul mengambang dengan sinkronisasi posisi section otomatis",
+      "Formulir pesan langsung terintegrasi dengan feedback status pengiriman",
+      "Standar kontras tinggi, navigasi keyboard ramah aksesibilitas, dan dukungan reduced motion"
     ],
     tech: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript"],
     image: "/projects/dimas.png",

@@ -13,7 +13,6 @@ import {
   ExternalLink,
   Code2,
   Search,
-  Sparkles,
   Info,
   Layers,
   RotateCcw
@@ -42,14 +41,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-[#050b14] text-slate-100 font-sans relative overflow-x-hidden selection:bg-cyan-500 selection:text-black">
-      {/* Deep blue atmospheric radial background */}
-      <div
-        className="fixed inset-0 pointer-events-none -z-10"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 30%, #0e274a 0%, #08172e 50%, #030813 90%)",
-        }}
-      />
+      {/* Deep blue atmospheric ambient background */}
+      <div className="fixed inset-0 pointer-events-none -z-10 ambient-bg" />
 
       {/* Atmospheric embers & floating star particles */}
       <FloatingShapes />
@@ -59,16 +52,18 @@ export default function ProjectsPage() {
         {/* Back to Home Button */}
         <Link
           href="/"
-          className="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#081220]/90 backdrop-blur-md border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)] group"
+          aria-label="Kembali ke halaman beranda"
+          className="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#081220]/90 backdrop-blur-md border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>KEMBALI KE BERANDA</span>
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
+          <span>BACK TO HOME</span>
         </Link>
 
         {/* Center Monogram Logo */}
         <Link
           href="/"
-          className="w-10 h-10 rounded-xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md flex items-center justify-center font-mono font-black text-base shadow-[0_0_20px_rgba(255,255,255,0.08)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all"
+          aria-label="Kembali ke halaman beranda"
+          className="w-10 h-10 rounded-xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md flex items-center justify-center font-mono font-black text-base shadow-[0_0_20px_rgba(255,255,255,0.08)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
         >
           <span className="bg-gradient-to-br from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
             DB
@@ -77,8 +72,8 @@ export default function ProjectsPage() {
 
         {/* Project Counter Badge */}
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300 font-mono text-xs">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>TOTAL: <strong className="text-white">{projectsData.length}</strong> PROYEK</span>
+          <span className="w-2 h-2 rounded-full bg-cyan-400" aria-hidden="true" />
+          <span>TOTAL: <strong className="text-white">{projectsData.length}</strong> PROJECTS</span>
         </div>
       </header>
 
@@ -88,34 +83,74 @@ export default function ProjectsPage() {
         {/* Page Header Lockup */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-semibold mb-3 tracking-widest uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>ARCHIVE &amp; SHOWCASE</span>
+            <Layers className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
+            <span>PROJECT SHOWCASE &amp; ARCHIVE</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white font-heading">
-            KATALOG <span className="text-cyan-400">PROYEK</span>
+            PROJECT <span className="text-cyan-400">ARCHIVE</span>
           </h1>
 
-          <p className="mt-3 text-slate-400 text-xs sm:text-sm font-sans leading-relaxed max-w-2xl">
-            Daftar lengkap karya web application, arsitektur microservice, dan desain antarmuka UI/UX. Klik tombol pada kartu untuk menuju repositori GitHub, mencoba Live Demo, atau membaca penjelasan arsitektur lengkapnya.
+          <p className="mt-3 text-slate-300 text-xs sm:text-sm font-sans leading-relaxed max-w-2xl">
+            Koleksi lengkap {projectsData.length} karya web application, arsitektur microservices, SaaS multi-tenant, dan desain antarmuka UI/UX. Klik kartu untuk melihat rincian sistem dan live demo.
           </p>
 
+          {/* Interactive Quick Stack Filter Chips */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+              <Code2 className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
+              <span>Filter Cepat:</span>
+            </span>
+            {["Next.js", "Supabase", "Laravel", "NestJS", "Figma", "MongoDB", "TypeScript"].map((tech) => {
+              const isSelected = searchQuery.toLowerCase() === tech.toLowerCase();
+              return (
+                <button
+                  key={tech}
+                  type="button"
+                  onClick={() => setSearchQuery(isSelected ? "" : tech)}
+                  aria-pressed={isSelected}
+                  aria-label={`Filter proyek dengan teknologi ${tech}`}
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                    isSelected
+                      ? "bg-cyan-400 text-slate-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.4)]"
+                      : "bg-slate-900/90 text-slate-300 hover:text-white border border-slate-700/80 hover:border-cyan-400/60"
+                  }`}
+                >
+                  <span>#{tech}</span>
+                  {isSelected && <span className="text-[10px] font-bold">✕</span>}
+                </button>
+              );
+            })}
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="text-xs font-mono text-cyan-400 hover:text-cyan-300 underline cursor-pointer ml-1"
+                aria-label="Reset filter pencarian"
+              >
+                Reset
+              </button>
+            )}
+          </div>
+
           {/* Search & Filter Controls */}
-          <div className="w-full mt-8 flex flex-col sm:flex-row items-center gap-3">
+          <div className="w-full mt-7 flex flex-col sm:flex-row items-center gap-3">
             {/* Search Input */}
             <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" aria-hidden="true" />
               <input
                 type="text"
                 placeholder="Cari judul, teknologi (cth: Next.js)..."
                 value={searchQuery}
+                aria-label="Cari proyek berdasarkan judul atau teknologi"
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900/80 border border-slate-700/80 focus:border-cyan-400 focus:outline-none text-xs font-mono text-white placeholder-slate-500 backdrop-blur-md shadow-inner transition-colors"
+                className="w-full pl-10 pr-12 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 text-xs font-mono text-white placeholder-slate-500 transition-colors"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-mono"
+                  aria-label="Bersihkan pencarian"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-mono cursor-pointer"
                 >
                   Clear
                 </button>
@@ -126,18 +161,18 @@ export default function ProjectsPage() {
             <div className="flex flex-wrap justify-center sm:justify-end gap-1.5 font-mono text-xs w-full">
               {(
                 [
-                  { id: "all", label: "SEMUA" },
+                  { id: "all", label: "ALL" },
                   { id: "webapp", label: "WEB APP" },
                   { id: "uiux", label: "UI/UX" },
-                  { id: "academic", label: "AKADEMIK" },
                 ] as const
               ).map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3.5 py-2 rounded-xl transition-all uppercase tracking-wider cursor-pointer font-bold ${
+                  aria-label={`Filter kategori ${cat.label}`}
+                  className={`px-4 py-1.5 rounded-full transition-all uppercase tracking-wider cursor-pointer font-bold text-xs ${
                     activeCategory === cat.id
-                      ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                      ? "bg-cyan-500 text-black shadow-md"
                       : "bg-slate-900/70 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700"
                   }`}
                 >
@@ -155,7 +190,7 @@ export default function ProjectsPage() {
         {/* PROJECTS GRID */}
         {filteredProjects.length === 0 ? (
           <div className="text-center py-20 bg-slate-900/40 border border-slate-800 rounded-3xl p-8 max-w-lg mx-auto">
-            <Layers className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+            <Layers className="w-10 h-10 text-slate-600 mx-auto mb-3" aria-hidden="true" />
             <h3 className="text-base font-bold text-white uppercase font-mono">
               Tidak Ada Proyek yang Cocok
             </h3>
@@ -167,9 +202,9 @@ export default function ProjectsPage() {
                 setSearchQuery("");
                 setActiveCategory("all");
               }}
-              className="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-bold inline-flex items-center gap-2 hover:bg-cyan-500/30 transition-all cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-bold inline-flex items-center gap-2 hover:bg-cyan-500/30 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
               Reset Filter
             </button>
           </div>
@@ -184,7 +219,7 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: idx * 0.04 }}
-                  className="game-panel game-panel-hover rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col justify-between border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 group"
+                  className="portfolio-card portfolio-card-hover rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 group"
                 >
                   {/* Top: 1 Preview Image Per Project */}
                   <div>
@@ -200,23 +235,23 @@ export default function ProjectsPage() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1424] via-transparent to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1424] via-transparent to-transparent opacity-80 pointer-events-none" />
 
                       {/* Floating Meta Pills */}
                       <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-950/80 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider backdrop-blur-md">
+                        <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-950/85 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider backdrop-blur-md">
                           {project.type}
                         </span>
                       </div>
 
-                      <div className="absolute top-3 right-3 font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-950/80 text-slate-300 border border-slate-700/80 backdrop-blur-md">
+                      <div className="absolute top-3 right-3 font-mono text-xs font-bold px-2 py-0.5 rounded-full bg-slate-950/85 text-slate-300 border border-slate-700/80 backdrop-blur-md">
                         {project.year}
                       </div>
 
                       {/* Hover Overlay Hint */}
                       <div className="absolute inset-0 bg-cyan-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                        <span className="px-3 py-1 rounded-full bg-slate-900/90 text-cyan-300 border border-cyan-400 font-mono text-xs font-bold shadow-lg flex items-center gap-1.5">
-                          <Info className="w-3.5 h-3.5" />
+                        <span className="px-3.5 py-1.5 rounded-full bg-slate-900/90 text-cyan-300 border border-cyan-400 font-mono text-xs font-bold shadow-lg flex items-center gap-1.5">
+                          <Info className="w-3.5 h-3.5" aria-hidden="true" />
                           Lihat Detail
                         </span>
                       </div>
@@ -236,7 +271,7 @@ export default function ProjectsPage() {
                       </p>
 
                       {/* Tech Pills */}
-                      <div className="flex flex-wrap gap-1.5 font-mono text-[10px] text-slate-400">
+                      <div className="flex flex-wrap gap-1.5 font-mono text-xs text-slate-300">
                         {project.tech.map((t) => (
                           <span
                             key={t}
@@ -254,9 +289,9 @@ export default function ProjectsPage() {
                     {/* View Details Button */}
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="text-xs font-mono font-bold text-cyan-400 hover:text-white flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all cursor-pointer"
+                      className="text-xs font-mono font-bold text-cyan-400 hover:text-white flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                     >
-                      <Info className="w-3.5 h-3.5" />
+                      <Info className="w-3.5 h-3.5" aria-hidden="true" />
                       Detail
                     </button>
 
@@ -267,10 +302,11 @@ export default function ProjectsPage() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
-                          title="Buka Repositori GitHub"
+                          aria-label={`Buka Repositori GitHub untuk ${project.title}`}
+                          className="w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                          title={`Buka Repositori GitHub ${project.title}`}
                         >
-                          <Code2 className="w-4 h-4" />
+                          <Code2 className="w-4 h-4" aria-hidden="true" />
                         </a>
                       )}
 
@@ -279,10 +315,11 @@ export default function ProjectsPage() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 text-cyan-200 hover:text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-[0_0_12px_rgba(6,182,212,0.25)]"
-                          title="Buka Live Demo"
+                          aria-label={`Buka Live Demo untuk ${project.title}`}
+                          className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 text-cyan-200 hover:text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-[0_0_12px_rgba(6,182,212,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                          title={`Buka Live Demo ${project.title}`}
                         >
-                          <ExternalLink className="w-3.5 h-3.5" />
+                          <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                           <span>Demo</span>
                         </a>
                       )}
@@ -298,10 +335,10 @@ export default function ProjectsPage() {
         <div className="mt-16 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900/90 border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>KEMBALI KE HALAMAN UTAMA</span>
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            <span>BACK TO HOME</span>
           </Link>
         </div>
       </main>

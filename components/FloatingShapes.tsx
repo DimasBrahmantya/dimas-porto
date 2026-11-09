@@ -17,44 +17,46 @@ interface Particle {
 export default function FloatingShapes() {
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Generate atmospheric embers & star dust particles
-    const generated: Particle[] = Array.from({ length: 32 }).map((_, i) => ({
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery.matches) {
+      setReducedMotion(true);
+      return;
+    }
+
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+
+    // Generate subtle atmospheric depth specks
+    const generated: Particle[] = Array.from({ length: 12 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() > 0.7 ? 3 : Math.random() > 0.4 ? 2 : 1.5,
-      color: i % 3 === 0 ? "amber" : i % 3 === 1 ? "cyan" : "white",
-      duration: 5 + Math.random() * 7,
+      size: Math.random() > 0.6 ? 2 : 1.5,
+      color: i % 2 === 0 ? "cyan" : "white",
+      duration: 8 + Math.random() * 8,
       delay: Math.random() * 4,
-      driftX: (Math.random() - 0.5) * 40,
+      driftX: (Math.random() - 0.5) * 30,
     }));
     setParticles(generated);
+
+    return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
       {/* Soft Vignette Overlay */}
       <div className="absolute inset-0 cinematic-vignette opacity-80" />
 
-      {/* Atmospheric Star / Ember particles */}
-      {particles.map((p) => {
-        const glowColor =
-          p.color === "amber"
-            ? "rgba(249, 115, 22, 0.7)"
-            : p.color === "cyan"
-            ? "rgba(6, 182, 212, 0.7)"
-            : "rgba(255, 255, 255, 0.6)";
-        const bgColor =
-          p.color === "amber"
-            ? "#fb923c"
-            : p.color === "cyan"
-            ? "#38bdf8"
-            : "#ffffff";
+      {/* Atmospheric Star / Ember particles (disabled under prefers-reduced-motion) */}
+      {!reducedMotion &&
+        particles.map((p) => {
+        const bgColor = p.color === "cyan" ? "rgba(56, 189, 248, 0.4)" : "rgba(255, 255, 255, 0.35)";
 
         return (
           <motion.div
@@ -62,14 +64,14 @@ export default function FloatingShapes() {
             initial={{
               x: `${p.x}vw`,
               y: `${p.y}vh`,
-              opacity: 0.1,
-              scale: 0.8,
+              opacity: 0.05,
+              scale: 0.9,
             }}
             animate={{
-              y: [`${p.y}vh`, `${(p.y - 15 + 100) % 100}vh`],
-              x: [`${p.x}vw`, `${p.x + p.driftX / 10}vw`],
-              opacity: [0.1, 0.7, 0.1],
-              scale: [0.8, 1.3, 0.8],
+              y: [`${p.y}vh`, `${(p.y - 12 + 100) % 100}vh`],
+              x: [`${p.x}vw`, `${p.x + p.driftX / 15}vw`],
+              opacity: [0.05, 0.3, 0.05],
+              scale: [0.9, 1.1, 0.9],
             }}
             transition={{
               duration: p.duration,
@@ -82,7 +84,6 @@ export default function FloatingShapes() {
               width: `${p.size}px`,
               height: `${p.size}px`,
               backgroundColor: bgColor,
-              boxShadow: `0 0 ${p.size * 3}px ${glowColor}, 0 0 ${p.size * 6}px ${glowColor}`,
             }}
           />
         );

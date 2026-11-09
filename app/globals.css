@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-:root {
   --background: #060b13;
   --foreground: #f1f5f9;
 }
@@ -13,90 +8,42 @@
 body {
   background-color: #060b13;
   color: #f1f5f9;
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
-/* Cinematic Vignette & Atmospheric Glows */
-.cinematic-bg {
+/* Atmospheric Ambient Background */
+.ambient-bg {
   background: 
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(14, 165, 233, 0.12), transparent),
-    radial-gradient(circle 500px at 15% 25%, rgba(225, 29, 72, 0.08), transparent),
-    radial-gradient(circle 600px at 85% 70%, rgba(14, 165, 233, 0.08), transparent),
-    radial-gradient(ellipse at 50% 100%, rgba(15, 23, 42, 0.9), transparent),
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(14, 165, 233, 0.08), transparent 70%),
+    radial-gradient(circle 600px at 80% 30%, rgba(30, 58, 138, 0.06), transparent 60%),
     #060b13;
 }
 
 .cinematic-vignette {
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(3, 7, 18, 0.8) 100%);
+  background: radial-gradient(ellipse at center, transparent 65%, rgba(3, 7, 18, 0.75) 100%);
 }
 
-/* Glassmorphism Panel */
-.game-panel {
-  background: rgba(11, 20, 36, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.15);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+/* Portfolio Card Surface (Controlled glass & crisp border) */
+.game-panel,
+.portfolio-card {
+  background: rgba(10, 18, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5);
 }
 
-.game-panel-hover {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.game-panel-hover,
+.portfolio-card-hover {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.game-panel-hover:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 15px 40px -10px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+.game-panel-hover:hover,
+.portfolio-card-hover:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.7);
   transform: translateY(-2px);
 }
 
-/* Crimson Hero Arch Card */
-.crimson-arch {
-  background: linear-gradient(135deg, rgba(159, 18, 57, 0.85) 0%, rgba(88, 28, 44, 0.6) 100%);
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  box-shadow: 0 0 45px rgba(225, 29, 72, 0.25);
-}
-
-/* Blue Avatar Halo Glow */
-.avatar-halo {
-  position: relative;
-}
-.avatar-halo::before {
-  content: "";
-  position: absolute;
-  inset: -15%;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, rgba(6, 182, 212, 0.15) 45%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-  filter: blur(20px);
-}
-
-/* Ember / Floating Particles Animation */
-@keyframes emberFloat {
-  0% {
-    transform: translateY(0px) translateX(0px) scale(0.8);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translateY(-25px) translateX(12px) scale(1.2);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-55px) translateX(-8px) scale(0.6);
-    opacity: 0;
-  }
-}
-
-.ember-particle {
-  position: absolute;
-  border-radius: 9999px;
-  background: #f97316;
-  box-shadow: 0 0 8px #fb923c, 0 0 16px #ea580c;
-  animation: emberFloat 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* Custom Scrollbar for Dark Futuristic Theme */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -106,16 +53,41 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 4px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.15);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #0284c7;
 }
 
-/* Text Glows */
-.glow-text-cyan {
-  text-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+/* Accessibility: Pointer cursors on interactive controls */
+@layer base {
+  a[href],
+  button,
+  summary,
+  select,
+  label[for],
+  [role="button"],
+  [role="tab"],
+  [role="switch"] {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 }
-.glow-text-red {
-  text-shadow: 0 0 15px rgba(244, 63, 94, 0.5);
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ember-particle {
+    display: none !important;
+  }
 }

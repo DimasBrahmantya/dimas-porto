@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dimas Brahmantya Aryasena – Portfolio 2026",
+  title: "Dimas Brahmantya Aryasena | Portfolio 2026",
   description:
-    "Portfolio Dimas Brahmantya Aryasena – Full Stack Developer, Web Developer & Front-End Developer. Lulusan Teknik Informatika UMM (IPK 3.80).",
+    "Portfolio Dimas Brahmantya Aryasena, Full Stack Developer, Web Developer & Front-End Developer. Lulusan Teknik Informatika UMM (IPK 3.80).",
 };
 
 const jsonLdPerson = {
@@ -42,13 +42,13 @@ const jsonLdWebSite = {
   name: "Portfolio Dimas Brahmantya Aryasena",
   url: "https://dimasbrahmantyaaryasena.vercel.app",
   description:
-    "Portfolio dan karya Dimas Brahmantya Aryasena – Full Stack Developer, Web Developer & Front-End Developer.",
+    "Portfolio dan karya Dimas Brahmantya Aryasena, Full Stack Developer, Web Developer & Front-End Developer.",
 };
 
 const jsonLdProfilePage = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  name: "Portfolio 2026 – Dimas Brahmantya Aryasena",
+  name: "Portfolio 2026: Dimas Brahmantya Aryasena",
   url: "https://dimasbrahmantyaaryasena.vercel.app",
   mainEntity: {
     "@type": "Person",
