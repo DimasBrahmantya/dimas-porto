@@ -327,7 +327,7 @@ export default function Portfolio() {
                   PORTFOLIO
                 </h1>
                 <span className="text-3xl sm:text-5xl lg:text-6xl font-light text-slate-400 font-mono">
-                  2026
+                
                 </span>
               </div>
 
@@ -726,7 +726,7 @@ export default function Portfolio() {
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1.5 bg-slate-900 border-2 border-slate-700 group-hover:border-cyan-400/60 shadow-xl transition-all duration-300">
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-950">
                   <Image
-                    src="/dsc_6847.JPG"
+                    src="/DSC_6847.JPG"
                     alt="Dimas Contact Avatar"
                     fill
                     sizes="(max-width: 768px) 192px, 256px"
