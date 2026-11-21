@@ -52,7 +52,8 @@ export default function Portfolio() {
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("dimasbrahmantyaaryasena@gmail.com");
+    const email = ["dimasbrahmantyaaryasena", "gmail.com"].join("@");
+    navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

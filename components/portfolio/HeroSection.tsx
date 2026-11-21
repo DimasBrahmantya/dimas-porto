@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Download } from "lucide-react";
 import {
   motion,
   useMotionValue,
@@ -18,6 +19,8 @@ interface HeroSectionProps {
   projectsCount: number;
   onScrollToSection: (id: string) => void;
 }
+
+const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 export function HeroSection({
   projectsCount,
@@ -38,7 +41,7 @@ export function HeroSection({
   const portfolioScrollX = useTransform(scrollYProgress, [0, 1], [0, 48]);
   const portraitScrollY = useTransform(scrollYProgress, [0, 1], [0, 28]);
 
-  // Subtle cursor-driven parallax for ambient aura & editorial backdrop
+  // Subtle pointer-reactive parallax for ambient aura behind portrait
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const auraX = useSpring(pointerX, { stiffness: 120, damping: 24 });
@@ -166,8 +169,8 @@ export function HeroSection({
 
           {/* Desktop Quadrant Overlay / Mobile Stacked Below Portrait */}
           <div className="relative z-30 mt-5 lg:mt-0 lg:absolute lg:inset-0 lg:pointer-events-none flex flex-col lg:flex-row lg:items-end lg:justify-between gap-7">
-            {/* Left Anchor: Availability Pill + I AM DIMAS BAS + Dual CTAs */}
-            <div className="lg:pointer-events-auto flex flex-col items-start lg:max-w-[390px] lg:pb-6">
+            {/* Left Anchor: Relocation/Work Availability Pill + I AM DIMAS BAS + Primary CTAs */}
+            <div className="lg:pointer-events-auto flex flex-col items-start lg:max-w-[440px] lg:pb-6">
               <motion.div
                 initial={
                   prefersReduced
@@ -176,13 +179,13 @@ export function HeroSection({
                 }
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2.5 h-10 px-4 rounded-full bg-white border border-[#F9A8D4] shadow-[0_6px_18px_rgba(17,18,22,0.06)] mb-4 sm:mb-6"
+                className="inline-flex items-center gap-2.5 min-h-[40px] py-1.5 px-4 rounded-full bg-white border border-[#F9A8D4] shadow-[0_6px_18px_rgba(17,18,22,0.06)] mb-4 sm:mb-6"
               >
-                <span className="relative flex items-center justify-center w-3 h-3 rounded-full bg-[#DB2777]/20">
+                <span className="relative flex items-center justify-center w-3 h-3 rounded-full bg-[#DB2777]/20 shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                 </span>
-                <span className="text-[13px] font-medium text-[#111216]">
-                  Available for new opportunities
+                <span className="text-xs sm:text-[13px] font-medium text-[#111216]">
+                  Open to relocate Jakarta / remote / freelance
                 </span>
               </motion.div>
 
@@ -221,13 +224,12 @@ export function HeroSection({
                   delay: 0.28,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mt-6 flex flex-wrap items-center gap-3"
+                className="mt-6 flex flex-wrap items-center gap-2.5"
               >
                 <MagneticWrap>
                   <Button
                     variant="primary"
                     size="lg"
-                    data-cursor="Works"
                     onClick={() => onScrollToSection("works")}
                     aria-label="Scroll to selected works"
                   >
@@ -236,18 +238,31 @@ export function HeroSection({
                 </MagneticWrap>
 
                 <MagneticWrap>
+                  <a
+                    href={CV_HREF}
+                    download="CV-Dimas-Brahmantya-Aryasena.pdf"
+                    className="group inline-flex items-center justify-center gap-2 h-12 px-5 rounded-full bg-white text-[#111216] border border-[#CBD2DF] hover:bg-[#F1F3F7] hover:border-[#94A3B8] text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                  >
+                    <Download
+                      className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                    <span>Download CV</span>
+                  </a>
+                </MagneticWrap>
+
+                <MagneticWrap>
                   <Link
                     href="/projects"
-                    data-cursor="Archive"
-                    className="inline-flex items-center justify-center h-12 px-6 rounded-full bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3] text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                    className="inline-flex items-center justify-center h-12 px-5 rounded-full bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3] text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                   >
-                    Full Archive ({projectsCount})
+                    Archive ({projectsCount})
                   </Link>
                 </MagneticWrap>
               </motion.div>
             </div>
 
-            {/* Right Anchor: Bio + FULL STACK WEB DEVELOPER + Location Blush Badge */}
+            {/* Right Anchor: Focused Primary Role (Full Stack) + Supporting UI/UX + Location */}
             <motion.div
               initial={prefersReduced ? false : { opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
@@ -259,8 +274,8 @@ export function HeroSection({
               className="lg:pointer-events-auto flex flex-col items-start lg:items-end text-left lg:text-right lg:max-w-[360px] lg:pb-6"
             >
               <p className="text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-sm">
-                Informatics Engineering UMM (GPA 3.80). Specialized in
-                Full-Stack Web Apps, UI/UX Design, &amp; Modern Frontend.
+                Full-Stack Web Developer focused on Next.js, TypeScript, and
+                Laravel, with UI/UX prototyping as a supporting skill.
               </p>
 
               <p
@@ -275,7 +290,7 @@ export function HeroSection({
               </p>
 
               <span className="mt-4 inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] font-mono text-[11px] font-bold tracking-wider uppercase">
-                MALANG, INDONESIA
+                MALANG | OPEN TO JAKARTA &amp; REMOTE
               </span>
             </motion.div>
           </div>

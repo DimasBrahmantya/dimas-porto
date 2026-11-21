@@ -26,6 +26,11 @@ export function Dialog({
 }: DialogProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const onOpenChangeRef = useRef(onOpenChange);
+
+  useEffect(() => {
+    onOpenChangeRef.current = onOpenChange;
+  }, [onOpenChange]);
 
   useEffect(() => {
     if (open) {
@@ -38,6 +43,13 @@ export function Dialog({
       const rafId = requestAnimationFrame(() => {
         const panel = panelRef.current;
         if (!panel) return;
+        const firstField = panel.querySelector<HTMLElement>(
+          'input:not([type="hidden"]):not([disabled]), textarea:not([disabled])'
+        );
+        if (firstField && firstField.offsetParent !== null) {
+          firstField.focus();
+          return;
+        }
         const focusables = panel.querySelectorAll<HTMLElement>(focusableSelector);
         if (focusables.length > 0) {
           focusables[0].focus();
@@ -48,7 +60,7 @@ export function Dialog({
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
-          onOpenChange(false);
+          onOpenChangeRef.current(false);
           return;
         }
         if (e.key === "Tab") {
@@ -91,7 +103,7 @@ export function Dialog({
 
     document.body.style.overflow = "";
     return undefined;
-  }, [open, onOpenChange]);
+  }, [open]);
 
   return (
     <AnimatePresence>

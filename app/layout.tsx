@@ -31,9 +31,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dimas Brahmantya Aryasena | Creative & Engineering Portfolio",
+  title: "Dimas Brahmantya Aryasena | Full-Stack Web Developer Portfolio",
   description:
-    "Portfolio of Dimas Brahmantya Aryasena, Full Stack Web Developer & UI/UX Engineer. Informatics Engineering graduate from Universitas Muhammadiyah Malang (GPA 3.80).",
+    "Portfolio of Dimas Brahmantya Aryasena, Full-Stack Web Developer (Next.js, Laravel, TypeScript) with UI/UX prototyping as a supporting skill. Open to Jakarta relocation, remote, and freelance.",
 };
 
 const jsonLdPerson = {
@@ -41,13 +41,12 @@ const jsonLdPerson = {
   "@type": "Person",
   name: "Dimas Brahmantya Aryasena",
   url: "https://dimasbrahmantyaaryasena.vercel.app",
-  email: "dimasbrahmantyaaryasena@gmail.com",
   sameAs: [
     "https://github.com/DimasBrahmantya",
     "https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/",
     "https://instagram.com/dimasbas_",
   ],
-  jobTitle: "Full Stack Web Developer",
+  jobTitle: "Full-Stack Web Developer",
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Universitas Muhammadiyah Malang",
@@ -60,7 +59,7 @@ const jsonLdWebSite = {
   name: "Dimas Brahmantya Aryasena Portfolio",
   url: "https://dimasbrahmantyaaryasena.vercel.app",
   description:
-    "Selected web applications, microservices architecture, and UI/UX design case studies by Dimas Brahmantya Aryasena.",
+    "Built and deployed web applications, backend systems, and UI/UX design case studies by Dimas Brahmantya Aryasena.",
 };
 
 const jsonLdProfilePage = {

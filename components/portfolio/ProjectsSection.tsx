@@ -106,8 +106,8 @@ export function ProjectsSection({
             Featured Projects.
           </h2>
           <p className="text-sm sm:text-[15px] text-[#5A6272] mt-2 max-w-xl">
-            Production web applications, multi-tenant SaaS architecture, and
-            UI/UX prototypes.
+            Built and deployed web applications, full-stack systems, and UI/UX
+            prototypes.
           </p>
         </div>
 
@@ -123,7 +123,6 @@ export function ProjectsSection({
                 key={tab.id}
                 type="button"
                 role="tab"
-                data-cursor="Filter"
                 aria-selected={isSelected}
                 onClick={() => onFilterChange(tab.id)}
                 className={`relative min-h-[44px] px-4 rounded-full text-xs font-semibold border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
@@ -168,24 +167,18 @@ export function ProjectsSection({
                 clipPath: "inset(6% 4% 6% 4% round 28px)",
                 scale: 0.98,
               }}
-              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               <Card className="overflow-hidden rounded-3xl shadow-[0_12px_32px_-8px_rgba(17,18,22,0.08)]">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 items-center">
                   <div className="lg:col-span-6 flex flex-col items-start">
                     <div className="flex flex-wrap items-center gap-2 mb-4">
-                      <Badge variant="blue">
-                        {flagship.id === "loyalty-card"
-                          ? "FLAGSHIP SAAS"
-                          : flagship.type.toUpperCase()}
+                      <Badge variant={flagship.category === "uiux" ? "pink" : "blue"}>
+                        {flagship.type.toUpperCase()}
                       </Badge>
-                      {flagship.id === "loyalty-card" ? (
-                        <Badge variant="pink">PostgreSQL RLS</Badge>
-                      ) : (
-                        <Badge variant="outline">
-                          {flagship.category === "uiux" ? "UI/UX" : "WEB APP"}
-                        </Badge>
-                      )}
+                      <Badge variant="outline">
+                        {flagship.category === "uiux" ? "UI/UX" : "WEB APP"}
+                      </Badge>
                     </div>
 
                     <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111216] mb-3">
@@ -196,7 +189,7 @@ export function ProjectsSection({
                       {flagship.desc}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-1.5 mb-6">
                       {flagship.tech.slice(0, 4).map((t) => (
                         <Badge key={t} variant="secondary">
                           #{t}
@@ -208,7 +201,6 @@ export function ProjectsSection({
                       <MagneticWrap>
                         <Button
                           size="default"
-                          data-cursor="Inspect"
                           onClick={() => onSelectProject(flagship)}
                         >
                           View Details
@@ -218,7 +210,6 @@ export function ProjectsSection({
                       <MagneticWrap>
                         <Link
                           href="/projects"
-                          data-cursor="Archive"
                           className="inline-flex items-center justify-center gap-1.5 h-11 px-5 rounded-full bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3] text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                         >
                           <span>Open Archive ({counts.all})</span>
@@ -231,7 +222,6 @@ export function ProjectsSection({
                   <div className="lg:col-span-6">
                     <button
                       type="button"
-                      data-cursor="Inspect"
                       onClick={() => onSelectProject(flagship)}
                       aria-label={`Open case study details for ${flagship.title}`}
                       className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#F1F3F7] border border-[#E2E5EC] group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
@@ -256,7 +246,7 @@ export function ProjectsSection({
         </AnimatePresence>
       </ShapeReveal>
 
-      {/* Supporting 3-Column Grid with Shape-In / Shape-Out & 3D Tilt Spotlight */}
+      {/* Supporting 3-Column Grid with Shape-In / Shape-Out, Uniform Chips & 3D Tilt Spotlight */}
       {supporting.length > 0 && (
         <motion.div
           layout
@@ -283,23 +273,20 @@ export function ProjectsSection({
                     scale: 1,
                     clipPath: "inset(0% 0% 0% 0% round 16px)",
                   }}
-                  viewport={{ once: false, amount: 0.12 }}
+                  viewport={{ once: false, amount: "some" }}
                   exit={{
                     opacity: 0,
                     scale: 0.92,
                     clipPath: "inset(8% 8% 8% 8% round 28px)",
                   }}
                   transition={{
-                    duration: 0.45,
-                    delay: index * 0.06,
+                    duration: 0.4,
+                    delay: index * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="h-full"
                 >
-                  <TiltSpotlightCard
-                    accent={isUiux ? "pink" : "blue"}
-                    cursorLabel="View"
-                  >
+                  <TiltSpotlightCard accent={isUiux ? "pink" : "blue"}>
                     <Card
                       interactive
                       className={`h-full flex flex-col justify-between overflow-hidden ${
@@ -340,7 +327,6 @@ export function ProjectsSection({
                                   href={project.githubUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  data-cursor="Code"
                                   aria-label={`Open GitHub repository for ${project.title}`}
                                   className="w-11 h-11 rounded-full bg-[#F1F3F7] border border-[#E2E5EC] flex items-center justify-center text-[#475060] hover:text-[#111216] hover:border-[#CBD2DF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                                 >
@@ -352,7 +338,6 @@ export function ProjectsSection({
                                   href={project.liveUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  data-cursor={isUiux ? "Figma" : "Live"}
                                   aria-label={`Open live preview for ${project.title}`}
                                   className={`w-11 h-11 rounded-full flex items-center justify-center border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
                                     isUiux
@@ -388,9 +373,13 @@ export function ProjectsSection({
                       </div>
 
                       <CardFooter className="pt-3 pb-4">
-                        <span className="font-mono text-[11px] font-semibold text-[#272B35] truncate">
-                          {project.tech.slice(0, 3).join(" / ")}
-                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tech.slice(0, 3).map((t) => (
+                            <Badge key={t} variant="secondary">
+                              #{t}
+                            </Badge>
+                          ))}
+                        </div>
                       </CardFooter>
                     </Card>
                   </TiltSpotlightCard>

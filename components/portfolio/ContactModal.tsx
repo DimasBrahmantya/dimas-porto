@@ -26,16 +26,18 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
     email: "",
     subject: "",
     message: "",
+    website: "",
   });
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedSender, setSubmittedSender] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) {
       setFieldErrors({});
       setErrorMessage("");
+      setSubmittedSender(null);
     }
     onOpenChange(nextOpen);
   };
@@ -67,36 +69,39 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
     setErrorMessage("");
 
     try {
-      const res = await fetch(
-        "https://formsubmit.co/ajax/dimasbrahmantyaaryasena@gmail.com",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            _subject: formData.subject.trim()
-              ? `[Portfolio] ${formData.subject.trim()}`
-              : `New Portfolio Inquiry from ${formData.name.trim()}`,
-            message: formData.message.trim(),
-            _captcha: "false",
-          }),
-        }
-      );
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          website: formData.website,
+        }),
+      });
 
-      if (res.ok) {
-        setIsSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => {
-          setIsSubmitted(false);
-          handleOpenChange(false);
-        }, 3000);
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+
+      if (res.ok && data.ok !== false) {
+        setSubmittedSender(formData.name.trim());
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          website: "",
+        });
       } else {
         setErrorMessage(
-          "Could not send your message right now. Please try again or email directly."
+          data.error ||
+            "Could not send your message right now. Please try again shortly."
         );
       }
     } catch {
@@ -130,21 +135,38 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
           </div>
         )}
 
-        {isSubmitted ? (
-          <div className="py-10 px-4 text-center">
+        {submittedSender ? (
+          <div role="status" aria-live="polite" className="py-8 px-4 text-center">
             <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#2563EB] flex items-center justify-center mx-auto mb-4">
               <Check className="w-6 h-6" aria-hidden="true" />
             </div>
             <h4 className="font-serif text-2xl font-bold text-[#111216] mb-2">
-              Message Sent.
+              Message Sent Successfully.
             </h4>
-            <p className="text-sm text-[#5A6272] leading-relaxed max-w-sm mx-auto">
-              Thank you for reaching out. Your message has been delivered
-              directly to Dimas Brahmantya&apos;s inbox.
+            <p className="text-sm text-[#5A6272] leading-relaxed max-w-sm mx-auto mb-6">
+              Thank you, {submittedSender}. Your inquiry has been delivered to
+              Dimas Brahmantya&apos;s inbox and will be answered promptly.
             </p>
+            <Button variant="primary" onClick={() => handleOpenChange(false)}>
+              Done
+            </Button>
           </div>
         ) : (
           <form onSubmit={handleFormSubmit} noValidate className="space-y-4">
+            {/* Hidden anti-spam honeypot field */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website}
+              onChange={(e) =>
+                setFormData({ ...formData, website: e.target.value })
+              }
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div>
               <label
                 htmlFor="contact-name"
@@ -224,7 +246,7 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
                 id="contact-subject"
                 type="text"
                 disabled={isSubmitting}
-                placeholder="Project inquiry, job role, or collaboration"
+                placeholder="Full-Stack role, Jakarta/remote opportunity, or freelance"
                 value={formData.subject}
                 onChange={(e) =>
                   setFormData({ ...formData, subject: e.target.value })

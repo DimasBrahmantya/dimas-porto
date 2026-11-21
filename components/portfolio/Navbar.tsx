@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MagneticWrap } from "@/components/portfolio/MotionPrimitives";
 
@@ -22,6 +22,8 @@ const navItems: { id: NavTab; label: string }[] = [
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
+
+const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 export function Navbar({
   activeTab,
@@ -52,7 +54,6 @@ export function Navbar({
         {/* Left: Editorial Serif Brand */}
         <motion.a
           href="#home"
-          data-cursor="Top"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={(e) => {
@@ -86,7 +87,6 @@ export function Navbar({
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                data-cursor={item.label}
                 onMouseEnter={() => setHoveredTab(item.id)}
                 onFocus={() => setHoveredTab(item.id)}
                 onBlur={() => setHoveredTab(null)}
@@ -126,8 +126,22 @@ export function Navbar({
           })}
         </nav>
 
-        {/* Right: Desktop Contact CTA + Mobile Controls */}
+        {/* Right: Download CV + Desktop Contact CTA + Mobile Controls */}
         <div className="flex items-center gap-2.5">
+          <MagneticWrap strength={0.16} className="hidden lg:inline-flex">
+            <a
+              href={CV_HREF}
+              download="CV-Dimas-Brahmantya-Aryasena.pdf"
+              className="group inline-flex items-center gap-1.5 h-11 px-4 rounded-full bg-white border border-[#CBD2DF] text-xs font-semibold text-[#111216] hover:bg-[#F1F3F7] hover:border-[#94A3B8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+            >
+              <Download
+                className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5"
+                aria-hidden="true"
+              />
+              <span>CV</span>
+            </a>
+          </MagneticWrap>
+
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
@@ -147,7 +161,6 @@ export function Navbar({
           <MagneticWrap>
             <Button
               size="default"
-              data-cursor="Message"
               onClick={() => {
                 setMobileOpen(false);
                 onOpenModal();
@@ -203,18 +216,30 @@ export function Navbar({
                 </motion.a>
               );
             })}
+
             <motion.div
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ delay: 0.16, duration: 0.22 }}
+              className="grid grid-cols-2 gap-2 pt-1"
             >
+              <a
+                href={CV_HREF}
+                download="CV-Dimas-Brahmantya-Aryasena.pdf"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-1.5 min-h-[44px] px-3 rounded-xl text-sm font-semibold text-[#111216] bg-white border border-[#CBD2DF] hover:bg-[#F1F3F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+              >
+                <Download className="w-4 h-4" aria-hidden="true" />
+                <span>Download CV</span>
+              </a>
+
               <Link
                 href="/projects"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between min-h-[44px] px-4 rounded-xl text-sm font-semibold text-[#9D174D] bg-[#FDF2F8] border border-[#F9A8D4] hover:bg-[#FCE7F3] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                className="flex items-center justify-center gap-1.5 min-h-[44px] px-3 rounded-xl text-sm font-semibold text-[#9D174D] bg-[#FDF2F8] border border-[#F9A8D4] hover:bg-[#FCE7F3] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
               >
-                <span>Full Archive</span>
+                <span>Archive</span>
                 <span className="font-mono text-xs">/projects</span>
               </Link>
             </motion.div>

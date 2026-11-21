@@ -148,9 +148,9 @@ export default function ProjectsPage() {
             </span>
           </h1>
           <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-2xl mx-auto">
-            Complete collection of {counts.all} production web apps,
-            microservices architectures, and Figma UI/UX systems. Select any
-            card for system details and live links.
+            Complete collection of {counts.all} built and deployed web apps,
+            full-stack systems, and Figma UI/UX prototypes. Select any card for
+            system details and live links.
           </p>
         </ShapeReveal>
 
@@ -398,21 +398,21 @@ export default function ProjectsPage() {
                           </CardContent>
                         </div>
 
-                        <CardFooter className="pt-3 pb-4 gap-3">
-                          <span className="font-mono text-[11px] font-semibold text-[#272B35] truncate">
-                            {project.tech
-                              .slice(0, 3)
-                              .map((t) => `#${t}`)
-                              .join(" ")}
-                          </span>
+                        <CardFooter className="pt-3 pb-4 gap-3 flex-wrap">
+                          <div className="flex flex-wrap gap-1.5 min-w-0">
+                            {project.tech.slice(0, 3).map((t) => (
+                              <Badge key={t} variant="secondary">
+                                #{t}
+                              </Badge>
+                            ))}
+                          </div>
 
-                          <div className="flex items-center gap-2 shrink-0">
+                          <div className="flex items-center gap-2 shrink-0 ml-auto">
                             {project.githubUrl && (
                               <a
                                 href={project.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor="Code"
                                 aria-label={`Open GitHub repository for ${project.title}`}
                                 className="w-11 h-11 rounded-full bg-[#F1F3F7] border border-[#E2E5EC] flex items-center justify-center text-[#272B35] hover:bg-[#E2E5EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                               >
@@ -425,7 +425,6 @@ export default function ProjectsPage() {
                                 href={project.liveUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                data-cursor={isUiux ? "Figma" : "Demo"}
                                 className={`inline-flex items-center gap-1.5 h-11 px-4 rounded-full text-xs font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
                                   isUiux
                                     ? "bg-[#DB2777] hover:bg-[#BE185D]"
@@ -441,7 +440,6 @@ export default function ProjectsPage() {
                             ) : (
                               <button
                                 type="button"
-                                data-cursor="Details"
                                 onClick={() => setSelectedProject(project)}
                                 className="inline-flex items-center gap-1.5 h-11 px-4 rounded-full bg-[#111216] hover:bg-[#272B35] text-white text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                               >
@@ -466,18 +464,18 @@ export default function ProjectsPage() {
                   <div className="w-full relative overflow-hidden rounded-3xl bg-white border border-[#F9A8D4] p-7 sm:p-10 flex flex-col justify-between shadow-[0_10px_28px_-8px_rgba(17,18,22,0.07)]">
                     <div className="relative z-10 max-w-xl">
                       <Badge variant="pink" className="mb-4">
-                        OPEN FOR COLLABORATION
+                        OPEN TO JAKARTA / REMOTE / FREELANCE
                       </Badge>
                       <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#111216] leading-tight">
-                        Need a Full-Stack Engineer
+                        Hiring a Full-Stack
                         <span className="block font-serif italic font-normal text-[#BE185D] mt-0.5">
-                          or UI/UX partner?
+                          Web Developer?
                         </span>
                       </h2>
                       <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                        Let&apos;s discuss your web product, internal dashboard,
-                        or Figma interface prototype. Available for full-time,
-                        internship, and freelance projects.
+                        Open for full-time Full-Stack Web Developer roles
+                        (relocating to Jakarta or remote) and freelance web or
+                        UI/UX projects.
                       </p>
                     </div>
 

@@ -1,13 +1,20 @@
 "use client";
 
+import { Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ShapeReveal } from "@/components/portfolio/MotionPrimitives";
+import {
+  MagneticWrap,
+  ShapeReveal,
+} from "@/components/portfolio/MotionPrimitives";
+
+const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 const stackGroups = [
   {
-    title: "FRONTEND & UI",
+    title: "FRONTEND & UI ENGINEERING",
+    caption: "Primary interface stack across deployed web apps and motion flows.",
     boxClass: "bg-[#FAF8F4] border-[#E2E5EC]",
     titleClass: "text-[#1D4ED8]",
     items: [
@@ -15,33 +22,45 @@ const stackGroups = [
       { label: "React", highlighted: null },
       { label: "TypeScript", highlighted: "blue" as const },
       { label: "Tailwind CSS", highlighted: null },
-      { label: "Vue.js", highlighted: null },
+      { label: "Framer Motion", highlighted: null },
     ],
   },
   {
-    title: "BACKEND & ARCHITECTURE",
+    title: "BACKEND & DATABASES",
+    caption: "Server logic, REST APIs, authentication, and relational/NoSQL data.",
     boxClass: "bg-[#FAF8F4] border-[#E2E5EC]",
     titleClass: "text-[#5A6272]",
     items: [
       { label: "Laravel", highlighted: null },
       { label: "NestJS", highlighted: null },
       { label: "Node.js", highlighted: null },
-      { label: "REST API", highlighted: null },
+      { label: "Python", highlighted: null },
       { label: "PostgreSQL RLS", highlighted: null },
-    ],
-  },
-  {
-    title: "DATABASE & PRODUCT DESIGN",
-    boxClass: "bg-[#FDF2F8] border-[#F9A8D4]",
-    titleClass: "text-[#9D174D]",
-    items: [
       { label: "MySQL", highlighted: null },
       { label: "MongoDB", highlighted: null },
       { label: "Supabase", highlighted: null },
+    ],
+  },
+  {
+    title: "WORKFLOW, DEPLOYMENT & UI/UX",
+    caption: "Version control, cloud deployment, and supporting Figma design systems.",
+    boxClass: "bg-[#FDF2F8] border-[#F9A8D4]",
+    titleClass: "text-[#9D174D]",
+    items: [
+      { label: "Git", highlighted: null },
+      { label: "GitHub", highlighted: null },
+      { label: "Vercel", highlighted: "blue" as const },
+      { label: "Solo Scrum", highlighted: null },
       { label: "Figma", highlighted: "pink" as const },
       { label: "Design Systems", highlighted: "pink" as const },
     ],
   },
+];
+
+const internshipHighlights = [
+  "Built and improved the hospital's outpatient registration module using Laravel, PHP, MySQL, and Bootstrap.",
+  "Used by hospital registration staff and outpatient clinic teams to handle BPJS Kesehatan and general patient intake.",
+  "Translated operational feedback from hospital staff into structured patient lookup and queue-slip workflows.",
 ];
 
 export function ProfileSection() {
@@ -70,9 +89,8 @@ export function ProfileSection() {
                 </h3>
                 <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
                   Informatics Engineering graduate from Universitas Muhammadiyah
-                  Malang (GPA 3.80). Focused on building production web
-                  applications, accessible UI systems, and clean full-stack
-                  architectures.
+                  Malang focused on building and deploying full-stack web
+                  applications, clean APIs, and responsive interfaces.
                 </p>
 
                 <div className="my-6 border-t border-[#E2E5EC]" />
@@ -82,29 +100,35 @@ export function ProfileSection() {
                   <motion.div
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: false, amount: "some" }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="flex items-start gap-3"
                   >
                     <motion.span
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      viewport={{ once: false, amount: 0.3 }}
-                      transition={{ type: "spring", stiffness: 360, damping: 20, delay: 0.1 }}
+                      viewport={{ once: false, amount: "some" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 360,
+                        damping: 20,
+                        delay: 0.1,
+                      }}
                       className="w-2.5 h-2.5 rounded-full bg-[#DB2777] mt-1.5 shrink-0"
                       aria-hidden="true"
                     />
                     <div>
                       <span className="font-mono text-[11px] font-bold text-[#BE185D] uppercase tracking-wider block">
-                        EX-INTERN AUG 2025 - SEP 2025
+                        FULLSTACK WEB DEVELOPER INTERN | AUG 2025 - SEP 2025
                       </span>
                       <p className="text-base font-bold text-[#111216] mt-0.5">
                         RSUD Grati Hospital, Pasuruan
                       </p>
-                      <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed mt-1">
-                        Fullstack Web Developer: Built outpatient SIMRS
-                        registration module using Laravel &amp; MySQL.
-                      </p>
+                      <ul className="mt-2 space-y-1.5 text-xs sm:text-[13px] text-[#5A6272] leading-relaxed list-disc pl-4">
+                        {internshipHighlights.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
                     </div>
                   </motion.div>
 
@@ -112,7 +136,7 @@ export function ProfileSection() {
                   <motion.div
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: false, amount: "some" }}
                     transition={{
                       duration: 0.45,
                       delay: 0.1,
@@ -123,39 +147,61 @@ export function ProfileSection() {
                     <motion.span
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      viewport={{ once: false, amount: 0.3 }}
-                      transition={{ type: "spring", stiffness: 360, damping: 20, delay: 0.18 }}
+                      viewport={{ once: false, amount: "some" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 360,
+                        damping: 20,
+                        delay: 0.18,
+                      }}
                       className="w-2.5 h-2.5 rounded-full bg-[#2563EB] mt-1.5 shrink-0"
                       aria-hidden="true"
                     />
                     <div>
                       <span className="font-mono text-[11px] font-bold text-[#2563EB] uppercase tracking-wider block">
-                        B.SC. INFORMATICS | GPA 3.80
+                        B.SC. INFORMATICS | GPA 3.80 / 4.00
                       </span>
                       <p className="text-base font-bold text-[#111216] mt-0.5">
                         Universitas Muhammadiyah Malang
                       </p>
                       <p className="text-xs sm:text-[13px] text-[#5A6272] mt-1">
-                        Informatics Engineering Graduate | SMAN 2 Pasuruan
+                        Final Thesis: Outpatient Registration System at RSUD
+                        Grati Using Solo Scrum
                       </p>
                     </div>
                   </motion.div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-5 border-t border-[#E2E5EC]">
-                <span className="font-mono text-[11px] font-bold text-[#5A6272] uppercase tracking-wider block mb-1.5">
-                  LANGUAGE PROFICIENCY
-                </span>
-                <p className="text-xs sm:text-sm font-semibold text-[#111216]">
-                  Indonesian (Native) | English (Professional Working)
-                </p>
+              <div className="mt-6 pt-5 border-t border-[#E2E5EC] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="font-mono text-[11px] font-bold text-[#5A6272] uppercase tracking-wider block mb-1">
+                    LANGUAGE PROFICIENCY
+                  </span>
+                  <p className="text-xs sm:text-sm font-semibold text-[#111216]">
+                    Indonesian (Native) | English (Intermediate)
+                  </p>
+                </div>
+
+                <MagneticWrap strength={0.16}>
+                  <a
+                    href={CV_HREF}
+                    download="CV-Dimas-Brahmantya-Aryasena.pdf"
+                    className="group inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#FAF8F4] border border-[#CBD2DF] hover:bg-[#F1F3F7] text-xs font-semibold text-[#111216] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                  >
+                    <Download
+                      className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                    <span>Download CV</span>
+                  </a>
+                </MagneticWrap>
               </div>
             </CardContent>
           </Card>
         </ShapeReveal>
 
-        {/* Right Asymmetric Column: Diagonal Wipe Reveal + Interactive Tech Badges */}
+        {/* Right Asymmetric Column: Wipe Reveal + Verified Tech Stack */}
         <ShapeReveal
           variant="diagonal-wipe"
           delay={0.08}
@@ -167,8 +213,8 @@ export function ProfileSection() {
                 Core Technologies &amp; Engineering Tools
               </h3>
               <p className="text-sm text-[#5A6272] mt-1 mb-6">
-                Production tools used across web apps, APIs, databases, and
-                interface design.
+                Tools and frameworks used across my built and deployed web apps,
+                APIs, databases, and interface designs.
               </p>
 
               <div className="space-y-4">
@@ -186,11 +232,14 @@ export function ProfileSection() {
                     className={`p-4 sm:p-5 rounded-2xl border ${group.boxClass}`}
                   >
                     <span
-                      className={`font-mono text-[11px] font-bold uppercase tracking-wider block mb-3 ${group.titleClass}`}
+                      className={`font-mono text-[11px] font-bold uppercase tracking-wider block ${group.titleClass}`}
                     >
                       {group.title}
                     </span>
-                    <div className="flex flex-wrap gap-2.5">
+                    <p className="text-xs text-[#5A6272] mt-0.5 mb-3">
+                      {group.caption}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
                       {group.items.map((item, itemIdx) => {
                         const variant =
                           item.highlighted === "blue"
@@ -214,7 +263,7 @@ export function ProfileSection() {
                           >
                             <Badge
                               variant={variant}
-                              className="h-9 px-4 text-xs sm:text-[13px] font-sans font-semibold select-none"
+                              className="h-9 px-3.5 text-xs sm:text-[13px] font-sans font-semibold select-none"
                             >
                               {item.label}
                             </Badge>

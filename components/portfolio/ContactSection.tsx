@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ChevronUp, Copy } from "lucide-react";
+import { Check, ChevronUp, Copy, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   MagneticWrap,
@@ -15,7 +15,7 @@ interface ContactSectionProps {
   onScrollToSection: (id: string) => void;
 }
 
-const socialLinks = [
+const externalSocialLinks = [
   {
     name: "Instagram",
     handle: "@dimasbas_",
@@ -40,14 +40,6 @@ const socialLinks = [
     badgeClass: "bg-[#EFF6FF] text-[#1D4ED8]",
     borderClass: "border-[#BFDBFE] hover:border-[#2563EB]",
   },
-  {
-    name: "WhatsApp",
-    handle: "088980457191",
-    href: "https://wa.me/6288980457191",
-    code: "WH",
-    badgeClass: "bg-[#F1F3F7] text-[#111216]",
-    borderClass: "border-[#E2E5EC] hover:border-[#CBD2DF]",
-  },
 ];
 
 export function ContactSection({
@@ -56,6 +48,15 @@ export function ContactSection({
   onOpenModal,
   onScrollToSection,
 }: ContactSectionProps) {
+  const handleOpenWhatsApp = () => {
+    const number = ["62", "889", "8045", "7191"].join("");
+    window.open(
+      `https://wa.me/${number}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <section
       id="contact"
@@ -65,7 +66,7 @@ export function ContactSection({
       <ShapeReveal variant="pill-expand" duration={0.7}>
         <div className="relative overflow-hidden rounded-[28px] bg-white border border-[#E2E5EC] shadow-[0_16px_40px_-10px_rgba(17,18,22,0.08)] p-6 sm:p-10 lg:p-12">
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Headline, Copyable Email & CTA */}
+            {/* Left Headline, Spam-Protected Email Action & Direct Form CTA */}
             <div className="lg:col-span-7">
               <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#BE185D] uppercase block mb-3">
                 03 / GET IN TOUCH
@@ -77,21 +78,29 @@ export function ContactSection({
                 </span>
               </h2>
               <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-lg">
-                Open for Full-Stack Developer, Front-End Engineer, and freelance
-                UI/UX collaborations.
+                Open for Full-Stack Web Developer roles (Jakarta relocation,
+                remote, or freelance), with UI/UX prototyping as a supporting
+                skill.
               </p>
 
-              {/* Copyable Email + Send Message CTA */}
+              {/* Spam-Protected Email Copy + Direct Message CTA */}
               <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <div className="flex items-center justify-between gap-3 min-h-[60px] py-1.5 px-4 rounded-2xl bg-[#F1F3F7] border border-[#E2E5EC] min-w-0 flex-1 max-w-lg">
-                  <span className="font-mono text-xs sm:text-[13px] font-bold text-[#111216] truncate">
-                    dimasbrahmantyaaryasena@gmail.com
-                  </span>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <ShieldCheck
+                      className="w-4 h-4 text-[#2563EB] shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="font-mono text-xs sm:text-[13px] font-bold text-[#111216] truncate">
+                      {copied
+                        ? "Email copied to clipboard"
+                        : "Direct Email (Hidden from bots)"}
+                    </span>
+                  </div>
                   <MagneticWrap strength={0.18}>
                     <Button
                       variant="outline"
                       size="sm"
-                      data-cursor={copied ? "Done" : "Copy"}
                       onClick={onCopyEmail}
                       aria-label="Copy Dimas email address"
                       className="shrink-0 px-4"
@@ -107,7 +116,7 @@ export function ContactSection({
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Copy</span>
+                          <span>Copy Email</span>
                         </>
                       )}
                     </Button>
@@ -118,7 +127,6 @@ export function ContactSection({
                   <Button
                     variant="pink"
                     size="lg"
-                    data-cursor="Send"
                     onClick={onOpenModal}
                     className="h-14 px-7 shrink-0 w-full sm:w-auto"
                   >
@@ -128,19 +136,18 @@ export function ContactSection({
               </div>
             </div>
 
-            {/* Right Social Channels */}
+            {/* Right Social Channels (WhatsApp Number Obfuscated Against Scraping) */}
             <div className="lg:col-span-5 space-y-3">
-              {socialLinks.map((item, idx) => (
+              {externalSocialLinks.map((item, idx) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor="Open"
                   aria-label={`Open ${item.name} profile (${item.handle})`}
                   initial={{ opacity: 0, x: 24 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: false, amount: "some" }}
                   transition={{
                     duration: 0.42,
                     delay: idx * 0.06,
@@ -170,6 +177,43 @@ export function ContactSection({
                   </span>
                 </motion.a>
               ))}
+
+              {/* WhatsApp Action Button (No Plaintext Phone Number in DOM) */}
+              <motion.button
+                type="button"
+                onClick={handleOpenWhatsApp}
+                aria-label="Start WhatsApp chat with Dimas"
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: "some" }}
+                transition={{
+                  duration: 0.42,
+                  delay: 0.18,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{ x: 5 }}
+                className="group w-full text-left flex items-center justify-between gap-3 min-h-[64px] p-3.5 rounded-2xl bg-white border border-[#E2E5EC] hover:border-[#CBD2DF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+              >
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <span
+                    className="w-10 h-10 rounded-xl bg-[#F1F3F7] text-[#111216] flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-transform duration-200 group-hover:scale-105"
+                    aria-hidden="true"
+                  >
+                    WH
+                  </span>
+                  <div className="min-w-0">
+                    <span className="block text-xs text-[#5A6272]">
+                      WhatsApp
+                    </span>
+                    <span className="block font-mono text-xs sm:text-sm font-bold text-[#111216] truncate">
+                      Chat via WhatsApp
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-semibold text-[#2563EB] shrink-0 pr-1 transition-transform duration-200 group-hover:translate-x-0.5">
+                  Chat
+                </span>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -177,13 +221,12 @@ export function ContactSection({
 
       {/* Clean Footer */}
       <footer className="mt-10 pt-6 border-t border-[#E2E5EC] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-[13px] text-[#5A6272]">
-        <p>Dimas Brahmantya Aryasena | Creative &amp; Engineering Portfolio</p>
+        <p>Dimas Brahmantya Aryasena | Full-Stack Web Developer Portfolio</p>
         <div className="flex items-center gap-4">
-          <span>Malang, East Java</span>
+          <span>Malang, Indonesia | Open to Jakarta &amp; Remote</span>
           <MagneticWrap strength={0.16}>
             <button
               type="button"
-              data-cursor="Top"
               onClick={() => onScrollToSection("home")}
               className="inline-flex items-center gap-1 min-h-[44px] font-semibold text-[#111216] hover:text-[#2563EB] transition-colors rounded-lg px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
             >
