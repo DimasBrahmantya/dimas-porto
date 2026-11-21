@@ -1,62 +1,51 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-display: var(--font-barlow-condensed), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --color-background: #FAF8F4;
+  --color-foreground: #111216;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #111216;
+  --color-muted: #F1F3F7;
+  --color-muted-foreground: #5A6272;
+  --color-border: #E2E5EC;
+  --color-primary: #2563EB;
+  --color-primary-foreground: #FFFFFF;
+}
+
 :root {
-  --background: #060b13;
-  --foreground: #f1f5f9;
+  --background: #FAF8F4;
+  --foreground: #111216;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #060b13;
-  color: #f1f5f9;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background-color: #FAF8F4;
+  color: #111216;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
-/* Atmospheric Ambient Background */
-.ambient-bg {
-  background: 
-    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(14, 165, 233, 0.08), transparent 70%),
-    radial-gradient(circle 600px at 80% 30%, rgba(30, 58, 138, 0.06), transparent 60%),
-    #060b13;
-}
-
-.cinematic-vignette {
-  background: radial-gradient(ellipse at center, transparent 65%, rgba(3, 7, 18, 0.75) 100%);
-}
-
-/* Portfolio Card Surface (Controlled glass & crisp border) */
-.game-panel,
-.portfolio-card {
-  background: rgba(10, 18, 30, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5);
-}
-
-.game-panel-hover,
-.portfolio-card-hover {
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.game-panel-hover:hover,
-.portfolio-card-hover:hover {
-  border-color: rgba(56, 189, 248, 0.35);
-  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.7);
-  transform: translateY(-2px);
-}
-
-/* Custom Scrollbar */
+/* Custom Light Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #060b13;
+  background: #FAF8F4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #CBD2DF;
   border-radius: 4px;
-  border: 1px solid rgba(56, 189, 248, 0.15);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: #94A3B8;
 }
 
 /* Accessibility: Pointer cursors on interactive controls */
@@ -86,8 +75,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .ember-particle {
-    display: none !important;
   }
 }

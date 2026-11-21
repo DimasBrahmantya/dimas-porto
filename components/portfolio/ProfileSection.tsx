@@ -1,364 +1,233 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import {
-  GraduationCap,
-  Briefcase,
-  UserCheck,
-  ArrowRight,
-  Globe,
-  Cpu,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ShapeReveal } from "@/components/portfolio/MotionPrimitives";
 
-type SkillGroup = "all" | "frontend" | "backend" | "data-ui";
-
-const softwareSkills: {
-  name: string;
-  category: string;
-  group: Exclude<SkillGroup, "all">;
-  icon: string;
-}[] = [
+const stackGroups = [
   {
-    name: "Next.js",
-    category: "Framework",
-    group: "frontend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    title: "FRONTEND & UI",
+    boxClass: "bg-[#FAF8F4] border-[#E2E5EC]",
+    titleClass: "text-[#1D4ED8]",
+    items: [
+      { label: "Next.js", highlighted: "blue" as const },
+      { label: "React", highlighted: null },
+      { label: "TypeScript", highlighted: "blue" as const },
+      { label: "Tailwind CSS", highlighted: null },
+      { label: "Vue.js", highlighted: null },
+    ],
   },
   {
-    name: "React",
-    category: "Library",
-    group: "frontend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    title: "BACKEND & ARCHITECTURE",
+    boxClass: "bg-[#FAF8F4] border-[#E2E5EC]",
+    titleClass: "text-[#5A6272]",
+    items: [
+      { label: "Laravel", highlighted: null },
+      { label: "NestJS", highlighted: null },
+      { label: "Node.js", highlighted: null },
+      { label: "REST API", highlighted: null },
+      { label: "PostgreSQL RLS", highlighted: null },
+    ],
   },
   {
-    name: "TypeScript",
-    category: "Language",
-    group: "frontend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "Tailwind CSS",
-    category: "Styling",
-    group: "frontend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    name: "Vue.js",
-    category: "Framework",
-    group: "frontend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
-  },
-  {
-    name: "Laravel",
-    category: "Backend",
-    group: "backend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
-  },
-  {
-    name: "NestJS",
-    category: "Backend",
-    group: "backend",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
-  },
-  {
-    name: "MySQL",
-    category: "Database",
-    group: "data-ui",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "MongoDB",
-    category: "Database",
-    group: "data-ui",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    name: "Figma",
-    category: "UI/UX",
-    group: "data-ui",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    title: "DATABASE & PRODUCT DESIGN",
+    boxClass: "bg-[#FDF2F8] border-[#F9A8D4]",
+    titleClass: "text-[#9D174D]",
+    items: [
+      { label: "MySQL", highlighted: null },
+      { label: "MongoDB", highlighted: null },
+      { label: "Supabase", highlighted: null },
+      { label: "Figma", highlighted: "pink" as const },
+      { label: "Design Systems", highlighted: "pink" as const },
+    ],
   },
 ];
 
-interface ProfileSectionProps {
-  onScrollToSection: (id: string) => void;
-}
-
-export function ProfileSection({ onScrollToSection }: ProfileSectionProps) {
-  const [skillGroup, setSkillGroup] = useState<SkillGroup>("all");
-
-  const visibleSkills =
-    skillGroup === "all"
-      ? softwareSkills
-      : softwareSkills.filter((s) => s.group === skillGroup);
-
+export function ProfileSection() {
   return (
     <section
-      id="profil"
-      className="relative py-24 px-4 sm:px-8 z-10 max-w-6xl mx-auto"
+      id="about"
+      className="scroll-mt-20 py-20 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto"
     >
-      {/* Section Header */}
-      <div className="mb-12">
-        <span className="font-mono text-xs font-semibold tracking-widest text-cyan-400 uppercase block mb-2">
-          01 / PROFIL &amp; KAPABILITAS
+      <ShapeReveal variant="fade-up" className="mb-10">
+        <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#BE185D] uppercase block mb-2">
+          02 / ABOUT &amp; CAPABILITIES
         </span>
-        <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-          Tentang Saya &amp; Keahlian Teknis
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] font-bold tracking-tight text-[#111216]">
+          Background &amp; Technical Stack.
         </h2>
-      </div>
+      </ShapeReveal>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-        {/* Left / Top Identity Card */}
-        <div className="lg:col-span-4 flex flex-col gap-5">
-          <Card className="overflow-hidden">
-            <CardContent className="p-5 flex flex-col items-center text-center">
-              <div className="relative w-44 h-56 sm:w-48 sm:h-60 rounded-2xl overflow-hidden border border-border bg-slate-950 mb-5">
-                <Image
-                  src="/IMG_4403.JPG"
-                  alt="Dimas Brahmantya Portrait"
-                  fill
-                  sizes="(max-width: 768px) 192px, 224px"
-                  className="object-cover object-top brightness-105 contrast-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
-              </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        {/* Left Asymmetric Column: Curtain Mask Reveal */}
+        <ShapeReveal variant="curtain-up" className="lg:col-span-5 flex">
+          <Card className="w-full rounded-3xl">
+            <CardContent className="p-6 sm:p-8 flex flex-col justify-between h-full">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#111216]">
+                  Dimas Brahmantya Aryasena
+                </h3>
+                <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
+                  Informatics Engineering graduate from Universitas Muhammadiyah
+                  Malang (GPA 3.80). Focused on building production web
+                  applications, accessible UI systems, and clean full-stack
+                  architectures.
+                </p>
 
-              <span className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
-                HELLO, I AM
-              </span>
-              <h3 className="font-heading text-xl font-extrabold text-white mt-1">
-                Dimas Brahmantya A.
-              </h3>
-              <p className="font-mono text-xs text-cyan-300 mt-1">
-                Informatics Engineering &bull; UMM
-              </p>
+                <div className="my-6 border-t border-[#E2E5EC]" />
 
-              <Button
-                className="w-full mt-5"
-                onClick={() => onScrollToSection("project")}
-                aria-label="Lihat proyek unggulan"
-              >
-                <span>LIHAT PROYEK</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Right Bento Grid */}
-        <div className="lg:col-span-8 flex flex-col gap-5">
-          {/* 1. About Me */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2">
-                <UserCheck className="w-4 h-4" aria-hidden="true" />
-                <span>About Me</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-slate-300 text-sm leading-relaxed font-sans">
-                Lulusan Teknik Informatika di Universitas Muhammadiyah Malang
-                dengan IPK 3.80. Memiliki kemampuan kerja tim yang adaptif serta
-                daya serap cepat terhadap perkembangan teknologi antarmuka web
-                modern. Berfokus pada posisi{" "}
-                <strong className="text-cyan-300 font-semibold">
-                  Front-End Developer
-                </strong>
-                ,{" "}
-                <strong className="text-white font-semibold">
-                  Web Developer
-                </strong>
-                , dan{" "}
-                <strong className="text-sky-300 font-semibold">
-                  Full Stack Developer
-                </strong>
-                .
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* 2. Software Skills */}
-          <Card>
-            <CardHeader className="pb-3 flex-col sm:flex-row sm:items-center justify-between gap-3 space-y-0">
-              <CardTitle className="font-mono text-xs uppercase tracking-widest text-cyan-400 flex items-center gap-2">
-                <Cpu className="w-4 h-4" aria-hidden="true" />
-                <span>Tech Stack &amp; Tools</span>
-              </CardTitle>
-
-              <div
-                className="inline-flex flex-wrap gap-1 p-0.5 rounded-full bg-slate-900/90 border border-slate-800"
-                role="tablist"
-                aria-label="Filter kategori keahlian"
-              >
-                {(
-                  [
-                    { id: "all", label: "All" },
-                    { id: "frontend", label: "Frontend" },
-                    { id: "backend", label: "Backend" },
-                    { id: "data-ui", label: "Data & UI" },
-                  ] as const
-                ).map((tab) => {
-                  const active = skillGroup === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      role="tab"
-                      aria-selected={active}
-                      onClick={() => setSkillGroup(tab.id)}
-                      className={`px-2.5 py-1 rounded-full font-mono text-[10px] uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                        active
-                          ? "bg-primary text-primary-foreground font-bold"
-                          : "text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-                {visibleSkills.map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="p-2.5 rounded-xl bg-slate-900/75 border border-slate-800/90 hover:border-cyan-500/40 transition-colors flex items-center gap-2.5"
+                <div className="space-y-6">
+                  {/* Experience */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -14 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-start gap-3"
                   >
-                    <div className="w-7 h-7 shrink-0 flex items-center justify-center p-1 rounded-lg bg-slate-950 border border-slate-800">
-                      <Image
-                        src={tech.icon}
-                        alt=""
-                        width={20}
-                        height={20}
-                        unoptimized
-                        aria-hidden="true"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span
-                        className="block font-mono text-[11px] font-bold text-slate-100 truncate"
-                        title={tech.name}
-                      >
-                        {tech.name}
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      transition={{ type: "spring", stiffness: 360, damping: 20, delay: 0.1 }}
+                      className="w-2.5 h-2.5 rounded-full bg-[#DB2777] mt-1.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <span className="font-mono text-[11px] font-bold text-[#BE185D] uppercase tracking-wider block">
+                        EX-INTERN AUG 2025 - SEP 2025
                       </span>
-                      <span className="block font-mono text-[10px] text-slate-400 truncate">
-                        {tech.category}
-                      </span>
+                      <p className="text-base font-bold text-[#111216] mt-0.5">
+                        RSUD Grati Hospital, Pasuruan
+                      </p>
+                      <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed mt-1">
+                        Fullstack Web Developer: Built outpatient SIMRS
+                        registration module using Laravel &amp; MySQL.
+                      </p>
                     </div>
-                  </div>
+                  </motion.div>
+
+                  {/* Education */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -14 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="flex items-start gap-3"
+                  >
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      transition={{ type: "spring", stiffness: 360, damping: 20, delay: 0.18 }}
+                      className="w-2.5 h-2.5 rounded-full bg-[#2563EB] mt-1.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <span className="font-mono text-[11px] font-bold text-[#2563EB] uppercase tracking-wider block">
+                        B.SC. INFORMATICS | GPA 3.80
+                      </span>
+                      <p className="text-base font-bold text-[#111216] mt-0.5">
+                        Universitas Muhammadiyah Malang
+                      </p>
+                      <p className="text-xs sm:text-[13px] text-[#5A6272] mt-1">
+                        Informatics Engineering Graduate | SMAN 2 Pasuruan
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-[#E2E5EC]">
+                <span className="font-mono text-[11px] font-bold text-[#5A6272] uppercase tracking-wider block mb-1.5">
+                  LANGUAGE PROFICIENCY
+                </span>
+                <p className="text-xs sm:text-sm font-semibold text-[#111216]">
+                  Indonesian (Native) | English (Professional Working)
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </ShapeReveal>
+
+        {/* Right Asymmetric Column: Diagonal Wipe Reveal + Interactive Tech Badges */}
+        <ShapeReveal
+          variant="diagonal-wipe"
+          delay={0.08}
+          className="lg:col-span-7 flex"
+        >
+          <Card className="w-full rounded-3xl">
+            <CardContent className="p-6 sm:p-8">
+              <h3 className="text-xl font-bold tracking-tight text-[#111216]">
+                Core Technologies &amp; Engineering Tools
+              </h3>
+              <p className="text-sm text-[#5A6272] mt-1 mb-6">
+                Production tools used across web apps, APIs, databases, and
+                interface design.
+              </p>
+
+              <div className="space-y-4">
+                {stackGroups.map((group, groupIdx) => (
+                  <motion.div
+                    key={group.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: "some" }}
+                    transition={{
+                      duration: 0.45,
+                      delay: groupIdx * 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className={`p-4 sm:p-5 rounded-2xl border ${group.boxClass}`}
+                  >
+                    <span
+                      className={`font-mono text-[11px] font-bold uppercase tracking-wider block mb-3 ${group.titleClass}`}
+                    >
+                      {group.title}
+                    </span>
+                    <div className="flex flex-wrap gap-2.5">
+                      {group.items.map((item, itemIdx) => {
+                        const variant =
+                          item.highlighted === "blue"
+                            ? "blue"
+                            : item.highlighted === "pink"
+                            ? "pink"
+                            : "outline";
+                        return (
+                          <motion.div
+                            key={item.label}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: false, amount: "some" }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 340,
+                              damping: 22,
+                              delay: groupIdx * 0.05 + itemIdx * 0.03,
+                            }}
+                            whileHover={{ y: -3, scale: 1.05 }}
+                          >
+                            <Badge
+                              variant={variant}
+                              className="h-9 px-4 text-xs sm:text-[13px] font-sans font-semibold select-none"
+                            >
+                              {item.label}
+                            </Badge>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </CardContent>
           </Card>
-
-          {/* 3. Education & Experience */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="font-mono text-xs uppercase tracking-widest text-slate-300 flex items-center gap-2">
-                  <GraduationCap
-                    className="w-4 h-4 text-cyan-400"
-                    aria-hidden="true"
-                  />
-                  <span>Education</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="relative pl-4 border-l border-cyan-500/40">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 absolute -left-[4.5px] top-1.5" />
-                  <span className="font-mono text-[11px] text-cyan-400 font-bold block">
-                    2022 - 2026
-                  </span>
-                  <p className="text-white font-semibold text-sm">
-                    Univ. Muhammadiyah Malang
-                  </p>
-                  <p className="text-slate-400 text-xs mt-0.5">
-                    Teknik Informatika &bull; IPK 3.80
-                  </p>
-                </div>
-
-                <div className="relative pl-4 border-l border-slate-700">
-                  <span className="w-2 h-2 rounded-full bg-slate-500 absolute -left-[4.5px] top-1.5" />
-                  <span className="font-mono text-[11px] text-slate-400 font-bold block">
-                    2019 - 2022
-                  </span>
-                  <p className="text-slate-200 font-semibold text-sm">
-                    SMAN 2 Kota Pasuruan
-                  </p>
-                  <p className="text-slate-400 text-xs mt-0.5">Jurusan MIPA</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="font-mono text-xs uppercase tracking-widest text-slate-300 flex items-center gap-2">
-                  <Briefcase
-                    className="w-4 h-4 text-cyan-400"
-                    aria-hidden="true"
-                  />
-                  <span>Experience</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="relative pl-4 border-l border-cyan-500/40">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 absolute -left-[4.5px] top-1.5" />
-                  <span className="font-mono text-[11px] text-cyan-400 font-bold block">
-                    EX-INTERN 2025
-                  </span>
-                  <p className="text-white font-semibold text-sm">
-                    RSUD Grati Kab. Pasuruan
-                  </p>
-                  <p className="text-slate-300 text-xs mt-1.5 leading-relaxed">
-                    Fullstack Web Developer: Mengembangkan modul pendaftaran
-                    rawat jalan SIMRS berbasis Laravel &amp; MySQL.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* 4. Language & Communication */}
-          <Card>
-            <CardHeader className="pb-2 flex-row items-center justify-between space-y-0">
-              <CardTitle className="font-mono text-xs uppercase tracking-widest text-slate-300 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-cyan-400" aria-hidden="true" />
-                <span>Language &amp; Communication</span>
-              </CardTitle>
-              <Badge variant="outline">Proficiency</Badge>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-white font-bold text-xs font-mono">
-                    Bahasa Indonesia
-                  </span>
-                  <Badge variant="accent">Native</Badge>
-                </div>
-                <p className="text-slate-400 text-xs">
-                  Komunikasi formal &amp; kolaborasi teknis
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-white font-bold text-xs font-mono">
-                    Bahasa Inggris
-                  </span>
-                  <Badge variant="secondary">Professional</Badge>
-                </div>
-                <p className="text-slate-400 text-xs">
-                  Dokumentasi teknis, riset, dan kolaborasi tim
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        </ShapeReveal>
       </div>
     </section>
   );

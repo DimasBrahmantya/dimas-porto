@@ -12,6 +12,14 @@ interface ContactModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
+interface FieldErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function ContactModal({ open, onOpenChange }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,14 +27,42 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
     subject: "",
     message: "",
   });
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) {
+      setFieldErrors({});
+      setErrorMessage("");
+    }
+    onOpenChange(nextOpen);
+  };
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    const errors: FieldErrors = {};
 
+    if (!formData.name.trim()) {
+      errors.name = "Please enter your full name.";
+    }
+    if (!formData.email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!emailPattern.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email format (e.g. name@domain.com).";
+    }
+    if (!formData.message.trim()) {
+      errors.message = "Please write a brief message or project summary.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setErrorMessage("Please review the highlighted fields below before sending.");
+      return;
+    }
+
+    setFieldErrors({});
     setIsSubmitting(true);
     setErrorMessage("");
 
@@ -40,12 +76,12 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            _subject: formData.subject
-              ? `[Portofolio] ${formData.subject}`
-              : `Pesan Portofolio Baru dari ${formData.name}`,
-            message: formData.message,
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            _subject: formData.subject.trim()
+              ? `[Portfolio] ${formData.subject.trim()}`
+              : `New Portfolio Inquiry from ${formData.name.trim()}`,
+            message: formData.message.trim(),
             _captcha: "false",
           }),
         }
@@ -56,14 +92,16 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
         setFormData({ name: "", email: "", subject: "", message: "" });
         setTimeout(() => {
           setIsSubmitted(false);
-          onOpenChange(false);
+          handleOpenChange(false);
         }, 3000);
       } else {
-        setErrorMessage("Gagal mengirim pesan. Silakan coba lagi nanti.");
+        setErrorMessage(
+          "Could not send your message right now. Please try again or email directly."
+        );
       }
     } catch {
       setErrorMessage(
-        "Terjadi kesalahan jaringan. Silakan periksa koneksi internet Anda."
+        "Network error while sending. Please check your connection and try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -73,90 +111,120 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
   return (
     <Dialog
       open={open}
-      onOpenChange={onOpenChange}
-      ariaLabel="Formulir kirim pesan langsung"
+      onOpenChange={handleOpenChange}
+      ariaLabel="Direct contact message form"
       className="max-w-lg"
     >
       <div className="overflow-y-auto p-6 sm:p-8">
-        <div className="flex items-center gap-2 border-b border-border pb-4 mb-6 font-mono text-xs font-bold text-cyan-400">
+        <div className="flex items-center gap-2 border-b border-[#E2E5EC] pb-4 mb-6 font-mono text-xs font-bold text-[#BE185D] uppercase tracking-wider">
           <Send className="w-4 h-4" aria-hidden="true" />
-          <span>DIRECT MESSAGE</span>
+          <span>Direct Message</span>
         </div>
 
         {errorMessage && (
-          <div className="p-3 mb-4 rounded-xl bg-red-950/60 border border-red-500/40 text-red-300 font-mono text-xs">
+          <div
+            role="alert"
+            className="p-3.5 mb-5 rounded-xl bg-[#FDF2F8] border border-[#F9A8D4] text-[#9D174D] text-xs font-medium"
+          >
             {errorMessage}
           </div>
         )}
 
         {isSubmitted ? (
-          <div className="p-6 text-center font-mono py-10">
-            <Check
-              className="w-12 h-12 text-cyan-400 mx-auto mb-3 animate-bounce"
-              aria-hidden="true"
-            />
-            <h4 className="text-xl font-bold mb-2 uppercase text-white font-heading">
-              PESAN TERKIRIM!
+          <div className="py-10 px-4 text-center">
+            <div className="w-12 h-12 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#2563EB] flex items-center justify-center mx-auto mb-4">
+              <Check className="w-6 h-6" aria-hidden="true" />
+            </div>
+            <h4 className="font-serif text-2xl font-bold text-[#111216] mb-2">
+              Message Sent.
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto font-sans">
-              Terima kasih! Pesan telah berhasil terkirim langsung ke inbox
-              Dimas Brahmantya.
+            <p className="text-sm text-[#5A6272] leading-relaxed max-w-sm mx-auto">
+              Thank you for reaching out. Your message has been delivered
+              directly to Dimas Brahmantya&apos;s inbox.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleFormSubmit} className="space-y-4">
+          <form onSubmit={handleFormSubmit} noValidate className="space-y-4">
             <div>
               <label
                 htmlFor="contact-name"
-                className="block font-mono text-xs font-semibold text-slate-300 uppercase mb-1.5"
+                className="block font-mono text-xs font-bold text-[#272B35] uppercase mb-1.5"
               >
-                Nama Lengkap <span className="text-cyan-400">*</span>
+                Full Name <span className="text-[#BE185D]">*</span>
               </label>
               <Input
                 id="contact-name"
                 type="text"
                 required
+                aria-invalid={Boolean(fieldErrors.name)}
+                aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
                 disabled={isSubmitting}
-                placeholder="Masukkan nama Anda..."
+                placeholder="Your name"
                 value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                  if (fieldErrors.name) {
+                    setFieldErrors({ ...fieldErrors, name: undefined });
+                  }
+                }}
+                className={fieldErrors.name ? "border-[#BE185D]" : undefined}
               />
+              {fieldErrors.name && (
+                <p
+                  id="contact-name-error"
+                  className="mt-1.5 text-xs font-medium text-[#9D174D]"
+                >
+                  {fieldErrors.name}
+                </p>
+              )}
             </div>
 
             <div>
               <label
                 htmlFor="contact-email"
-                className="block font-mono text-xs font-semibold text-slate-300 uppercase mb-1.5"
+                className="block font-mono text-xs font-bold text-[#272B35] uppercase mb-1.5"
               >
-                Email Anda <span className="text-cyan-400">*</span>
+                Email Address <span className="text-[#BE185D]">*</span>
               </label>
               <Input
                 id="contact-email"
                 type="email"
                 required
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
                 disabled={isSubmitting}
-                placeholder="nama@domain.com"
+                placeholder="email@example.com"
                 value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  if (fieldErrors.email) {
+                    setFieldErrors({ ...fieldErrors, email: undefined });
+                  }
+                }}
+                className={fieldErrors.email ? "border-[#BE185D]" : undefined}
               />
+              {fieldErrors.email && (
+                <p
+                  id="contact-email-error"
+                  className="mt-1.5 text-xs font-medium text-[#9D174D]"
+                >
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
 
             <div>
               <label
                 htmlFor="contact-subject"
-                className="block font-mono text-xs font-semibold text-slate-300 uppercase mb-1.5"
+                className="block font-mono text-xs font-bold text-[#272B35] uppercase mb-1.5"
               >
-                Subjek
+                Subject
               </label>
               <Input
                 id="contact-subject"
                 type="text"
                 disabled={isSubmitting}
-                placeholder="Tawaran Project / Kolaborasi / Diskusi"
+                placeholder="Project inquiry, job role, or collaboration"
                 value={formData.subject}
                 onChange={(e) =>
                   setFormData({ ...formData, subject: e.target.value })
@@ -167,21 +235,37 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
             <div>
               <label
                 htmlFor="contact-message"
-                className="block font-mono text-xs font-semibold text-slate-300 uppercase mb-1.5"
+                className="block font-mono text-xs font-bold text-[#272B35] uppercase mb-1.5"
               >
-                Pesan <span className="text-cyan-400">*</span>
+                Message <span className="text-[#BE185D]">*</span>
               </label>
               <Textarea
                 id="contact-message"
                 required
                 rows={4}
-                disabled={isSubmitting}
-                placeholder="Tuliskan pesan Anda di sini..."
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
+                aria-invalid={Boolean(fieldErrors.message)}
+                aria-describedby={
+                  fieldErrors.message ? "contact-message-error" : undefined
                 }
+                disabled={isSubmitting}
+                placeholder="Write your message here..."
+                value={formData.message}
+                onChange={(e) => {
+                  setFormData({ ...formData, message: e.target.value });
+                  if (fieldErrors.message) {
+                    setFieldErrors({ ...fieldErrors, message: undefined });
+                  }
+                }}
+                className={fieldErrors.message ? "border-[#BE185D]" : undefined}
               />
+              {fieldErrors.message && (
+                <p
+                  id="contact-message-error"
+                  className="mt-1.5 text-xs font-medium text-[#9D174D]"
+                >
+                  {fieldErrors.message}
+                </p>
+              )}
             </div>
 
             <div className="pt-2 flex items-center justify-end gap-3">
@@ -189,19 +273,22 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
                 type="button"
                 variant="outline"
                 disabled={isSubmitting}
-                onClick={() => onOpenChange(false)}
+                onClick={() => handleOpenChange(false)}
               >
-                BATAL
+                Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type="submit" variant="pink" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                    <span>MENGIRIM...</span>
+                    <Loader2
+                      className="w-4 h-4 animate-spin"
+                      aria-hidden="true"
+                    />
+                    <span>Sending...</span>
                   </>
                 ) : (
                   <>
-                    <span>KIRIM PESAN</span>
+                    <span>Send Message</span>
                     <Send className="w-3.5 h-3.5" aria-hidden="true" />
                   </>
                 )}

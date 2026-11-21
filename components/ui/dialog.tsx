@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,9 @@ interface DialogProps {
   ariaLabel?: string;
 }
 
+const focusableSelector =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function Dialog({
   open,
   onOpenChange,
@@ -21,22 +24,73 @@ export function Dialog({
   className,
   ariaLabel,
 }: DialogProps) {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onOpenChange(false);
-    };
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
+  useEffect(() => {
     if (open) {
+      previousFocusRef.current =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
       document.body.style.overflow = "hidden";
+
+      const rafId = requestAnimationFrame(() => {
+        const panel = panelRef.current;
+        if (!panel) return;
+        const focusables = panel.querySelectorAll<HTMLElement>(focusableSelector);
+        if (focusables.length > 0) {
+          focusables[0].focus();
+        } else {
+          panel.focus();
+        }
+      });
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          onOpenChange(false);
+          return;
+        }
+        if (e.key === "Tab") {
+          const panel = panelRef.current;
+          if (!panel) return;
+          const focusables = Array.from(
+            panel.querySelectorAll<HTMLElement>(focusableSelector)
+          ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+          if (focusables.length === 0) {
+            e.preventDefault();
+            return;
+          }
+
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          const active = document.activeElement;
+
+          if (!panel.contains(active)) {
+            e.preventDefault();
+            first.focus();
+          } else if (e.shiftKey && active === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && active === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+
       window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
+      return () => {
+        cancelAnimationFrame(rafId);
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+        previousFocusRef.current?.focus();
+      };
     }
 
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    document.body.style.overflow = "";
+    return undefined;
   }, [open, onOpenChange]);
 
   return (
@@ -53,25 +107,27 @@ export function Dialog({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => onOpenChange(false)}
-            className="fixed inset-0 bg-[#020610]/85 backdrop-blur-md"
+            className="fixed inset-0 bg-[#111216]/60"
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+            ref={panelRef}
+            tabIndex={-1}
+            initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 16 }}
-            transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className={cn(
-              "relative z-10 w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl bg-[#07111e]/95 border border-cyan-500/30 text-slate-100 shadow-[0_24px_64px_rgba(0,0,0,0.75)]",
+              "relative z-10 w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-[#E2E5EC] text-[#111216] shadow-[0_24px_64px_rgba(17,18,22,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]",
               className
             )}
           >
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              aria-label="Tutup dialog"
-              title="Tutup (ESC)"
-              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/90 border border-slate-700/80 text-slate-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-500/15 transition-all flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              aria-label="Close dialog"
+              title="Close (ESC)"
+              className="absolute top-3.5 right-3.5 z-20 w-11 h-11 rounded-full bg-[#F1F3F7] border border-[#E2E5EC] text-[#475060] hover:text-[#111216] hover:bg-[#E2E5EC] transition-colors flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
             >
               <X className="w-4 h-4" aria-hidden="true" />
             </button>

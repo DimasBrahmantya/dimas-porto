@@ -6,7 +6,6 @@ export interface Project {
   title: string;
   type: string;
   category: "webapp" | "uiux" | "academic" | "mobile";
-  year: string;
   role?: string;
   desc: string;
   fullDescription: string;

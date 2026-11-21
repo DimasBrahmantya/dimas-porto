@@ -3,27 +3,47 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import FloatingShapes from "@/components/FloatingShapes";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, Code2, ExternalLink, Layers, RotateCcw, Search } from "lucide-react";
 import ProjectDetailModal from "@/components/ProjectDetailModal";
+import { ContactModal } from "@/components/portfolio/ContactModal";
 import { projectsData } from "@/data/projects";
-import { Project, ProjectCategory } from "@/types/project";
+import { Project } from "@/types/project";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ArrowLeft,
-  ExternalLink,
-  Code2,
-  Search,
-  Info,
-  Layers,
-  RotateCcw
-} from "lucide-react";
+  MagneticWrap,
+  ShapeReveal,
+  TiltSpotlightCard,
+} from "@/components/portfolio/MotionPrimitives";
+
+type ArchiveCategory = "all" | "webapp" | "uiux";
+
+const quickStacks = [
+  "Next.js",
+  "Supabase",
+  "Laravel",
+  "NestJS",
+  "Figma",
+  "MongoDB",
+  "TypeScript",
+];
+
+const portraitPreviewIds = new Set(["smart-laundry", "readly"]);
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
+  const [activeCategory, setActiveCategory] = useState<ArchiveCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
-  // Filter projects based on active category and search term
+  const counts = {
+    all: projectsData.length,
+    webapp: projectsData.filter((p) => p.category === "webapp").length,
+    uiux: projectsData.filter((p) => p.category === "uiux").length,
+  };
+
   const filteredProjects = useMemo(() => {
     return projectsData.filter((item) => {
       const matchesCategory =
@@ -39,317 +59,476 @@ export default function ProjectsPage() {
     });
   }, [activeCategory, searchQuery]);
 
+  const categoryTabs: {
+    id: ArchiveCategory;
+    label: string;
+    activeBg: string;
+    idleClass: string;
+  }[] = [
+    {
+      id: "all",
+      label: `All (${counts.all})`,
+      activeBg: "bg-[#111216]",
+      idleClass: "bg-white text-[#475060] border-[#CBD2DF] hover:bg-[#F1F3F7]",
+    },
+    {
+      id: "webapp",
+      label: `Web App (${counts.webapp})`,
+      activeBg: "bg-[#2563EB]",
+      idleClass:
+        "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE] hover:bg-[#DBEAFE]",
+    },
+    {
+      id: "uiux",
+      label: `UI/UX (${counts.uiux})`,
+      activeBg: "bg-[#DB2777]",
+      idleClass:
+        "bg-[#FCE7F3] text-[#9D174D] border-[#F9A8D4] hover:bg-[#FBCFE8]",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-[#050b14] text-slate-100 font-sans relative overflow-x-hidden selection:bg-cyan-500 selection:text-black">
-      {/* Deep blue atmospheric ambient background */}
-      <div className="fixed inset-0 pointer-events-none -z-10 ambient-bg" />
+    <div className="min-h-screen bg-[#FAF8F4] text-[#111216] font-sans relative overflow-x-clip">
+      {/* Top Sticky Editorial Header */}
+      <header className="sticky top-0 z-40 w-full bg-[#FAF8F4]/92 backdrop-blur-md border-b border-[#E2E5EC]/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-[76px] flex items-center justify-between gap-3">
+          <MagneticWrap strength={0.16}>
+            <Link
+              href="/"
+              data-cursor="Home"
+              className="inline-flex items-center gap-2 min-h-[44px] h-11 px-4 sm:px-5 rounded-full bg-white border border-[#CBD2DF] text-xs sm:text-sm font-semibold text-[#111216] hover:bg-[#F1F3F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+            >
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+              <span>Back to Home</span>
+            </Link>
+          </MagneticWrap>
 
-      {/* Atmospheric embers & floating star particles */}
-      <FloatingShapes />
+          <Link
+            href="/"
+            data-cursor="Home"
+            className="inline-flex items-center min-h-[44px] font-serif italic text-2xl sm:text-[26px] font-bold tracking-tight text-[#111216] rounded-lg px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+          >
+            <span className="inline-flex items-baseline gap-1">
+              <span>Dimas.</span>
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-[#DB2777] mb-1 shrink-0"
+                aria-hidden="true"
+              />
+            </span>
+          </Link>
 
-      {/* TOP FLOATING NAVIGATION */}
-      <header className="sticky top-4 inset-x-0 z-40 px-4 sm:px-8 max-w-7xl mx-auto flex items-center justify-between mb-6">
-        {/* Back to Home Button */}
-        <Link
-          href="/"
-          aria-label="Kembali ke halaman beranda"
-          className="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#081220]/90 backdrop-blur-md border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-wider transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-          <span>BACK TO HOME</span>
-        </Link>
-
-        {/* Center Monogram Logo */}
-        <Link
-          href="/"
-          aria-label="Kembali ke halaman beranda"
-          className="w-10 h-10 rounded-xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md flex items-center justify-center font-mono font-black text-base shadow-[0_0_20px_rgba(255,255,255,0.08)] hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-        >
-          <span className="bg-gradient-to-br from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
-            DB
-          </span>
-        </Link>
-
-        {/* Project Counter Badge */}
-        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300 font-mono text-xs">
-          <span className="w-2 h-2 rounded-full bg-cyan-400" aria-hidden="true" />
-          <span>TOTAL: <strong className="text-white">{projectsData.length}</strong> PROJECTS</span>
+          <MagneticWrap>
+            <Button
+              size="default"
+              data-cursor="Message"
+              onClick={() => setIsContactOpen(true)}
+              aria-label="Open direct contact message form"
+              className="h-11 px-5"
+            >
+              Contact
+            </Button>
+          </MagneticWrap>
         </div>
       </header>
 
-      {/* MAIN CONTAINER */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 z-10 relative">
-        
-        {/* Page Header Lockup */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-semibold mb-3 tracking-widest uppercase">
-            <Layers className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
-            <span>PROJECT SHOWCASE &amp; ARCHIVE</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white font-heading">
-            PROJECT <span className="text-cyan-400">ARCHIVE</span>
-          </h1>
-
-          <p className="mt-3 text-slate-300 text-xs sm:text-sm font-sans leading-relaxed max-w-2xl">
-            Koleksi lengkap {projectsData.length} karya web application, arsitektur microservices, SaaS multi-tenant, dan desain antarmuka UI/UX. Klik kartu untuk melihat rincian sistem dan live demo.
-          </p>
-
-          {/* Interactive Quick Stack Filter Chips */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-            <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
-              <Code2 className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
-              <span>Filter Cepat:</span>
+      <main className="relative max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
+        {/* Page Intro */}
+        <ShapeReveal
+          variant="curtain-up"
+          once
+          className="relative z-10 text-center max-w-3xl mx-auto mb-10"
+        >
+          <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#BE185D] uppercase block mb-3">
+            PROJECT ARCHIVE &amp; CASE STUDIES
+          </span>
+          <h1 className="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-[#111216] leading-none">
+            Project{" "}
+            <span className="font-serif italic font-normal text-[#BE185D]">
+              Archive.
             </span>
-            {["Next.js", "Supabase", "Laravel", "NestJS", "Figma", "MongoDB", "TypeScript"].map((tech) => {
-              const isSelected = searchQuery.toLowerCase() === tech.toLowerCase();
-              return (
-                <button
-                  key={tech}
-                  type="button"
-                  onClick={() => setSearchQuery(isSelected ? "" : tech)}
-                  aria-pressed={isSelected}
-                  aria-label={`Filter proyek dengan teknologi ${tech}`}
-                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition-all cursor-pointer flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                    isSelected
-                      ? "bg-cyan-400 text-slate-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.4)]"
-                      : "bg-slate-900/90 text-slate-300 hover:text-white border border-slate-700/80 hover:border-cyan-400/60"
-                  }`}
-                >
-                  <span>#{tech}</span>
-                  {isSelected && <span className="text-[10px] font-bold">✕</span>}
-                </button>
-              );
-            })}
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="text-xs font-mono text-cyan-400 hover:text-cyan-300 underline cursor-pointer ml-1"
-                aria-label="Reset filter pencarian"
-              >
-                Reset
-              </button>
-            )}
-          </div>
+          </h1>
+          <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-2xl mx-auto">
+            Complete collection of {counts.all} production web apps,
+            microservices architectures, and Figma UI/UX systems. Select any
+            card for system details and live links.
+          </p>
+        </ShapeReveal>
 
-          {/* Search & Filter Controls */}
-          <div className="w-full mt-7 flex flex-col sm:flex-row items-center gap-3">
+        {/* Search, Morphing Category Tabs & Quick Stack Filter */}
+        <div className="relative z-10 space-y-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Search Input */}
-            <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" aria-hidden="true" />
+            <div className="relative w-full md:max-w-md">
+              <label htmlFor="archive-search" className="sr-only">
+                Search projects by title or technology
+              </label>
+              <Search
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5A6272]"
+                aria-hidden="true"
+              />
               <input
+                id="archive-search"
                 type="text"
-                placeholder="Cari judul, teknologi (cth: Next.js)..."
                 value={searchQuery}
-                aria-label="Cari proyek berdasarkan judul atau teknologi"
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-12 py-2 rounded-xl bg-slate-900/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 text-xs font-mono text-white placeholder-slate-500 transition-colors"
+                placeholder="Search title, stack, or role (e.g. Next.js, Figma)..."
+                className="w-full h-12 pl-10 pr-16 rounded-2xl bg-white border border-[#CBD2DF] text-sm text-[#111216] placeholder:text-[#5A6272] transition-colors focus-visible:outline-none focus-visible:border-[#2563EB] focus-visible:ring-2 focus-visible:ring-[#2563EB]/25"
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery("")}
-                  aria-label="Bersihkan pencarian"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-mono cursor-pointer"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] px-2.5 rounded-lg text-xs font-mono font-semibold text-[#5A6272] hover:text-[#111216] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                 >
                   Clear
                 </button>
               )}
             </div>
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap justify-center sm:justify-end gap-1.5 font-mono text-xs w-full">
-              {(
-                [
-                  { id: "all", label: "ALL" },
-                  { id: "webapp", label: "WEB APP" },
-                  { id: "uiux", label: "UI/UX" },
-                ] as const
-              ).map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  aria-label={`Filter kategori ${cat.label}`}
-                  className={`px-4 py-1.5 rounded-full transition-all uppercase tracking-wider cursor-pointer font-bold text-xs ${
-                    activeCategory === cat.id
-                      ? "bg-cyan-500 text-black shadow-md"
-                      : "bg-slate-900/70 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700"
+            {/* Morphing Category Tabs */}
+            <div
+              className="flex flex-wrap items-center gap-2"
+              role="tablist"
+              aria-label="Filter archive by category"
+            >
+              {categoryTabs.map((tab) => {
+                const isSelected = activeCategory === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    data-cursor="Filter"
+                    aria-selected={isSelected}
+                    onClick={() => setActiveCategory(tab.id)}
+                    className={`relative min-h-[44px] px-4 rounded-full text-xs font-semibold border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
+                      isSelected ? "border-transparent text-white" : tab.idleClass
+                    }`}
+                  >
+                    {isSelected && (
+                      <motion.span
+                        layoutId="archive-category-pill"
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
+                        className={`absolute inset-0 rounded-full ${tab.activeBg}`}
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="relative z-10">{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Quick Stack Filter Chips */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#5A6272] mr-1">
+              Filter by stack:
+            </span>
+            {quickStacks.map((tech) => {
+              const isSelected =
+                searchQuery.toLowerCase() === tech.toLowerCase();
+              const isFigma = tech === "Figma";
+              return (
+                <motion.button
+                  key={tech}
+                  type="button"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => setSearchQuery(isSelected ? "" : tech)}
+                  aria-pressed={isSelected}
+                  className={`min-h-[44px] px-3.5 rounded-lg font-mono text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
+                    isSelected
+                      ? isFigma
+                        ? "bg-[#DB2777] text-white"
+                        : "bg-[#2563EB] text-white"
+                      : isFigma
+                      ? "bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3]"
+                      : "bg-white text-[#272B35] border border-[#E2E5EC] hover:border-[#CBD2DF]"
                   }`}
                 >
-                  {cat.label} (
-                  {cat.id === "all"
-                    ? projectsData.length
-                    : projectsData.filter((p) => p.category === cat.id).length}
-                  )
-                </button>
-              ))}
-            </div>
+                  #{tech}
+                </motion.button>
+              );
+            })}
+            {(searchQuery || activeCategory !== "all") && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setActiveCategory("all");
+                }}
+                className="min-h-[44px] px-3 rounded-lg text-xs font-mono font-bold text-[#BE185D] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+              >
+                Reset filters
+              </button>
+            )}
           </div>
         </div>
 
-        {/* PROJECTS GRID */}
+        {/* Projects Grid / Honest Empty State with Shape-In / Shape-Out */}
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-20 bg-slate-900/40 border border-slate-800 rounded-3xl p-8 max-w-lg mx-auto">
-            <Layers className="w-10 h-10 text-slate-600 mx-auto mb-3" aria-hidden="true" />
-            <h3 className="text-base font-bold text-white uppercase font-mono">
-              Tidak Ada Proyek yang Cocok
-            </h3>
-            <p className="text-xs text-slate-400 mt-1 mb-4 font-sans">
-              Tidak ditemukan hasil untuk pencarian &quot;{searchQuery}&quot; pada kategori ini.
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="text-center py-16 px-6 bg-white border border-[#E2E5EC] rounded-3xl max-w-lg mx-auto"
+          >
+            <Layers
+              className="w-10 h-10 text-[#5A6272] mx-auto mb-3"
+              aria-hidden="true"
+            />
+            <h2 className="text-lg font-bold text-[#111216]">
+              No matching projects found
+            </h2>
+            <p className="text-sm text-[#5A6272] mt-1 mb-5">
+              No projects matched &quot;{searchQuery}&quot; under the selected
+              category filter.
             </p>
-            <button
+            <Button
+              variant="primary"
               onClick={() => {
                 setSearchQuery("");
                 setActiveCategory("all");
               }}
-              className="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-xs font-bold inline-flex items-center gap-2 hover:bg-cyan-500/30 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
-              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              Reset Filter
-            </button>
-          </div>
+              <RotateCcw className="w-4 h-4" aria-hidden="true" />
+              <span>Reset Filters</span>
+            </Button>
+          </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, idx) => (
-                <motion.div
-                  layout
-                  key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: idx * 0.04 }}
-                  className="portfolio-card portfolio-card-hover rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-800/80 hover:border-cyan-500/40 transition-all duration-300 group"
-                >
-                  {/* Top: 1 Preview Image Per Project */}
-                  <div>
-                    <div 
-                      onClick={() => setSelectedProject(project)}
-                      className="relative w-full aspect-video overflow-hidden bg-slate-950 cursor-pointer"
-                      title="Klik untuk melihat penjelasan lengkap"
+              {filteredProjects.map((project, index) => {
+                const isUiux = project.category === "uiux";
+                const isPortrait = portraitPreviewIds.has(project.id);
+
+                return (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{
+                      opacity: 0,
+                      y: 22,
+                      scale: 0.95,
+                      clipPath: "inset(8% 0% 0% 0% round 22px)",
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      clipPath: "inset(0% 0% 0% 0% round 16px)",
+                    }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.92,
+                      clipPath: "inset(10% 10% 10% 10% round 28px)",
+                    }}
+                    transition={{
+                      duration: 0.36,
+                      delay: Math.min(index * 0.035, 0.2),
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="h-full"
+                  >
+                    <TiltSpotlightCard
+                      accent={isUiux ? "pink" : "blue"}
+                      cursorLabel="Inspect"
                     >
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1424] via-transparent to-transparent opacity-80 pointer-events-none" />
-
-                      {/* Floating Meta Pills */}
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-950/85 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider backdrop-blur-md">
-                          {project.type}
-                        </span>
-                      </div>
-
-                      <div className="absolute top-3 right-3 font-mono text-xs font-bold px-2 py-0.5 rounded-full bg-slate-950/85 text-slate-300 border border-slate-700/80 backdrop-blur-md">
-                        {project.year}
-                      </div>
-
-                      {/* Hover Overlay Hint */}
-                      <div className="absolute inset-0 bg-cyan-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                        <span className="px-3.5 py-1.5 rounded-full bg-slate-900/90 text-cyan-300 border border-cyan-400 font-mono text-xs font-bold shadow-lg flex items-center gap-1.5">
-                          <Info className="w-3.5 h-3.5" aria-hidden="true" />
-                          Lihat Detail
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="p-5">
-                      <h3
-                        onClick={() => setSelectedProject(project)}
-                        className="text-lg sm:text-xl font-bold uppercase text-white mb-2 font-heading group-hover:text-cyan-300 transition-colors cursor-pointer"
+                      <Card
+                        interactive
+                        className={`h-full flex flex-col justify-between overflow-hidden ${
+                          isUiux ? "border-[#F9A8D4]" : "border-[#E2E5EC]"
+                        }`}
                       >
-                        {project.title}
-                      </h3>
+                        <div>
+                          <div className="p-3 pb-0">
+                            <button
+                              type="button"
+                              onClick={() => setSelectedProject(project)}
+                              aria-label={`Open case study details for ${project.title}`}
+                              className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#F1F3F7] border border-[#E2E5EC] group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                            >
+                              <Image
+                                src={project.image}
+                                alt={project.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className={
+                                  isPortrait
+                                    ? "object-contain p-2 transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                                    : "object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                                }
+                              />
+                            </button>
+                          </div>
 
-                      <p className="text-slate-300 font-sans text-xs leading-relaxed line-clamp-3 mb-4">
-                        {project.desc}
-                      </p>
+                          <CardHeader className="pb-2">
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <Badge variant={isUiux ? "pink" : "blue"}>
+                                {project.type.toUpperCase()}
+                              </Badge>
+                              <Badge variant="outline">
+                                {isUiux ? "UI/UX" : "WEB APP"}
+                              </Badge>
+                            </div>
 
-                      {/* Tech Pills */}
-                      <div className="flex flex-wrap gap-1.5 font-mono text-xs text-slate-300">
-                        {project.tech.map((t) => (
-                          <span
-                            key={t}
-                            className="px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-800 text-slate-300"
-                          >
-                            #{t}
+                            <CardTitle className="text-lg">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedProject(project)}
+                                className="min-h-[44px] py-1.5 flex items-center w-full text-left hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded"
+                              >
+                                {project.title}
+                              </button>
+                            </CardTitle>
+                          </CardHeader>
+
+                          <CardContent className="pb-4">
+                            <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed line-clamp-3">
+                              {project.desc}
+                            </p>
+                          </CardContent>
+                        </div>
+
+                        <CardFooter className="pt-3 pb-4 gap-3">
+                          <span className="font-mono text-[11px] font-semibold text-[#272B35] truncate">
+                            {project.tech
+                              .slice(0, 3)
+                              .map((t) => `#${t}`)
+                              .join(" ")}
                           </span>
-                        ))}
-                      </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            {project.githubUrl && (
+                              <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-cursor="Code"
+                                aria-label={`Open GitHub repository for ${project.title}`}
+                                className="w-11 h-11 rounded-full bg-[#F1F3F7] border border-[#E2E5EC] flex items-center justify-center text-[#272B35] hover:bg-[#E2E5EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                              >
+                                <Code2 className="w-4 h-4" aria-hidden="true" />
+                              </a>
+                            )}
+
+                            {project.liveUrl ? (
+                              <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-cursor={isUiux ? "Figma" : "Demo"}
+                                className={`inline-flex items-center gap-1.5 h-11 px-4 rounded-full text-xs font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
+                                  isUiux
+                                    ? "bg-[#DB2777] hover:bg-[#BE185D]"
+                                    : "bg-[#2563EB] hover:bg-[#1D4ED8]"
+                                }`}
+                              >
+                                <span>{isUiux ? "Figma" : "Demo"}</span>
+                                <ExternalLink
+                                  className="w-3.5 h-3.5"
+                                  aria-hidden="true"
+                                />
+                              </a>
+                            ) : (
+                              <button
+                                type="button"
+                                data-cursor="Details"
+                                onClick={() => setSelectedProject(project)}
+                                className="inline-flex items-center gap-1.5 h-11 px-4 rounded-full bg-[#111216] hover:bg-[#272B35] text-white text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                              >
+                                <span>Details</span>
+                              </button>
+                            )}
+                          </div>
+                        </CardFooter>
+                      </Card>
+                    </TiltSpotlightCard>
+                  </motion.div>
+                );
+              })}
+
+              {/* Companion Collaboration CTA Card balancing row 4 when all 10 projects are shown */}
+              {filteredProjects.length % 3 === 1 && (
+                <ShapeReveal
+                  key="collaboration-cta"
+                  variant="pill-expand"
+                  className="md:col-span-1 lg:col-span-2 flex"
+                >
+                  <div className="w-full relative overflow-hidden rounded-3xl bg-white border border-[#F9A8D4] p-7 sm:p-10 flex flex-col justify-between shadow-[0_10px_28px_-8px_rgba(17,18,22,0.07)]">
+                    <div className="relative z-10 max-w-xl">
+                      <Badge variant="pink" className="mb-4">
+                        OPEN FOR COLLABORATION
+                      </Badge>
+                      <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#111216] leading-tight">
+                        Need a Full-Stack Engineer
+                        <span className="block font-serif italic font-normal text-[#BE185D] mt-0.5">
+                          or UI/UX partner?
+                        </span>
+                      </h2>
+                      <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
+                        Let&apos;s discuss your web product, internal dashboard,
+                        or Figma interface prototype. Available for full-time,
+                        internship, and freelance projects.
+                      </p>
+                    </div>
+
+                    <div className="relative z-10 mt-6 flex flex-wrap items-center gap-3">
+                      <MagneticWrap>
+                        <Button
+                          variant="pink"
+                          size="lg"
+                          data-cursor="Send"
+                          onClick={() => setIsContactOpen(true)}
+                        >
+                          Send Message
+                        </Button>
+                      </MagneticWrap>
+                      <MagneticWrap strength={0.16}>
+                        <Link
+                          href="/"
+                          data-cursor="Home"
+                          className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-white border border-[#CBD2DF] hover:bg-[#F1F3F7] text-sm font-semibold text-[#111216] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                        >
+                          <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+                          <span>Back to Home</span>
+                        </Link>
+                      </MagneticWrap>
                     </div>
                   </div>
-
-                  {/* Card Bottom Actions */}
-                  <div className="p-5 pt-0 border-t border-slate-800/80 flex items-center justify-between gap-2 mt-2">
-                    {/* View Details Button */}
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="text-xs font-mono font-bold text-cyan-400 hover:text-white flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                    >
-                      <Info className="w-3.5 h-3.5" aria-hidden="true" />
-                      Detail
-                    </button>
-
-                    {/* Quick External Links (GitHub & Live Demo) */}
-                    <div className="flex items-center gap-2">
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Buka Repositori GitHub untuk ${project.title}`}
-                          className="w-8 h-8 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                          title={`Buka Repositori GitHub ${project.title}`}
-                        >
-                          <Code2 className="w-4 h-4" aria-hidden="true" />
-                        </a>
-                      )}
-
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Buka Live Demo untuk ${project.title}`}
-                          className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 text-cyan-200 hover:text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-[0_0_12px_rgba(6,182,212,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-                          title={`Buka Live Demo ${project.title}`}
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                          <span>Demo</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                </ShapeReveal>
+              )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         )}
 
-        {/* Bottom Back Button */}
-        <div className="mt-16 text-center">
+        {/* Footer */}
+        <footer className="mt-14 pt-6 border-t border-[#E2E5EC] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-[13px] text-[#5A6272]">
+          <p>Dimas Brahmantya Aryasena | Project Archive ({counts.all} Works)</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-cyan-300 hover:text-white hover:bg-cyan-500/20 hover:border-cyan-400 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="inline-flex items-center min-h-[44px] px-2 font-semibold text-[#2563EB] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-lg"
           >
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-            <span>BACK TO HOME</span>
+            Back to Home
           </Link>
-        </div>
+        </footer>
       </main>
 
-      {/* Detail Pop-up Modal */}
       <ProjectDetailModal
         project={selectedProject}
-        isOpen={!!selectedProject}
+        isOpen={Boolean(selectedProject)}
         onClose={() => setSelectedProject(null)}
       />
+
+      <ContactModal open={isContactOpen} onOpenChange={setIsContactOpen} />
     </div>
   );
 }
-
