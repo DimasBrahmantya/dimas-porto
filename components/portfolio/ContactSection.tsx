@@ -94,7 +94,7 @@ export function ContactSection({
                     <span className="font-mono text-xs sm:text-[13px] font-bold text-[#111216] truncate">
                       {copied
                         ? "Email copied to clipboard"
-                        : "Direct Email (Hidden from bots)"}
+                        : "Direct Email"}
                     </span>
                   </div>
                   <MagneticWrap strength={0.18}>
