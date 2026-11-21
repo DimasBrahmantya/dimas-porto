@@ -81,7 +81,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <head>
         <script

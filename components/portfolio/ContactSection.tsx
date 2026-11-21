@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { Check, ChevronUp, Copy, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
+  LiveMalangClock,
   MagneticWrap,
   ShapeReveal,
+  SplitTextReveal,
+  TextScramble,
 } from "@/components/portfolio/MotionPrimitives";
 
 interface ContactSectionProps {
@@ -65,16 +68,21 @@ export function ContactSection({
       {/* Editorial Contact Banner Card (Pill-Expand Shape-In / Shape-Out) */}
       <ShapeReveal variant="pill-expand" duration={0.7}>
         <div className="relative overflow-hidden rounded-[28px] bg-white border border-[#E2E5EC] shadow-[0_16px_40px_-10px_rgba(17,18,22,0.08)] p-6 sm:p-10 lg:p-12">
+          {/* Subtle Architectural Grid Backdrop */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 editorial-grid-bg opacity-75 z-0"
+          />
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Headline, Spam-Protected Email Action & Direct Form CTA */}
             <div className="lg:col-span-7">
               <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#BE185D] uppercase block mb-3">
-                03 / GET IN TOUCH
+                <TextScramble text="03 / GET IN TOUCH" />
               </span>
               <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] text-[#111216] leading-none tracking-tight">
-                Let&apos;s build
+                <SplitTextReveal text="Let's build" />
                 <span className="block font-serif italic font-normal text-[#BE185D] mt-1">
-                  something real.
+                  <SplitTextReveal text="something real." delay={0.14} />
                 </span>
               </h2>
               <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-lg">
@@ -85,7 +93,10 @@ export function ContactSection({
 
               {/* Spam-Protected Email Copy + Direct Message CTA */}
               <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                <div className="flex items-center justify-between gap-3 min-h-[60px] py-1.5 px-4 rounded-2xl bg-[#F1F3F7] border border-[#E2E5EC] min-w-0 flex-1 max-w-lg">
+                <div
+                  data-cursor={copied ? "Copied ✓" : "Copy"}
+                  className="flex items-center justify-between gap-3 min-h-[60px] py-1.5 px-4 rounded-2xl bg-[#F1F3F7] border border-[#E2E5EC] min-w-0 flex-1 max-w-lg"
+                >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <ShieldCheck
                       className="w-4 h-4 text-[#2563EB] shrink-0"
@@ -145,9 +156,10 @@ export function ContactSection({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Open ${item.name} profile (${item.handle})`}
+                  data-cursor="Open ↗"
                   initial={{ opacity: 0, x: 24 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: "some" }}
+                  viewport={{ once: true, amount: "some" }}
                   transition={{
                     duration: 0.42,
                     delay: idx * 0.06,
@@ -183,9 +195,10 @@ export function ContactSection({
                 type="button"
                 onClick={handleOpenWhatsApp}
                 aria-label="Start WhatsApp chat with Dimas"
+                data-cursor="Chat ↗"
                 initial={{ opacity: 0, x: 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: "some" }}
+                viewport={{ once: true, amount: "some" }}
                 transition={{
                   duration: 0.42,
                   delay: 0.18,
@@ -222,8 +235,12 @@ export function ContactSection({
       {/* Clean Footer */}
       <footer className="mt-10 pt-6 border-t border-[#E2E5EC] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-[13px] text-[#5A6272]">
         <p>Dimas Brahmantya Aryasena | Full-Stack Web Developer Portfolio</p>
-        <div className="flex items-center gap-4">
-          <span>Malang, Indonesia | Open to Jakarta &amp; Remote</span>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <LiveMalangClock className="text-[#111216]" />
+          <span className="hidden sm:inline text-[#CBD2DF]" aria-hidden="true">
+            |
+          </span>
+          <span>Open to Jakarta &amp; Remote</span>
           <MagneticWrap strength={0.16}>
             <button
               type="button"

@@ -1,23 +1,78 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 
 export function EditorialCursor() {
   const prefersReduced = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const [visible, setVisible] = useState(false);
+  const [label, setLabel] = useState<string | null>(null);
+
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  const springX = useSpring(mouseX, { stiffness: 460, damping: 34, mass: 0.45 });
+  const springY = useSpring(mouseY, { stiffness: 460, damping: 34, mass: 0.45 });
+
+  useEffect(() => {
+    if (prefersReduced || typeof window === "undefined") return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const handleMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      setVisible(true);
+
+      const target = e.target as HTMLElement | null;
+      const cursorEl = target?.closest<HTMLElement>("[data-cursor]");
+      setLabel(cursorEl?.dataset.cursor || null);
+    };
+
+    const handleLeave = () => {
+      setVisible(false);
+      setLabel(null);
+    };
+
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    document.addEventListener("mouseleave", handleLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      document.removeEventListener("mouseleave", handleLeave);
+    };
+  }, [mouseX, mouseY, prefersReduced]);
 
   if (prefersReduced) return null;
 
   return (
     <motion.div
       aria-hidden="true"
-      style={{ scaleX: smoothProgress }}
-      className="fixed top-0 left-0 right-0 h-[3px] z-50 origin-left pointer-events-none bg-gradient-to-r from-[#2563EB] to-[#DB2777]"
-    />
+      style={{
+        x: springX,
+        y: springY,
+      }}
+      className="pointer-events-none fixed top-0 left-0 z-[70] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+    >
+      <AnimatePresence>
+        {visible && label && (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, scale: 0.72 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.72 }}
+            transition={{ type: "spring", stiffness: 420, damping: 28 }}
+            className="px-3.5 py-1.5 rounded-full bg-[#111216]/88 text-white backdrop-blur-md border border-white/20 shadow-[0_10px_28px_rgba(17,18,22,0.22)] font-mono text-[11px] font-bold tracking-wider uppercase whitespace-nowrap"
+          >
+            {label}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

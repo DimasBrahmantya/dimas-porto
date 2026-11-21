@@ -6,7 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   MagneticWrap,
+  RollingNumber,
   ShapeReveal,
+  SplitTextReveal,
+  TextScramble,
 } from "@/components/portfolio/MotionPrimitives";
 
 const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
@@ -71,10 +74,10 @@ export function ProfileSection() {
     >
       <ShapeReveal variant="fade-up" className="mb-10">
         <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#BE185D] uppercase block mb-2">
-          02 / ABOUT &amp; CAPABILITIES
+          <TextScramble text="02 / ABOUT & CAPABILITIES" />
         </span>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] font-bold tracking-tight text-[#111216]">
-          Background &amp; Technical Stack.
+          <SplitTextReveal text="Background & Technical Stack." />
         </h2>
       </ShapeReveal>
 
@@ -100,14 +103,14 @@ export function ProfileSection() {
                   <motion.div
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: "some" }}
+                    viewport={{ once: true, amount: "some" }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="flex items-start gap-3"
                   >
                     <motion.span
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      viewport={{ once: false, amount: "some" }}
+                      viewport={{ once: true, amount: "some" }}
                       transition={{
                         type: "spring",
                         stiffness: 360,
@@ -136,7 +139,7 @@ export function ProfileSection() {
                   <motion.div
                     initial={{ opacity: 0, x: -14 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: "some" }}
+                    viewport={{ once: true, amount: "some" }}
                     transition={{
                       duration: 0.45,
                       delay: 0.1,
@@ -147,7 +150,7 @@ export function ProfileSection() {
                     <motion.span
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      viewport={{ once: false, amount: "some" }}
+                      viewport={{ once: true, amount: "some" }}
                       transition={{
                         type: "spring",
                         stiffness: 360,
@@ -159,7 +162,8 @@ export function ProfileSection() {
                     />
                     <div>
                       <span className="font-mono text-[11px] font-bold text-[#2563EB] uppercase tracking-wider block">
-                        B.SC. INFORMATICS | GPA 3.80 / 4.00
+                        B.SC. INFORMATICS | GPA{" "}
+                        <RollingNumber value={3.8} decimals={2} /> / 4.00
                       </span>
                       <p className="text-base font-bold text-[#111216] mt-0.5">
                         Universitas Muhammadiyah Malang
@@ -223,7 +227,7 @@ export function ProfileSection() {
                     key={group.title}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: "some" }}
+                    viewport={{ once: true, amount: "some" }}
                     transition={{
                       duration: 0.45,
                       delay: groupIdx * 0.08,
@@ -252,7 +256,7 @@ export function ProfileSection() {
                             key={item.label}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: false, amount: "some" }}
+                            viewport={{ once: true, amount: "some" }}
                             transition={{
                               type: "spring",
                               stiffness: 340,

@@ -13,7 +13,13 @@ import {
   useTransform,
 } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MagneticWrap } from "@/components/portfolio/MotionPrimitives";
+import {
+  LiveMalangClock,
+  MagneticWrap,
+  RollingNumber,
+  SplitTextReveal,
+  TextScramble,
+} from "@/components/portfolio/MotionPrimitives";
 
 interface HeroSectionProps {
   projectsCount: number;
@@ -72,6 +78,12 @@ export function HeroSection({
       className="scroll-mt-20 relative overflow-x-clip bg-[#FAF8F4] border-b border-[#E2E5EC]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-6 sm:pt-10 pb-12 lg:pb-14 relative">
+        {/* Subtle Architectural Grid Backdrop with Radial Fade */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 editorial-grid-bg z-0"
+        />
+
         {/* Desktop Layered Composition / Mobile Clean Visual Top + Stacked Content */}
         <div className="relative min-h-[400px] sm:min-h-[520px] lg:min-h-[670px] flex flex-col justify-end">
           {/* Dual Soft Blue & Rose Pink Ambient Aura behind Portrait (Cursor-Reactive) */}
@@ -189,32 +201,11 @@ export function HeroSection({
                 </span>
               </motion.div>
 
-              <motion.h1
-                initial={
-                  prefersReduced
-                    ? false
-                    : {
-                        opacity: 0,
-                        y: 26,
-                        clipPath: "inset(100% 0% 0% 0%)",
-                      }
-                }
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  clipPath: "inset(0% 0% 0% 0%)",
-                }}
-                transition={{
-                  duration: 0.65,
-                  delay: 0.16,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="font-display font-extrabold uppercase text-[#111216] text-[52px] sm:text-[74px] lg:text-[94px] leading-[0.92] tracking-[-0.015em]"
-              >
-                I AM
+              <h1 className="font-display font-extrabold uppercase text-[#111216] text-[52px] sm:text-[74px] lg:text-[94px] leading-[0.92] tracking-[-0.015em]">
+                <SplitTextReveal text="I AM" immediate delay={0.12} stagger={0.07} />
                 <br />
-                DIMAS BAS
-              </motion.h1>
+                <SplitTextReveal text="DIMAS BAS" immediate delay={0.22} stagger={0.07} />
+              </h1>
 
               <motion.div
                 initial={prefersReduced ? false : { opacity: 0, y: 16 }}
@@ -256,7 +247,7 @@ export function HeroSection({
                     href="/projects"
                     className="inline-flex items-center justify-center h-12 px-5 rounded-full bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3] text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                   >
-                    Archive ({projectsCount})
+                    Archive (<RollingNumber value={projectsCount} />)
                   </Link>
                 </MagneticWrap>
               </motion.div>
@@ -290,8 +281,10 @@ export function HeroSection({
               </p>
 
               <span className="mt-4 inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] font-mono text-[11px] font-bold tracking-wider uppercase">
-                MALANG | OPEN TO JAKARTA &amp; REMOTE
+                <TextScramble text="MALANG | OPEN TO JAKARTA & REMOTE" />
               </span>
+
+              <LiveMalangClock className="mt-2.5 text-[#5A6272]" />
             </motion.div>
           </div>
         </div>

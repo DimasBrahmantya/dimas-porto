@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  animate,
   motion,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -87,7 +89,7 @@ export function ShapeReveal({
   delay = 0,
   duration = 0.65,
   className,
-  once = false,
+  once = true,
 }: ShapeRevealProps) {
   const prefersReduced = useReducedMotion();
 
@@ -168,7 +170,7 @@ export function TiltSpotlightCard({
   children,
   className,
   accent = "blue",
-  cursorLabel = "View",
+  cursorLabel = "View ↗",
 }: TiltSpotlightCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
@@ -243,5 +245,239 @@ export function TiltSpotlightCard({
         />
       )}
     </motion.div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  SplitTextReveal: Editorial Masked Word-by-Word Reveal (React Bits style)  */
+/* -------------------------------------------------------------------------- */
+
+interface SplitTextRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+  stagger?: number;
+  immediate?: boolean;
+}
+
+export function SplitTextReveal({
+  text,
+  className,
+  delay = 0,
+  stagger = 0.06,
+  immediate = false,
+}: SplitTextRevealProps) {
+  const prefersReduced = useReducedMotion();
+  const words = text.split(" ");
+
+  if (prefersReduced) {
+    return <span className={className}>{text}</span>;
+  }
+
+  return (
+    <span className={cn("inline-flex flex-wrap gap-x-[0.26em]", className)}>
+      {words.map((word, index) => (
+        <span
+          key={`${word}-${index}`}
+          className="inline-block overflow-hidden pb-[0.06em] -mb-[0.06em]"
+        >
+          <motion.span
+            className="inline-block"
+            initial={{ y: "105%", opacity: 0 }}
+            {...(immediate
+              ? { animate: { y: "0%", opacity: 1 } }
+              : {
+                  whileInView: { y: "0%", opacity: 1 },
+                  viewport: { once: true, amount: "some" },
+                })}
+            transition={{
+              duration: 0.58,
+              delay: delay + index * stagger,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  TextScramble: Monospace Decrypted Text (React Bits / Motion Primitives)   */
+/* -------------------------------------------------------------------------- */
+
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/|-";
+
+interface TextScrambleProps {
+  text: string;
+  className?: string;
+  triggerOnHover?: boolean;
+  durationMs?: number;
+}
+
+export function TextScramble({
+  text,
+  className,
+  triggerOnHover = true,
+  durationMs = 520,
+}: TextScrambleProps) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const prefersReduced = useReducedMotion();
+  const isInView = useInView(ref, { once: true, amount: "some" });
+  const [display, setDisplay] = useState(text);
+  const rafRef = useRef<number | null>(null);
+
+  const runScramble = React.useCallback(() => {
+    if (prefersReduced) return;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+    const start = performance.now();
+    const len = text.length;
+
+    const tick = (now: number) => {
+      const progress = Math.min(1, (now - start) / durationMs);
+      const revealedCount = Math.floor(progress * len);
+
+      let output = "";
+      for (let i = 0; i < len; i++) {
+        const ch = text[i];
+        if (ch === " " || ch === "/" || ch === "|") {
+          output += ch;
+        } else if (i < revealedCount) {
+          output += ch;
+        } else {
+          output +=
+            SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+      }
+
+      setDisplay(output);
+
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setDisplay(text);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [durationMs, prefersReduced, text]);
+
+  useEffect(() => {
+    if (isInView) {
+      runScramble();
+    }
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isInView, runScramble]);
+
+  return (
+    <span
+      ref={ref}
+      onMouseEnter={triggerOnHover ? runScramble : undefined}
+      className={className}
+    >
+      {prefersReduced ? text : display}
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  RollingNumber: Smooth Counting Numeric Primitive                          */
+/* -------------------------------------------------------------------------- */
+
+interface RollingNumberProps {
+  value: number;
+  decimals?: number;
+  className?: string;
+}
+
+export function RollingNumber({
+  value,
+  decimals = 0,
+  className,
+}: RollingNumberProps) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const prefersReduced = useReducedMotion();
+  const isInView = useInView(ref, { once: true, amount: "some" });
+  const [formatted, setFormatted] = useState(() => value.toFixed(decimals));
+
+  useEffect(() => {
+    if (prefersReduced || !isInView) return;
+
+    const controls = animate(0, value, {
+      duration: 0.9,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (latest) => {
+        setFormatted(latest.toFixed(decimals));
+      },
+    });
+
+    return () => controls.stop();
+  }, [decimals, isInView, prefersReduced, value]);
+
+  return (
+    <span ref={ref} className={cn("tabular-nums", className)}>
+      {prefersReduced ? value.toFixed(decimals) : formatted}
+    </span>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  LiveMalangClock: Hydration-Safe Local WIB Time Badge                      */
+/* -------------------------------------------------------------------------- */
+
+interface LiveMalangClockProps {
+  className?: string;
+  compact?: boolean;
+}
+
+export function LiveMalangClock({
+  className,
+  compact = false,
+}: LiveMalangClockProps) {
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const formatWib = () => {
+      try {
+        return new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Jakarta",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }).format(new Date());
+      } catch {
+        return "";
+      }
+    };
+
+    const initialId = setTimeout(() => setTime(formatWib()), 0);
+    const id = setInterval(() => setTime(formatWib()), 15000);
+    return () => {
+      clearTimeout(initialId);
+      clearInterval(id);
+    };
+  }, []);
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 font-mono text-[11px] font-semibold tracking-wider uppercase",
+        className
+      )}
+    >
+      <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+      </span>
+      <span>
+        {compact ? "Malang" : "Malang, ID"}
+        {time ? ` · ${time} WIB` : " · WIB"}
+      </span>
+    </span>
   );
 }

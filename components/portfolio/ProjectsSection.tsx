@@ -16,7 +16,10 @@ import {
 } from "@/components/ui/card";
 import {
   MagneticWrap,
+  RollingNumber,
   ShapeReveal,
+  SplitTextReveal,
+  TextScramble,
   TiltSpotlightCard,
 } from "@/components/portfolio/MotionPrimitives";
 
@@ -100,10 +103,10 @@ export function ProjectsSection({
       >
         <div>
           <span className="font-mono text-xs font-bold tracking-[0.08em] text-[#2563EB] uppercase block mb-2">
-            01 / SELECTED WORKS
+            <TextScramble text="01 / SELECTED WORKS" />
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-[#111216]">
-            Featured Projects.
+            <SplitTextReveal text="Featured Projects." />
           </h2>
           <p className="text-sm sm:text-[15px] text-[#5A6272] mt-2 max-w-xl">
             Built and deployed web applications, full-stack systems, and UI/UX
@@ -212,7 +215,9 @@ export function ProjectsSection({
                           href="/projects"
                           className="inline-flex items-center justify-center gap-1.5 h-11 px-5 rounded-full bg-[#FDF2F8] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#FCE7F3] text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
                         >
-                          <span>Open Archive ({counts.all})</span>
+                          <span>
+                            Open Archive (<RollingNumber value={counts.all} />)
+                          </span>
                           <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </Link>
                       </MagneticWrap>
@@ -222,6 +227,7 @@ export function ProjectsSection({
                   <div className="lg:col-span-6">
                     <button
                       type="button"
+                      data-cursor="View ↗"
                       onClick={() => onSelectProject(flagship)}
                       aria-label={`Open case study details for ${flagship.title}`}
                       className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#F1F3F7] border border-[#E2E5EC] group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
@@ -273,7 +279,7 @@ export function ProjectsSection({
                     scale: 1,
                     clipPath: "inset(0% 0% 0% 0% round 16px)",
                   }}
-                  viewport={{ once: false, amount: "some" }}
+                  viewport={{ once: true, amount: "some" }}
                   exit={{
                     opacity: 0,
                     scale: 0.92,
