@@ -8,9 +8,9 @@ export const projectsData: Project[] = [
     type: "Featured Web App",
     category: "webapp",
     role: "Full-Stack Web Developer",
-    desc: "Deployed digital loyalty stamp web app for small businesses with QR camera auto-stamping, PostgreSQL Row Level Security (RLS), and zero-login customer cards.",
+    desc: "Architected and built end-to-end digital loyalty stamp web app using Next.js, TypeScript, and Supabase PostgreSQL RLS with QR camera auto-stamping and zero-login customer cards.",
     fullDescription:
-      "LoyaltyCard is a deployed portfolio web application built to help small businesses such as cafes, barbershops, salons, and laundries replace paper stamp cards with digital QR passes.\n\nDesigned for a low-friction customer flow, shoppers do not need to download a native app or register an account. Opening a cryptographically random 192-bit token URL (/c/[token]) loads their interactive stamp card and unique QR code immediately. On the cashier side, a web camera QR scanner triggers instant auto-stamping with audio chime feedback and atomic mutations protected against race conditions via PostgreSQL Stored Procedures (RPC).\n\nMerchant data is isolated at the database layer using Supabase PostgreSQL Row Level Security (RLS), paired with Owner and Cashier Role-Based Access Control (RBAC), storefront branding options (logo, theme palette, stamp icons, and reward targets), and privacy-minded data handling aligned with Indonesia PDP Law No. 27/2022.",
+      "LoyaltyCard is a deployed portfolio web application I architected and developed end-to-end to help small businesses such as cafes, barbershops, salons, and laundries replace paper stamp cards with digital QR passes.\n\nMy Contribution: Designed the multi-tenant database schema with Supabase PostgreSQL Row Level Security (RLS), built atomic stamp/redemption PostgreSQL RPC stored procedures to prevent race conditions, implemented Owner & Cashier Role-Based Access Control (RBAC), and developed the Next.js App Router frontend with web-camera QR scanning and PGlite WebAssembly concurrency tests.\n\nKey Workflow: Shoppers open a cryptographically random 192-bit token URL (/c/[token]) to access their interactive stamp card without downloading an app or creating an account, while cashiers scan customer QR passes with instant audio chime feedback.",
     features: [
       "Cashier web-camera QR scanner with instant auto-stamp and audio feedback",
       "Zero-login instant customer card access via 192-bit cryptographic token (/c/[token])",
@@ -44,9 +44,9 @@ export const projectsData: Project[] = [
     type: "Final Thesis",
     category: "webapp",
     role: "Full-Stack Web Developer",
-    desc: "Outpatient hospital registration system built for my final thesis with doctor quota scheduling, patient record lookup, and live queue monitoring.",
+    desc: "Developed full-stack outpatient hospital registration system (Next.js, Node.js, MongoDB) featuring doctor quota scheduling, NIK/Medical Record lookup, and live queue monitoring.",
     fullDescription:
-      "Built as my undergraduate final thesis using Solo Scrum, this Outpatient Hospital Management Information System (SIMRS) addresses administrative bottlenecks and waiting room congestion in clinics. It integrates patient registration, specialist clinic quota allocation, patient data recaps, and waiting-room queue displays.",
+      "Built as my undergraduate final thesis using Solo Scrum, this Outpatient Hospital Management Information System (SIMRS) addresses administrative bottlenecks and waiting room congestion in clinics.\n\nMy Contribution: Independently gathered system requirements, designed the MongoDB schema and REST API endpoints in Node.js/Next.js, and built the multi-role interfaces (Admin, Registration Desk, Doctor, and Clinic Staff) covering patient NIK/medical record lookup, specialist clinic quota allocation, daily/monthly visit recaps, and live waiting-room queue boards.",
     features: [
       "Outpatient registration and identity lookup (NIK / Medical Record No.)",
       "Specialist doctor quota scheduling filtered by clinic polyclinic",
@@ -68,9 +68,9 @@ export const projectsData: Project[] = [
     type: "University Project",
     category: "webapp",
     role: "Full-Stack & Backend Developer",
-    desc: "Anti-phishing URL scanner built with NestJS microservices to flag homograph attacks, typo-squatting, and suspicious shortlinks.",
+    desc: "Built anti-phishing URL scanner using NestJS microservices, Next.js, and MongoDB to detect homograph attacks, typo-squatting, and suspicious shortlinks.",
     fullDescription:
-      "Secure Hub is a university web security project built to analyze and flag social engineering threats such as phishing links and suspicious URLs. Built with a NestJS microservice backend and Next.js frontend, it runs multi-layer URL checks and presents clear risk reports.",
+      "Secure Hub is a university web security project built to analyze and flag social engineering threats such as phishing links and suspicious URLs.\n\nMy Contribution: Designed and implemented the NestJS microservice backend and REST API endpoints for heuristic URL analysis (homograph detection, typo-squatting rules, shortlink expansion, and domain reputation checks), integrated MongoDB scan audit logging, and connected the Next.js TypeScript dashboard.",
     features: [
       "Automated URL scanning combining heuristic rules and domain reputation lookup",
       "Modular backend microservices architecture built with NestJS",
@@ -92,9 +92,9 @@ export const projectsData: Project[] = [
     type: "Internship Project",
     category: "webapp",
     role: "Full-Stack Web Developer Intern",
-    desc: "Outpatient registration module built during internship at RSUD Grati, Pasuruan for BPJS and general patient workflows.",
+    desc: "Developed and improved the outpatient registration module at RSUD Grati using Laravel, PHP, MySQL, and Bootstrap for BPJS and general patient workflows.",
     fullDescription:
-      "Built during my internship (August to September 2025) at RSUD Grati Hospital, Pasuruan Regency. I worked with hospital staff and the internal development team to improve the outpatient registration module using Laravel, PHP, MySQL, and Bootstrap, simplifying patient lookup, separating BPJS Kesehatan vs. general patient flows, and generating clinic queue slips.",
+      "Built during my internship (August to September 2025) at RSUD Grati Hospital, Pasuruan Regency.\n\nMy Contribution: Collaborated directly with hospital staff and the internal IT team to develop and refine the outpatient registration module using Laravel, PHP, MySQL, and Bootstrap. Implemented NIK and Medical Record lookup, separated BPJS Kesehatan vs. general patient intake workflows, validated clinic schedules, and automated queue slip generation.",
     features: [
       "Patient history lookup by NIK and Medical Record Number",
       "Dedicated intake flows for BPJS Kesehatan and general self-pay patients",
@@ -116,9 +116,9 @@ export const projectsData: Project[] = [
     type: "Web App",
     category: "webapp",
     role: "Full-Stack & Front-End Developer",
-    desc: "Deployed streetwear lookbook landing page with interactive product catalog and direct WhatsApp ordering flow.",
+    desc: "Built and deployed responsive streetwear catalog and landing page using Next.js, TypeScript, TailwindCSS, and Framer Motion with direct WhatsApp ordering.",
     fullDescription:
-      "A deployed streetwear storefront built for local apparel label Remadja.Inc. Combines Framer Motion transitions, editorial display typography, and a responsive lookbook catalog with direct ordering links to WhatsApp and marketplaces.",
+      "A deployed streetwear storefront built for local apparel label Remadja.Inc.\n\nMy Contribution: Developed the frontend architecture and product data catalog in Next.js and TypeScript, crafted editorial typography and Framer Motion interactions, optimized image delivery, and integrated direct WhatsApp and marketplace checkout CTAs.",
     features: [
       "Editorial hero showcase with purposeful micro-interactions",
       "Interactive streetwear catalog with category filtering",
@@ -140,9 +140,9 @@ export const projectsData: Project[] = [
     type: "UI/UX Case Study",
     category: "uiux",
     role: "UI/UX Designer",
-    desc: "User-centered mobile laundry pickup and real-time washing status tracker designed with modular Figma component systems.",
+    desc: "Designed end-to-end mobile laundry pickup and real-time washing status tracker in Figma with user research, wireframes, and modular component systems.",
     fullDescription:
-      "Smart Laundry is a mobile UI/UX case study connecting customers with local laundry providers. Applying a User-Centered Design (UCD) process, the prototype streamlines pickup scheduling, wash package selection (dry clean, express, ironing), and step-by-step garment progress tracking.",
+      "Smart Laundry is a mobile UI/UX case study connecting customers with local laundry providers.\n\nMy Contribution: Conducted user research under a User-Centered Design (UCD) workflow, mapped information architecture and user flows, built a reusable Figma component library, and created a high-fidelity interactive prototype covering GPS pickup booking, transparent weight/cost calculation, and live garment tracking.",
     features: [
       "GPS-assisted laundry pickup booking and address selection flow",
       "Staged garment status tracking (Picked Up, Washing, Ironing, Out for Delivery)",
@@ -164,9 +164,9 @@ export const projectsData: Project[] = [
     type: "UI/UX Case Study",
     category: "uiux",
     role: "UI/UX Designer",
-    desc: "Mobile e-commerce UX tailored for local Malang banana snack SMEs with flavor previews and streamlined 3-step checkout.",
+    desc: "Designed mobile e-commerce UI/UX prototype in Figma for local banana snack SMEs featuring flavor variant cards, review proofs, and a 3-step checkout flow.",
     fullDescription:
-      "A mobile shopping UI/UX case study designed for regional snack SMEs selling Malang banana crisps and specialty treats. Features warm color accents, scannable flavor and weight cards, and a concise 3-step checkout flow.",
+      "A mobile shopping UI/UX case study designed for regional snack SMEs selling banana crisps and specialty treats.\n\nMy Contribution: Designed the visual identity, Figma Auto-Layout component system, product variant & weight cards, customer review layouts, and a friction-free 3-step checkout prototype (Address, Courier, Payment).",
     features: [
       "Product catalog displaying flavor variants and package weights clearly",
       "Streamlined 3-step checkout (Address, Delivery Courier, Payment)",
@@ -188,9 +188,9 @@ export const projectsData: Project[] = [
     type: "UI/UX Case Study",
     category: "uiux",
     role: "UI/UX Designer",
-    desc: "Interactive digital library prototype with customizable e-reader mode, reading progress tracking, and book search.",
+    desc: "Designed accessible digital library and e-reader prototype in Figma featuring customizable reading controls, bookshelf management, and goal tracking.",
     fullDescription:
-      "Readly is an interactive digital library prototype focused on long-form reading comfort. Designed with adjustable reader typography, spacing, and night reading controls, bookmark sync, inline footnotes, and curated book discovery.",
+      "Readly is an interactive digital library prototype focused on long-form reading comfort.\n\nMy Contribution: Structured the information architecture, designed WCAG-aligned typographic scales and reusable Figma components, and prototyped the customizable e-reader interface (font, margin, and night-mode controls), personal bookshelf states, and daily reading goal tracker.",
     features: [
       "Customizable e-reader interface with brightness, font, and margin controls",
       "Personal bookshelf organization (Reading, Want to Read, Favorites)",
@@ -212,9 +212,9 @@ export const projectsData: Project[] = [
     type: "Personal Project",
     category: "webapp",
     role: "Front-End Developer",
-    desc: "Deployed software engineering portfolio website featuring interactive project cards, experience timeline, and fast static loading.",
+    desc: "Developed and deployed responsive software engineering portfolio using Next.js, React, and TailwindCSS with interactive project cards and career timeline.",
     fullDescription:
-      "A personal portfolio website built and deployed on Vercel to showcase software engineering work and credentials for a peer developer (Rismansyah). Focuses on clean section pacing, interactive project cards, and direct repository links.",
+      "A personal portfolio website built and deployed on Vercel to showcase software engineering work and credentials for a peer developer (Rismansyah).\n\nMy Contribution: Built the responsive frontend using Next.js, React, and TailwindCSS, structured the project showcase and experience timeline components, and handled static optimization and Vercel deployment.",
     features: [
       "Interactive work showcase with live preview links",
       "Structured work history, education, and engineering skill overview",
@@ -235,9 +235,9 @@ export const projectsData: Project[] = [
     type: "Personal Project",
     category: "webapp",
     role: "Full-Stack Web Developer",
-    desc: "Personal portfolio built and deployed with Next.js App Router, editorial light identity, accessible contrast standards, and project archive.",
+    desc: "Designed, built, and deployed my personal portfolio using Next.js App Router, TypeScript, TailwindCSS, and Framer Motion with a searchable project archive and contact API.",
     fullDescription:
-      "My personal web portfolio built and deployed on Vercel to reflect my engineering and UI design workflow. Combines an alabaster light editorial aesthetic with blue and rose-pink co-accents, WCAG AA contrast verification, a searchable 10-project archive, and an interactive direct-inbox message form.",
+      "My personal web portfolio built and deployed on Vercel to showcase my full-stack engineering and UI/UX work.\n\nMy Contribution: Designed the editorial light interface with WCAG AA contrast compliance, engineered the Next.js App Router frontend with custom Framer Motion primitives, built the searchable 10-project archive, and implemented the direct contact API route supporting Resend and Formspree.",
     features: [
       "Next.js App Router architecture with optimized portrait and project imagery",
       "Filterable project archive with instant search and stack tags",

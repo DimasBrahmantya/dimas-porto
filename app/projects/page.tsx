@@ -389,6 +389,11 @@ export default function ProjectsPage() {
                                 {project.title}
                               </button>
                             </CardTitle>
+                            {project.role && (
+                              <p className="font-mono text-[11px] font-semibold text-[#2563EB]">
+                                Role: {project.role}
+                              </p>
+                            )}
                           </CardHeader>
 
                           <CardContent className="pb-4">
@@ -464,18 +469,18 @@ export default function ProjectsPage() {
                   <div className="w-full relative overflow-hidden rounded-3xl bg-white border border-[#F9A8D4] p-7 sm:p-10 flex flex-col justify-between shadow-[0_10px_28px_-8px_rgba(17,18,22,0.07)]">
                     <div className="relative z-10 max-w-xl">
                       <Badge variant="pink" className="mb-4">
-                        OPEN TO JAKARTA / REMOTE / FREELANCE
+                        JAKARTA SELATAN / ON-SITE / REMOTE / FREELANCE
                       </Badge>
                       <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#111216] leading-tight">
-                        Hiring a Full-Stack
+                        Hiring a Full Stack
                         <span className="block font-serif italic font-normal text-[#BE185D] mt-0.5">
-                          Web Developer?
+                          &amp; Web Developer?
                         </span>
                       </h2>
                       <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                        Open for full-time Full-Stack Web Developer roles
-                        (relocating to Jakarta or remote) and freelance web or
-                        UI/UX projects.
+                        Based in Jakarta Selatan and open for full-time Full
+                        Stack Developer &amp; Web Developer roles (on-site
+                        Jakarta or remote) and freelance web or UI/UX projects.
                       </p>
                     </div>
 

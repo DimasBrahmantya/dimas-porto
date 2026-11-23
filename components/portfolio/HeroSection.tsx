@@ -197,7 +197,7 @@ export function HeroSection({
                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                 </span>
                 <span className="text-xs sm:text-[13px] font-medium text-[#111216]">
-                  Open to relocate Jakarta / remote / freelance
+                  Jakarta Selatan · Open to On-Site, Remote &amp; Freelance
                 </span>
               </motion.div>
 
@@ -265,23 +265,24 @@ export function HeroSection({
               className="lg:pointer-events-auto flex flex-col items-start lg:items-end text-left lg:text-right lg:max-w-[360px] lg:pb-6"
             >
               <p className="text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-sm">
-                Full-Stack Web Developer focused on Next.js, TypeScript, and
-                Laravel, with UI/UX prototyping as a supporting skill.
+                Full Stack Developer &amp; Web Developer focused on Next.js,
+                TypeScript, and Laravel, with UI/UX prototyping as a supporting
+                skill.
               </p>
 
               <p
                 className="mt-4 lg:mt-6 font-display font-extrabold uppercase text-[#111216] text-[38px] sm:text-[50px] lg:text-[62px] leading-[0.95] tracking-tight"
-                aria-label="Full Stack Web Developer"
+                aria-label="Full Stack and Web Developer"
               >
                 FULL STACK
                 <br />
-                WEB
+                &amp; WEB
                 <br />
                 DEVELOPER
               </p>
 
               <span className="mt-4 inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] font-mono text-[11px] font-bold tracking-wider uppercase">
-                <TextScramble text="MALANG | OPEN TO JAKARTA & REMOTE" />
+                <TextScramble text="JAKARTA SELATAN | ON-SITE & REMOTE" />
               </span>
 
               <LiveMalangClock className="mt-2.5 text-[#5A6272]" />

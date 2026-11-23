@@ -80,7 +80,7 @@ export default function ProjectDetailModal({
         {/* Full Description */}
         <div className="bg-[#FAF8F4] border border-[#E2E5EC] rounded-2xl p-5">
           <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#272B35] mb-2.5">
-            Project Overview
+            Project Overview &amp; Contribution
           </h3>
           <p className="text-[#272B35] text-sm leading-relaxed whitespace-pre-line">
             {project.fullDescription || project.desc}

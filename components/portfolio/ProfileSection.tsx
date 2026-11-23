@@ -77,7 +77,7 @@ export function ProfileSection() {
           <TextScramble text="02 / ABOUT & CAPABILITIES" />
         </span>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] font-bold tracking-tight text-[#111216]">
-          <SplitTextReveal text="Background & Technical Stack." />
+          <SplitTextReveal text="Background & Technologies." />
         </h2>
       </ShapeReveal>
 
@@ -91,9 +91,10 @@ export function ProfileSection() {
                   Dimas Brahmantya Aryasena
                 </h3>
                 <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                  Informatics Engineering graduate from Universitas Muhammadiyah
-                  Malang focused on building and deploying full-stack web
-                  applications, clean APIs, and responsive interfaces.
+                  Based in South Jakarta (Jakarta Selatan). Informatics
+                  Engineering graduate from Universitas Muhammadiyah Malang
+                  focused on building and deploying full-stack web applications,
+                  clean APIs, and responsive interfaces.
                 </p>
 
                 <div className="my-6 border-t border-[#E2E5EC]" />
@@ -214,11 +215,11 @@ export function ProfileSection() {
           <Card className="w-full rounded-3xl">
             <CardContent className="p-6 sm:p-8">
               <h3 className="text-xl font-bold tracking-tight text-[#111216]">
-                Core Technologies &amp; Engineering Tools
+                Technologies &amp; Tools
               </h3>
               <p className="text-sm text-[#5A6272] mt-1 mb-6">
-                Tools and frameworks used across my built and deployed web apps,
-                APIs, databases, and interface designs.
+                Technologies, frameworks, and tools I work with across web
+                applications, backend APIs, databases, and UI/UX design.
               </p>
 
               <div className="space-y-4">

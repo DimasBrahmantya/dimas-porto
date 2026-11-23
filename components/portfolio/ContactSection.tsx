@@ -86,9 +86,9 @@ export function ContactSection({
                 </span>
               </h2>
               <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-lg">
-                Open for Full-Stack Web Developer roles (Jakarta relocation,
-                remote, or freelance), with UI/UX prototyping as a supporting
-                skill.
+                Based in Jakarta Selatan and open for Full Stack Developer &amp;
+                Web Developer roles (on-site Jakarta, remote, or freelance),
+                with UI/UX prototyping as a supporting skill.
               </p>
 
               {/* Spam-Protected Email Copy + Direct Message CTA */}
@@ -234,13 +234,13 @@ export function ContactSection({
 
       {/* Clean Footer */}
       <footer className="mt-10 pt-6 border-t border-[#E2E5EC] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-[13px] text-[#5A6272]">
-        <p>Dimas Brahmantya Aryasena | Full-Stack Web Developer Portfolio</p>
+        <p>Dimas Brahmantya Aryasena | Full Stack Developer &amp; Web Developer</p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <LiveMalangClock className="text-[#111216]" />
           <span className="hidden sm:inline text-[#CBD2DF]" aria-hidden="true">
             |
           </span>
-          <span>Open to Jakarta &amp; Remote</span>
+          <span>Open to On-Site Jakarta &amp; Remote</span>
           <MagneticWrap strength={0.16}>
             <button
               type="button"

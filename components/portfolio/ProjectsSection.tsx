@@ -182,6 +182,11 @@ export function ProjectsSection({
                       <Badge variant="outline">
                         {flagship.category === "uiux" ? "UI/UX" : "WEB APP"}
                       </Badge>
+                      {flagship.role && (
+                        <Badge variant="secondary">
+                          Role: {flagship.role}
+                        </Badge>
+                      )}
                     </div>
 
                     <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111216] mb-3">
@@ -193,14 +198,14 @@ export function ProjectsSection({
                     </p>
 
                     <div className="flex flex-wrap gap-1.5 mb-6">
-                      {flagship.tech.slice(0, 4).map((t) => (
+                      {flagship.tech.map((t) => (
                         <Badge key={t} variant="secondary">
                           #{t}
                         </Badge>
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2.5">
                       <MagneticWrap>
                         <Button
                           size="default"
@@ -209,6 +214,45 @@ export function ProjectsSection({
                           View Details
                         </Button>
                       </MagneticWrap>
+
+                      {flagship.liveUrl && (
+                        <MagneticWrap>
+                          <a
+                            href={flagship.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`inline-flex items-center justify-center gap-1.5 h-11 px-5 rounded-full text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
+                              flagship.category === "uiux"
+                                ? "bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] hover:bg-[#DB2777] hover:text-white"
+                                : "bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE] hover:bg-[#2563EB] hover:text-white"
+                            }`}
+                          >
+                            <span>
+                              {flagship.category === "uiux"
+                                ? "Figma Prototype"
+                                : "Live Demo"}
+                            </span>
+                            <ExternalLink
+                              className="w-3.5 h-3.5"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        </MagneticWrap>
+                      )}
+
+                      {flagship.githubUrl && (
+                        <MagneticWrap>
+                          <a
+                            href={flagship.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-1.5 h-11 px-4 rounded-full bg-[#F1F3F7] text-[#111216] border border-[#E2E5EC] hover:border-[#CBD2DF] text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                          >
+                            <Code2 className="w-3.5 h-3.5" aria-hidden="true" />
+                            <span>GitHub</span>
+                          </a>
+                        </MagneticWrap>
+                      )}
 
                       <MagneticWrap>
                         <Link
@@ -369,10 +413,15 @@ export function ProjectsSection({
                               {project.title}
                             </button>
                           </CardTitle>
+                          {project.role && (
+                            <p className="font-mono text-[11px] font-semibold text-[#2563EB]">
+                              Role: {project.role}
+                            </p>
+                          )}
                         </CardHeader>
 
                         <CardContent className="pb-4">
-                          <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed line-clamp-2">
+                          <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed line-clamp-3">
                             {project.desc}
                           </p>
                         </CardContent>

@@ -31,9 +31,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dimas Brahmantya Aryasena | Full-Stack Web Developer Portfolio",
+  title: "Dimas Brahmantya Aryasena | Full Stack Developer & Web Developer",
   description:
-    "Portfolio of Dimas Brahmantya Aryasena, Full-Stack Web Developer (Next.js, Laravel, TypeScript) with UI/UX prototyping as a supporting skill. Open to Jakarta relocation, remote, and freelance.",
+    "Portfolio of Dimas Brahmantya Aryasena, Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.",
 };
 
 const jsonLdPerson = {
@@ -46,7 +46,13 @@ const jsonLdPerson = {
     "https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/",
     "https://instagram.com/dimasbas_",
   ],
-  jobTitle: "Full-Stack Web Developer",
+  jobTitle: "Full Stack Developer & Web Developer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Jakarta Selatan",
+    addressRegion: "DKI Jakarta",
+    addressCountry: "ID",
+  },
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Universitas Muhammadiyah Malang",
