@@ -104,7 +104,7 @@ export function Navbar({
             aria-label="Dimas Brahmantya home"
           >
             <span className="inline-flex items-baseline gap-1">
-              <span>Dimas.</span>
+              <span>Dimas</span>
               <motion.span
                 className="w-1.5 h-1.5 rounded-full bg-[#DB2777] mb-1 shrink-0"
                 whileHover={{ scale: 1.5 }}
