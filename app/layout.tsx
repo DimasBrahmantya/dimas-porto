@@ -30,17 +30,49 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://dimasbas.vercel.app";
+const SITE_TITLE =
+  "Dimas Brahmantya Aryasena | Full Stack Developer & Web Developer";
+const SITE_DESCRIPTION =
+  "Portfolio of Dimas Brahmantya Aryasena, Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.";
+
 export const metadata: Metadata = {
-  title: "Dimas Brahmantya Aryasena | Full Stack Developer & Web Developer",
-  description:
-    "Portfolio of Dimas Brahmantya Aryasena, Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: SITE_URL,
+    siteName: "Dimas Brahmantya Aryasena Portfolio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1917,
+        height: 1047,
+        alt: "Dimas Brahmantya Aryasena — Full Stack & Web Developer Creative Portfolio",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
+  },
 };
 
 const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Dimas Brahmantya Aryasena",
-  url: "https://dimasbrahmantyaaryasena.vercel.app",
+  url: SITE_URL,
   sameAs: [
     "https://github.com/DimasBrahmantya",
     "https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/",
@@ -63,7 +95,7 @@ const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Dimas Brahmantya Aryasena Portfolio",
-  url: "https://dimasbrahmantyaaryasena.vercel.app",
+  url: SITE_URL,
   description:
     "Built and deployed web applications, backend systems, and UI/UX design case studies by Dimas Brahmantya Aryasena.",
 };
@@ -72,7 +104,7 @@ const jsonLdProfilePage = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
   name: "Creative & Engineering Portfolio: Dimas Brahmantya Aryasena",
-  url: "https://dimasbrahmantyaaryasena.vercel.app",
+  url: SITE_URL,
   mainEntity: {
     "@type": "Person",
     name: "Dimas Brahmantya Aryasena",
