@@ -31,21 +31,56 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://dimasbas.vercel.app";
+const FULL_NAME = "Dimas Brahmantya Aryasena";
+const ALTERNATE_NAMES = [
+  "Dimas Bas",
+  "Dimas Brahmantya",
+  "Dimas Aryasena",
+  "dimasbas",
+  "dimasbas_",
+];
 const SITE_TITLE =
-  "Dimas Brahmantya Aryasena | Full Stack Developer & Web Developer";
+  "Dimas Brahmantya Aryasena (Dimas Bas) | Full Stack & Web Developer";
 const SITE_DESCRIPTION =
-  "Portfolio of Dimas Brahmantya Aryasena, Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.";
+  "Portfolio of Dimas Brahmantya Aryasena (Dimas Bas), Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
+  applicationName: "Dimas Bas Portfolio",
+  authors: [{ name: FULL_NAME, url: SITE_URL }],
+  creator: FULL_NAME,
+  keywords: [
+    FULL_NAME,
+    ...ALTERNATE_NAMES,
+    "Dimas Bas portfolio",
+    "Full Stack Developer Jakarta",
+    "Web Developer Jakarta",
+    "Next.js Developer",
+    "Laravel Developer",
+    "Universitas Muhammadiyah Malang",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    type: "website",
-    locale: "id_ID",
+    type: "profile",
+    firstName: "Dimas",
+    lastName: "Brahmantya Aryasena",
+    username: "dimasbas",
+    locale: "en_US",
+    alternateLocale: ["id_ID"],
     url: SITE_URL,
     siteName: "Dimas Brahmantya Aryasena Portfolio",
     title: SITE_TITLE,
@@ -74,8 +109,25 @@ export const metadata: Metadata = {
 const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Dimas Brahmantya Aryasena",
+  "@id": `${SITE_URL}/#person`,
+  name: FULL_NAME,
+  alternateName: ALTERNATE_NAMES,
+  givenName: "Dimas",
+  familyName: "Aryasena",
+  additionalName: "Brahmantya",
   url: SITE_URL,
+  image: `${SITE_URL}/dimas-hero-cutout.png`,
+  description: SITE_DESCRIPTION,
+  nationality: { "@type": "Country", name: "Indonesia" },
+  knowsAbout: [
+    "Full Stack Development",
+    "Web Development",
+    "Next.js",
+    "React",
+    "Laravel",
+    "TypeScript",
+    "UI/UX Design",
+  ],
   sameAs: [
     "https://github.com/DimasBrahmantya",
     "https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/",
@@ -98,9 +150,11 @@ const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Dimas Brahmantya Aryasena Portfolio",
+  alternateName: ["Dimas Bas", "Dimas Bas Portfolio"],
   url: SITE_URL,
   description:
     "Built and deployed web applications, backend systems, and UI/UX design case studies by Dimas Brahmantya Aryasena.",
+  author: { "@id": `${SITE_URL}/#person` },
 };
 
 const jsonLdProfilePage = {
@@ -108,10 +162,7 @@ const jsonLdProfilePage = {
   "@type": "ProfilePage",
   name: "Creative & Engineering Portfolio: Dimas Brahmantya Aryasena",
   url: SITE_URL,
-  mainEntity: {
-    "@type": "Person",
-    name: "Dimas Brahmantya Aryasena",
-  },
+  mainEntity: { "@id": `${SITE_URL}/#person` },
 };
 
 export default function RootLayout({

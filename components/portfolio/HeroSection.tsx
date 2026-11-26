@@ -202,6 +202,7 @@ export function HeroSection({
               </motion.div>
 
               <h1 className="font-display font-extrabold uppercase text-[#111216] text-[52px] sm:text-[74px] lg:text-[94px] leading-[0.92] tracking-[-0.015em]">
+                <span className="sr-only">Dimas Brahmantya Aryasena, </span>
                 <SplitTextReveal text="I AM" immediate delay={0.12} stagger={0.07} />
                 <br />
                 <SplitTextReveal text="DIMAS BAS" immediate delay={0.22} stagger={0.07} />

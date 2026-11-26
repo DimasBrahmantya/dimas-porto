@@ -298,6 +298,8 @@ export function SplitTextReveal({
           >
             {word}
           </motion.span>
+          {/* Keeps words separated in the HTML text crawlers read; flex gap handles visual spacing. */}
+          {index < words.length - 1 ? " " : null}
         </span>
       ))}
     </span>
