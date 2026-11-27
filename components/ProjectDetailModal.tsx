@@ -13,8 +13,6 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
-const portraitPreviewIds = new Set(["smart-laundry", "readly"]);
-
 export default function ProjectDetailModal({
   project,
   isOpen,
@@ -23,7 +21,7 @@ export default function ProjectDetailModal({
   if (!project) return null;
 
   const isUiux = project.category === "uiux";
-  const isPortrait = portraitPreviewIds.has(project.id);
+  const isPortrait = Boolean(project.portrait);
 
   return (
     <Dialog

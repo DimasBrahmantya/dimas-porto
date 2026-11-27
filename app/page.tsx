@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { projectsData } from "@/data/projects";
 import { Project } from "@/types/project";
 import { Navbar, NavTab } from "@/components/portfolio/Navbar";
@@ -12,7 +12,16 @@ import {
 import { ProfileSection } from "@/components/portfolio/ProfileSection";
 import { ContactSection } from "@/components/portfolio/ContactSection";
 import { ContactModal } from "@/components/portfolio/ContactModal";
+import { SITE_URL } from "@/lib/site";
 import ProjectDetailModal from "@/components/ProjectDetailModal";
+
+const jsonLdProfilePage = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  name: "Creative & Engineering Portfolio: Dimas Brahmantya Aryasena",
+  url: SITE_URL,
+  mainEntity: { "@id": `${SITE_URL}/#person` },
+};
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<NavTab>("home");
@@ -20,6 +29,13 @@ export default function Portfolio() {
   const [copied, setCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+    };
+  }, []);
 
   // Sync active nav link on scroll
   useEffect(() => {
@@ -51,15 +67,25 @@ export default function Portfolio() {
     }
   };
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = async () => {
+    if (!navigator.clipboard?.writeText) return;
     const email = ["dimasbrahmantyaaryasena", "gmail.com"].join("@");
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+      copyTimerRef.current = setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#FAF8F4] text-[#111216] font-sans relative overflow-x-clip">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
+      />
       <Navbar
         activeTab={activeTab}
         onSelectTab={setActiveTab}

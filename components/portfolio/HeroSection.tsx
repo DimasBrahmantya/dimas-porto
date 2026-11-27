@@ -21,12 +21,12 @@ import {
   TextScramble,
 } from "@/components/portfolio/MotionPrimitives";
 
+import { CV_HREF } from "@/lib/site";
+
 interface HeroSectionProps {
   projectsCount: number;
   onScrollToSection: (id: string) => void;
 }
-
-const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 export function HeroSection({
   projectsCount,
@@ -197,7 +197,7 @@ export function HeroSection({
                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                 </span>
                 <span className="text-xs sm:text-[13px] font-medium text-[#111216]">
-                  Jakarta Selatan · Open to On-Site, Remote &amp; Freelance
+                  South Jakarta · Open to On-Site, Remote &amp; Freelance
                 </span>
               </motion.div>
 
@@ -283,7 +283,7 @@ export function HeroSection({
               </p>
 
               <span className="mt-4 inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] font-mono text-[11px] font-bold tracking-wider uppercase">
-                <TextScramble text="JAKARTA SELATAN | ON-SITE & REMOTE" />
+                <TextScramble text="SOUTH JAKARTA | ON-SITE & REMOTE" />
               </span>
 
               <LiveMalangClock className="mt-2.5 text-[#5A6272]" />

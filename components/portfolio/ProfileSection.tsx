@@ -4,6 +4,7 @@ import { Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { CV_HREF } from "@/lib/site";
 import {
   MagneticWrap,
   RollingNumber,
@@ -11,8 +12,6 @@ import {
   SplitTextReveal,
   TextScramble,
 } from "@/components/portfolio/MotionPrimitives";
-
-const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 const stackGroups = [
   {
@@ -91,7 +90,7 @@ export function ProfileSection() {
                   Dimas Brahmantya Aryasena
                 </h3>
                 <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                  Based in South Jakarta (Jakarta Selatan). Informatics
+                  Based in South Jakarta, Indonesia. Informatics
                   Engineering graduate from Universitas Muhammadiyah Malang
                   focused on building and deploying full-stack web applications,
                   clean APIs, and responsive interfaces.

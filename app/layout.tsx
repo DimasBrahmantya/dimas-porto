@@ -6,6 +6,7 @@ import {
   Playfair_Display,
 } from "next/font/google";
 import { MotionProvider } from "@/components/portfolio/MotionProvider";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,7 +31,6 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://dimasbas.vercel.app";
 const FULL_NAME = "Dimas Brahmantya Aryasena";
 const ALTERNATE_NAMES = [
   "Dimas Bas",
@@ -136,8 +136,8 @@ const jsonLdPerson = {
   jobTitle: "Full Stack Developer & Web Developer",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Jakarta Selatan",
-    addressRegion: "DKI Jakarta",
+    addressLocality: "South Jakarta",
+    addressRegion: "Jakarta",
     addressCountry: "ID",
   },
   alumniOf: {
@@ -155,14 +155,6 @@ const jsonLdWebSite = {
   description:
     "Built and deployed web applications, backend systems, and UI/UX design case studies by Dimas Brahmantya Aryasena.",
   author: { "@id": `${SITE_URL}/#person` },
-};
-
-const jsonLdProfilePage = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  name: "Creative & Engineering Portfolio: Dimas Brahmantya Aryasena",
-  url: SITE_URL,
-  mainEntity: { "@id": `${SITE_URL}/#person` },
 };
 
 export default function RootLayout({
@@ -183,10 +175,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-[#FAF8F4] text-[#111216] antialiased selection:bg-[#2563EB] selection:text-white">

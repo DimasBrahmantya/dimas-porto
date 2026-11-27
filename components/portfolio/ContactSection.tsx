@@ -86,7 +86,7 @@ export function ContactSection({
                 </span>
               </h2>
               <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-lg">
-                Based in Jakarta Selatan and open for Full Stack Developer &amp;
+                Based in South Jakarta and open for Full Stack Developer &amp;
                 Web Developer roles (on-site Jakarta, remote, or freelance),
                 with UI/UX prototyping as a supporting skill.
               </p>

@@ -7,20 +7,14 @@ import { ArrowUpRight, Code2, ExternalLink } from "lucide-react";
 import { Project } from "@/types/project";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import {
   MagneticWrap,
   RollingNumber,
   ShapeReveal,
   SplitTextReveal,
   TextScramble,
-  TiltSpotlightCard,
 } from "@/components/portfolio/MotionPrimitives";
 
 export type ProjectFilter = "all" | "webapp" | "uiux";
@@ -31,8 +25,6 @@ interface ProjectsSectionProps {
   onFilterChange: (filter: ProjectFilter) => void;
   onSelectProject: (project: Project) => void;
 }
-
-const portraitPreviewIds = new Set(["smart-laundry", "readly"]);
 
 export function ProjectsSection({
   projects,
@@ -282,7 +274,7 @@ export function ProjectsSection({
                         fill
                         sizes="(max-width: 1024px) 100vw, 620px"
                         className={
-                          portraitPreviewIds.has(flagship.id)
+                          flagship.portrait
                             ? "object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                             : "object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                         }
@@ -303,144 +295,42 @@ export function ProjectsSection({
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {supporting.map((project, index) => {
-              const isUiux = project.category === "uiux";
-              const isPortrait = portraitPreviewIds.has(project.id);
-
-              return (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{
-                    opacity: 0,
-                    y: 26,
-                    scale: 0.94,
-                    clipPath: "inset(10% 0% 0% 0% round 24px)",
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    clipPath: "inset(0% 0% 0% 0% round 16px)",
-                  }}
-                  viewport={{ once: true, amount: "some" }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0.92,
-                    clipPath: "inset(8% 8% 8% 8% round 28px)",
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    delay: index * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="h-full"
-                >
-                  <TiltSpotlightCard accent={isUiux ? "pink" : "blue"}>
-                    <Card
-                      interactive
-                      className={`h-full flex flex-col justify-between overflow-hidden ${
-                        isUiux ? "border-[#F9A8D4]" : "border-[#E2E5EC]"
-                      }`}
-                    >
-                      <div>
-                        <div className="p-3 pb-0">
-                          <button
-                            type="button"
-                            onClick={() => onSelectProject(project)}
-                            aria-label={`Inspect ${project.title}`}
-                            className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#F1F3F7] border border-[#E2E5EC] group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                          >
-                            <Image
-                              src={project.image}
-                              alt={project.title}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 400px"
-                              className={
-                                isPortrait
-                                  ? "object-contain p-2 transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                                  : "object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                              }
-                            />
-                          </button>
-                        </div>
-
-                        <CardHeader className="pb-2">
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <Badge variant={isUiux ? "pink" : "blue"}>
-                              {project.type.toUpperCase()}
-                            </Badge>
-
-                            <div className="flex items-center gap-2">
-                              {project.githubUrl && (
-                                <a
-                                  href={project.githubUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={`Open GitHub repository for ${project.title}`}
-                                  className="w-11 h-11 rounded-full bg-[#F1F3F7] border border-[#E2E5EC] flex items-center justify-center text-[#475060] hover:text-[#111216] hover:border-[#CBD2DF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                                >
-                                  <Code2 className="w-4 h-4" aria-hidden="true" />
-                                </a>
-                              )}
-                              {project.liveUrl && (
-                                <a
-                                  href={project.liveUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={`Open live preview for ${project.title}`}
-                                  className={`w-11 h-11 rounded-full flex items-center justify-center border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] ${
-                                    isUiux
-                                      ? "bg-[#FCE7F3] border-[#F9A8D4] text-[#9D174D] hover:bg-[#DB2777] hover:text-white"
-                                      : "bg-[#EFF6FF] border-[#BFDBFE] text-[#1D4ED8] hover:bg-[#2563EB] hover:text-white"
-                                  }`}
-                                >
-                                  <ExternalLink
-                                    className="w-4 h-4"
-                                    aria-hidden="true"
-                                  />
-                                </a>
-                              )}
-                            </div>
-                          </div>
-
-                          <CardTitle className="text-lg">
-                            <button
-                              type="button"
-                              onClick={() => onSelectProject(project)}
-                              className="min-h-[44px] py-1.5 flex items-center w-full text-left hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded"
-                            >
-                              {project.title}
-                            </button>
-                          </CardTitle>
-                          {project.role && (
-                            <p className="font-mono text-[11px] font-semibold text-[#2563EB]">
-                              Role: {project.role}
-                            </p>
-                          )}
-                        </CardHeader>
-
-                        <CardContent className="pb-4">
-                          <p className="text-xs sm:text-[13px] text-[#5A6272] leading-relaxed line-clamp-3">
-                            {project.desc}
-                          </p>
-                        </CardContent>
-                      </div>
-
-                      <CardFooter className="pt-3 pb-4">
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.tech.slice(0, 3).map((t) => (
-                            <Badge key={t} variant="secondary">
-                              #{t}
-                            </Badge>
-                          ))}
-                        </div>
-                      </CardFooter>
-                    </Card>
-                  </TiltSpotlightCard>
-                </motion.div>
-              );
-            })}
+            {supporting.map((project, index) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{
+                  opacity: 0,
+                  y: 26,
+                  scale: 0.94,
+                  clipPath: "inset(10% 0% 0% 0% round 24px)",
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  clipPath: "inset(0% 0% 0% 0% round 16px)",
+                }}
+                viewport={{ once: true, amount: "some" }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.92,
+                  clipPath: "inset(8% 8% 8% 8% round 28px)",
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.05,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="h-full"
+              >
+                <ProjectCard
+                  project={project}
+                  onSelect={onSelectProject}
+                  variant="home"
+                />
+              </motion.div>
+            ))}
           </AnimatePresence>
         </motion.div>
       )}

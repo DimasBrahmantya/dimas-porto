@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 interface ContactPayload {
   name?: string;
   email?: string;
@@ -9,33 +7,83 @@ interface ContactPayload {
 }
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX_REQUESTS = 5;
+
+// shortcut: in-memory per-instance rate limit resets on serverless cold starts, move to Vercel WAF or Redis if spam scales
+const rateHits = new Map<string, number[]>();
+
+function isRateLimited(ip: string, now = Date.now()): boolean {
+  const cutoff = now - RATE_WINDOW_MS;
+  const recent = (rateHits.get(ip) || []).filter((t) => t > cutoff);
+  if (recent.length >= RATE_MAX_REQUESTS) {
+    rateHits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  rateHits.set(ip, recent);
+  if (rateHits.size > 1000) {
+    for (const [key, times] of rateHits) {
+      if (times.every((t) => t <= cutoff)) rateHits.delete(key);
+    }
+  }
+  return false;
+}
+
+const asString = (value: unknown) => (typeof value === "string" ? value : "");
+const stripLineBreaks = (value: unknown) =>
+  asString(value).replace(/[\r\n]+/g, " ").trim();
 
 export async function POST(request: Request) {
   try {
+    const clientIp =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-real-ip")?.trim() ||
+      "unknown";
+
+    if (isRateLimited(clientIp)) {
+      return Response.json(
+        { ok: false, error: "Too many messages sent. Please wait a few minutes." },
+        { status: 429 }
+      );
+    }
+
     const body = (await request.json()) as ContactPayload;
-    const name = (body.name || "").trim();
-    const email = (body.email || "").trim();
-    const subject = (body.subject || "").trim();
-    const message = (body.message || "").trim();
-    const honeypot = (body.website || "").trim();
+    const name = stripLineBreaks(body?.name);
+    const email = asString(body?.email).trim();
+    const subject = stripLineBreaks(body?.subject);
+    const message = asString(body?.message).trim();
+    const honeypot = asString(body?.website).trim();
 
     // Silent accept for spam bots that fill hidden honeypot field
     if (honeypot) {
-      return NextResponse.json({
+      return Response.json({
         ok: true,
         message: "Message received.",
       });
     }
 
     if (!name || !email || !message) {
-      return NextResponse.json(
+      return Response.json(
         { ok: false, error: "Name, email, and message are required." },
         { status: 400 }
       );
     }
 
+    if (
+      name.length > 100 ||
+      email.length > 254 ||
+      subject.length > 150 ||
+      message.length > 5000
+    ) {
+      return Response.json(
+        { ok: false, error: "One or more fields exceed the allowed length." },
+        { status: 400 }
+      );
+    }
+
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
+      return Response.json(
         { ok: false, error: "Please provide a valid email address." },
         { status: 400 }
       );
@@ -70,18 +118,17 @@ export async function POST(request: Request) {
       });
 
       if (resendRes.ok) {
-        return NextResponse.json({
+        return Response.json({
           ok: true,
           provider: "resend",
           message: "Message delivered via Resend.",
         });
       }
 
-      const errText = await resendRes.text();
-      return NextResponse.json(
+      return Response.json(
         {
           ok: false,
-          error: `Email delivery failed (${resendRes.status}). ${errText.slice(0, 120)}`,
+          error: "Could not deliver message right now. Please try again later.",
         },
         { status: 502 }
       );
@@ -104,14 +151,14 @@ export async function POST(request: Request) {
       });
 
       if (formspreeRes.ok) {
-        return NextResponse.json({
+        return Response.json({
           ok: true,
           provider: "formspree",
           message: "Message delivered via Formspree.",
         });
       }
 
-      return NextResponse.json(
+      return Response.json(
         {
           ok: false,
           error: "Could not deliver message via Formspree. Please try again later.",
@@ -140,14 +187,14 @@ export async function POST(request: Request) {
     );
 
     if (formSubmitRes.ok) {
-      return NextResponse.json({
+      return Response.json({
         ok: true,
         provider: "formsubmit",
         message: "Message delivered to inbox.",
       });
     }
 
-    return NextResponse.json(
+    return Response.json(
       {
         ok: false,
         error:
@@ -156,7 +203,7 @@ export async function POST(request: Request) {
       { status: 502 }
     );
   } catch {
-    return NextResponse.json(
+    return Response.json(
       {
         ok: false,
         error: "Invalid request payload or network interruption.",

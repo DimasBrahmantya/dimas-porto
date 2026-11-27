@@ -39,7 +39,6 @@ export function Dialog({
           ? document.activeElement
           : null;
       document.body.style.overflow = "hidden";
-      window.dispatchEvent(new CustomEvent("lenis:stop"));
 
       const rafId = requestAnimationFrame(() => {
         const panel = panelRef.current;
@@ -97,14 +96,12 @@ export function Dialog({
       return () => {
         cancelAnimationFrame(rafId);
         document.body.style.overflow = "";
-        window.dispatchEvent(new CustomEvent("lenis:start"));
         window.removeEventListener("keydown", handleKeyDown);
         previousFocusRef.current?.focus();
       };
     }
 
     document.body.style.overflow = "";
-    window.dispatchEvent(new CustomEvent("lenis:start"));
     return undefined;
   }, [open]);
 
@@ -112,7 +109,6 @@ export function Dialog({
     <AnimatePresence>
       {open && (
         <div
-          data-lenis-prevent
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto overscroll-contain"
           role="dialog"
           aria-modal="true"
@@ -128,7 +124,6 @@ export function Dialog({
 
           <motion.div
             ref={panelRef}
-            data-lenis-prevent
             tabIndex={-1}
             initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}

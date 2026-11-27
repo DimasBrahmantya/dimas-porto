@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ Dimas Brahmantya Aryasena — Portfolio 2026
+# Dimas Brahmantya Aryasena — Portfolio 2026
 
 **Full-Stack Developer • Web Developer • Front-End & UI Engineer**
 
@@ -10,112 +10,126 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-[**🌐 Live Portfolio**](https://dimasbrahmantyaaryasena.vercel.app) · [**🗂️ Project Archive**](/projects) · [**💼 LinkedIn**](https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/) · [**🐙 GitHub**](https://github.com/DimasBrahmantya)
+[**Live Portfolio**](https://dimasbas.vercel.app) · [**Project Archive**](https://dimasbas.vercel.app/projects) · [**LinkedIn**](https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/) · [**GitHub**](https://github.com/DimasBrahmantya)
 
 </div>
 
 ---
 
-## ✨ Tentang Proyek
+## About
 
-Website portofolio pribadi **Dimas Brahmantya Aryasena** (Lulusan Teknik Informatika, Universitas Muhammadiyah Malang). Dibangun dengan **Next.js App Router (Turbopack)**, **TypeScript**, **Tailwind CSS v4**, dan **Framer Motion** untuk menampilkan profil profesional, pengalaman, serta arsip karya perangkat lunak dan desain UI/UX.
-
----
-
-## 🚀 Fitur Utama
-
-- **Navigasi Kapsul Mengambang (*Floating Capsule Nav*):** Sinkronisasi otomatis posisi *scroll* antar bagian `PROFIL`, `PROJECT`, dan `CONTACT PERSON`.
-- **Flagship Work Spotlight:** Sorotan khusus di halaman utama untuk proyek unggulan dengan pratinjau visual dan tautan langsung ke repositori & *live demo*.
-- **Halaman Khusus Project Archive (`/projects`):**
-  - Pencarian *real-time* berdasarkan judul, deskripsi, atau teknologi.
-  - Filter kategori (`ALL`, `WEB APP`, `UI/UX`) dan *quick-filter chips* (`#Next.js`, `#Supabase`, `#Laravel`, `#NestJS`, `#Figma`, `#MongoDB`, `#TypeScript`).
-  - **Project Detail Modal:** Menampilkan penjelasan sistem lengkap, daftar fitur utama, peran, *tech stack*, serta tautan GitHub & Vercel/Figma.
-- **Atmosfer Visual & Aksesibilitas:** Latar gelap biru atmosferik dengan animasi partikel (`FloatingShapes`), tipografi `Geist` & `Geist Mono`, navigasi ramah keyboard, dan kontras tinggi.
-- **SEO & Structured Data:** Dilengkapi `JSON-LD` (`Person`, `WebSite`, dan `ProfilePage`) di `app/layout.tsx`.
+Personal portfolio of **Dimas Brahmantya Aryasena (Dimas Bas)**, a Full-Stack & Web Developer based in **South Jakarta, Indonesia** (Informatics Engineering graduate, Universitas Muhammadiyah Malang). Built with **Next.js App Router (Turbopack)**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion** to showcase deployed web applications, backend systems, and UI/UX case studies.
 
 ---
 
-## 🗂️ Daftar Karya Unggulan (10 Proyek)
+## Key Features
 
-| Proyek | Kategori | Deskripsi Singkat | Tautan |
+- **Scroll-Synced Navigation:** Floating pill navbar syncing active state across `Home`, `Works`, `About`, and `Contact` with a responsive mobile drawer.
+- **Featured Works & Flagship Spotlight:** Editorial showcase on the homepage with category filtering (`All`, `Web App`, `UI/UX`) and direct GitHub & live demo links.
+- **Searchable Project Archive (`/projects`):**
+  - Real-time search by title, description, or tech stack.
+  - Category filters and quick stack chips (`#Next.js`, `#Supabase`, `#Laravel`, `#NestJS`, `#Figma`, `#MongoDB`, `#TypeScript`).
+  - **Project Detail Modal:** Full case study overview, key features, role, tech stack, and external links.
+- **Direct Contact API (`/api/contact`):** Validated, rate-limited contact endpoint supporting Resend, Formspree, and FormSubmit with honeypot spam protection.
+- **SEO & Accessibility:** Structured `JSON-LD` (`Person`, `WebSite`, `ProfilePage`), dynamic `sitemap.xml` & `robots.txt`, keyboard focus trapping, and `prefers-reduced-motion` support.
+
+---
+
+## Featured Projects (10 Works)
+
+| Project | Category | Summary | Links |
 | :--- | :---: | :--- | :--- |
-| **LoyaltyCard SaaS** *(Flagship)* | Web App | Platform kartu stempel loyalitas digital multi-tenant untuk UMKM (QR Auto-Stamp, Supabase RLS, Atomic RPC) | [GitHub](https://github.com/DimasBrahmantya/loyaltycard) · [Live](https://loyaltycard-sable.vercel.app/) |
-| **SIMRS Rawat Jalan** | Web App | Sistem pendaftaran rawat jalan rumah sakit, jadwal dokter spesialis, & antrean *real-time* | [GitHub](https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git) |
-| **Secure Hub** | Web App | Platform pendeteksi tautan berbahaya & anti-phishing berbasis arsitektur *microservices* | [GitHub](https://github.com/DimasBrahmantya/Secure-Hub.git) |
-| **Sistem Pendaftaran RSUD Grati** | Web App | Digitalisasi alur pendaftaran pasien poliklinik *on-premise* (BPJS/Umum) | [GitHub](https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git) |
-| **Remadja.Inc Landing Page** | Web App | *Landing page showcase* brand *streetwear* lokal dengan katalog interaktif | [GitHub](https://github.com/DimasBrahmantya/remadja-inc) · [Live](https://remadja-inc.vercel.app/) |
-| **Portfolio Rismansyah** | Web App | Website portofolio profesional untuk memvisualisasikan karya rekayasa perangkat lunak | [GitHub](https://github.com/DimasBrahmantya/porto-aris) · [Live](https://rismansyah-portofolio.vercel.app/) |
-| **Portfolio Dimas** | Web App | Portofolio pribadi berbasis Next.js dengan katalog proyek terstruktur & aksesibilitas tinggi | [GitHub](https://github.com/DimasBrahmantya/dimas-porto) · [Live](https://dimasbas.vercel.app/) |
-| **Smart Laundry** | UI/UX | Desain aplikasi mobile pemesanan & pelacakan layanan laundry berbasis GPS | [Figma Prototype](https://www.figma.com/proto/RyEi7OnUZznUxftePXkO9z/Smart-Laundry?node-id=15-6&p=f&t=BFnwWDWCeQl0zySa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=15%3A6) |
-| **Sale Pisang** | UI/UX | Pengalaman belanja aplikasi mobile *e-commerce* untuk produk oleh-oleh UMKM | [Figma Prototype](https://www.figma.com/proto/pO33hTo6vxXsdHI7UqNmmZ/sale-pisang-malang-web?node-id=1-3&p=f&t=VbTr62KlYEpm4D01-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1) |
-| **Readly** | UI/UX | Purwarupa antarmuka perpustakaan digital modern dengan mode *e-reader* | [Figma Prototype](https://www.figma.com/proto/dgaeEnl2KOLXDfcm1klSyY/IMK-Prototype?node-id=0-137&p=f&t=qPIvXnIm4UGve2yu-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=0%3A137) |
+| **LoyaltyCard Web App** *(Flagship)* | Web App | Multi-tenant digital loyalty stamp platform for SMEs (QR auto-stamp, Supabase PostgreSQL RLS, Atomic RPC) | [GitHub](https://github.com/DimasBrahmantya/loyaltycard) · [Live](https://loyaltycard-sable.vercel.app/) |
+| **SIMRS Rawat Jalan** | Web App | Outpatient hospital registration system with doctor quota scheduling, NIK/Medical Record lookup, and live queue boards | [GitHub](https://github.com/DimasBrahmantya/Simrs-Rawat-Jalan.git) |
+| **Secure Hub** | Web App | Anti-phishing URL scanner built with NestJS microservices, Next.js, and MongoDB | [GitHub](https://github.com/DimasBrahmantya/Secure-Hub.git) |
+| **RSUD Grati Registration** | Web App | Outpatient clinic registration module for BPJS Kesehatan and general patient intake (Laravel, MySQL) | [GitHub](https://github.com/DimasBrahmantya/PendaftaranRawatJalan.git) |
+| **Remadja.Inc Landing Page** | Web App | Responsive streetwear catalog and landing page with direct WhatsApp ordering | [GitHub](https://github.com/DimasBrahmantya/remadja-inc) · [Live](https://remadja-inc.vercel.app/) |
+| **Rismansyah Portfolio** | Web App | Responsive software engineering portfolio with interactive project cards and career timeline | [GitHub](https://github.com/DimasBrahmantya/porto-aris) · [Live](https://rismansyah-portofolio.vercel.app/) |
+| **Dimas Portfolio** | Web App | Personal Next.js portfolio with searchable project archive, editorial UI, and direct contact API | [GitHub](https://github.com/DimasBrahmantya/dimas-porto) · [Live](https://dimasbas.vercel.app/) |
+| **Smart Laundry UI/UX** | UI/UX | Mobile laundry pickup booking and real-time washing status tracker prototype in Figma | [Figma Prototype](https://www.figma.com/proto/RyEi7OnUZznUxftePXkO9z/Smart-Laundry?node-id=15-6&p=f&t=BFnwWDWCeQl0zySa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=15%3A6) |
+| **Sale Pisang UI/UX** | UI/UX | Mobile e-commerce shopping prototype for regional banana snack SMEs with a 3-step checkout flow | [Figma Prototype](https://www.figma.com/proto/pO33hTo6vxXsdHI7UqNmmZ/sale-pisang-malang-web?node-id=1-3&p=f&t=VbTr62KlYEpm4D01-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1) |
+| **Readly UI/UX** | UI/UX | Accessible digital library and customizable e-reader prototype designed in Figma | [Figma Prototype](https://www.figma.com/proto/dgaeEnl2KOLXDfcm1klSyY/IMK-Prototype?node-id=0-137&p=f&t=qPIvXnIm4UGve2yu-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=0%3A137) |
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-| Layer | Teknologi |
+| Layer | Technology |
 | :--- | :--- |
 | **Framework** | Next.js 16 (App Router, Turbopack) |
 | **UI & Styling** | React 19, Tailwind CSS v4, Lucide React |
-| **Animasi** | Framer Motion |
-| **Bahasa & Tipe** | TypeScript (Strict) |
-| **Font** | `next/font/google` (Geist & Geist Mono) |
+| **Animation** | Framer Motion |
+| **Language** | TypeScript (Strict) |
+| **Fonts** | `next/font/google` (Inter, Playfair Display, Barlow Condensed, JetBrains Mono) |
 | **Deployment** | Vercel |
 
 ---
 
-## 📁 Struktur Direktori
+## Project Structure
 
 ```text
 dimas-porto/
 ├── app/
+│   ├── api/contact/
+│   │   ├── route.ts             # Contact form API (Resend / Formspree / FormSubmit)
+│   │   └── route.test.mjs       # Unit tests for validation, honeypot, and rate limiting
 │   ├── projects/
-│   │   └── page.tsx             # Halaman Project Archive (Search, Filter, & Grid)
-│   ├── globals.css              # Konfigurasi Tailwind v4 & tema atmosferik
-│   ├── layout.tsx               # Root layout, font Geist, & metadata JSON-LD SEO
-│   └── page.tsx                 # Halaman utama (Profil, Flagship & Showcase, Kontak)
+│   │   ├── layout.tsx           # Project Archive metadata & Open Graph tags
+│   │   └── page.tsx             # Searchable Project Archive
+│   ├── globals.css              # Tailwind v4 theme & base styles
+│   ├── layout.tsx               # Root layout, fonts, and Person/WebSite JSON-LD
+│   ├── page.tsx                 # Homepage (Hero, Works, Profile, Contact)
+│   ├── robots.ts                # robots.txt route
+│   └── sitemap.ts               # sitemap.xml route
 ├── components/
-│   ├── FloatingShapes.tsx       # Animasi partikel latar belakang
-│   └── ProjectDetailModal.tsx   # Modal detail fitur, tech stack, & tautan proyek
+│   ├── portfolio/               # Navbar, Hero, Projects, ProjectCard, Profile, Contact, Motion
+│   ├── ui/                      # Button, Badge, Card, Dialog, Input, Textarea
+│   └── ProjectDetailModal.tsx   # Case study modal
 ├── data/
-│   └── projects.ts              # Data terpusat seluruh proyek portofolio
+│   └── projects.ts              # Centralized portfolio project data
+├── lib/
+│   ├── site.ts                  # Shared SITE_URL and CV_HREF constants
+│   └── utils.ts                 # Class name helper
 ├── public/
-│   └── projects/                # Aset gambar & mockup SVG tiap proyek
+│   └── projects/                # Project preview images & assets
 └── types/
-    └── project.ts               # Definisi tipe TypeScript Project & Category
+    └── project.ts               # TypeScript Project interface
 ```
 
 ---
 
-## ⚡ Menjalankan Secara Lokal
+## Running Locally
 
-1. **Kloning repositori:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/DimasBrahmantya/dimas-porto.git
    cd dimas-porto
    ```
 
-2. **Instal dependensi:**
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Jalankan server pengembangan:**
+3. **Configure environment variables (optional, for `/api/contact`):**
+   Copy `.env.example` to `.env.local` and set `RESEND_API_KEY` (or `FORMSPREE_ENDPOINT`) and `CONTACT_RECIPIENT_EMAIL`.
+
+4. **Start the development server:**
    ```bash
    npm run dev
    ```
-   Buka [http://localhost:3000](http://localhost:3000) di browser.
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-4. **Build produksi & lint:**
+5. **Test, lint, and build:**
    ```bash
-   npm run build
+   npm test
    npm run lint
+   npm run build
    ```
 
 ---
 
-## 📬 Kontak
+## Contact
 
 - **Email:** [dimasbrahmantyaaryasena@gmail.com](mailto:dimasbrahmantyaaryasena@gmail.com)
 - **LinkedIn:** [Dimas Brahmantya Aryasena](https://www.linkedin.com/in/dimas-brahmantya-aryasena-169a51174/)

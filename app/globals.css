@@ -49,20 +49,6 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 35%, transparent 100%);
 }
 
-/* Lenis Recommended Helpers */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
 /* Custom Light Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

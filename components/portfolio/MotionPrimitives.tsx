@@ -477,7 +477,7 @@ export function LiveMalangClock({
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
       <span>
-        {compact ? "Jakarta Selatan" : "Jakarta Selatan, ID"}
+        {compact ? "South Jakarta" : "South Jakarta, ID"}
         {time ? ` · ${time} WIB` : " · WIB"}
       </span>
     </span>

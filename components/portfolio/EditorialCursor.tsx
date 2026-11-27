@@ -24,17 +24,28 @@ export function EditorialCursor() {
     if (prefersReduced || typeof window === "undefined") return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
+    let lastTarget: EventTarget | null = null;
+    let isVisible = false;
+
     const handleMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      setVisible(true);
+      if (!isVisible) {
+        isVisible = true;
+        setVisible(true);
+      }
 
-      const target = e.target as HTMLElement | null;
-      const cursorEl = target?.closest<HTMLElement>("[data-cursor]");
-      setLabel(cursorEl?.dataset.cursor || null);
+      if (e.target !== lastTarget) {
+        lastTarget = e.target;
+        const target = e.target as HTMLElement | null;
+        const cursorEl = target?.closest<HTMLElement>("[data-cursor]");
+        setLabel(cursorEl?.dataset.cursor || null);
+      }
     };
 
     const handleLeave = () => {
+      lastTarget = null;
+      isVisible = false;
       setVisible(false);
       setLabel(null);
     };

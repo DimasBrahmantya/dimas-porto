@@ -12,6 +12,7 @@ import {
 } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CV_HREF } from "@/lib/site";
 import { MagneticWrap } from "@/components/portfolio/MotionPrimitives";
 
 export type NavTab = "home" | "works" | "about" | "contact";
@@ -29,8 +30,6 @@ const navItems: { id: NavTab; label: string }[] = [
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
-
-const CV_HREF = "/CV%20Dimas%20Brahmantya%20Aryasena.pdf";
 
 export function Navbar({
   activeTab,
