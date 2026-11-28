@@ -348,7 +348,7 @@ export default function ProjectsPage() {
                   <div className="w-full relative overflow-hidden rounded-3xl bg-white border border-[#F9A8D4] p-7 sm:p-10 flex flex-col justify-between shadow-[0_10px_28px_-8px_rgba(17,18,22,0.07)]">
                     <div className="relative z-10 max-w-xl">
                       <Badge variant="pink" className="mb-4">
-                        SOUTH JAKARTA / ON-SITE / REMOTE / FREELANCE
+                        ON-SITE / REMOTE / FREELANCE
                       </Badge>
                       <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-[#111216] leading-tight">
                         Hiring a Full Stack
@@ -357,9 +357,9 @@ export default function ProjectsPage() {
                         </span>
                       </h2>
                       <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                        Based in South Jakarta and open for full-time Full
-                        Stack Developer &amp; Web Developer roles (on-site
-                        Jakarta or remote) and freelance web or UI/UX projects.
+                        Open for full-time Full Stack Developer &amp; Web
+                        Developer roles (on-site or remote) and freelance web or
+                        UI/UX projects.
                       </p>
                     </div>
 

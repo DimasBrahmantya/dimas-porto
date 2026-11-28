@@ -197,7 +197,7 @@ export function HeroSection({
                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                 </span>
                 <span className="text-xs sm:text-[13px] font-medium text-[#111216]">
-                  South Jakarta · Open to On-Site, Remote &amp; Freelance
+                  Open to On-Site, Remote &amp; Freelance
                 </span>
               </motion.div>
 
@@ -283,7 +283,7 @@ export function HeroSection({
               </p>
 
               <span className="mt-4 inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FCE7F3] text-[#9D174D] border border-[#F9A8D4] font-mono text-[11px] font-bold tracking-wider uppercase">
-                <TextScramble text="SOUTH JAKARTA | ON-SITE & REMOTE" />
+                <TextScramble text="INDONESIA | ON-SITE & REMOTE" />
               </span>
 
               <LiveMalangClock className="mt-2.5 text-[#5A6272]" />

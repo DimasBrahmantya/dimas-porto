@@ -18,7 +18,7 @@
 
 ## About
 
-Personal portfolio of **Dimas Brahmantya Aryasena (Dimas Bas)**, a Full-Stack & Web Developer based in **South Jakarta, Indonesia** (Informatics Engineering graduate, Universitas Muhammadiyah Malang). Built with **Next.js App Router (Turbopack)**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion** to showcase deployed web applications, backend systems, and UI/UX case studies.
+Personal portfolio of **Dimas Brahmantya Aryasena (Dimas Bas)**, a Full-Stack & Web Developer based in **Indonesia** (Informatics Engineering graduate, Universitas Muhammadiyah Malang). Built with **Next.js App Router (Turbopack)**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion** to showcase deployed web applications, backend systems, and UI/UX case studies.
 
 ---
 

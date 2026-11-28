@@ -246,7 +246,7 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
                 id="contact-subject"
                 type="text"
                 disabled={isSubmitting}
-                placeholder="Full-Stack role, Jakarta/remote opportunity, or freelance"
+                placeholder="Full-Stack role, on-site/remote opportunity, or freelance"
                 value={formData.subject}
                 onChange={(e) =>
                   setFormData({ ...formData, subject: e.target.value })

@@ -90,7 +90,7 @@ export function ProfileSection() {
                   Dimas Brahmantya Aryasena
                 </h3>
                 <p className="mt-3 text-sm text-[#272B35] leading-relaxed">
-                  Based in South Jakarta, Indonesia. Informatics
+                  Based in Indonesia. Informatics
                   Engineering graduate from Universitas Muhammadiyah Malang
                   focused on building and deploying full-stack web applications,
                   clean APIs, and responsive interfaces.

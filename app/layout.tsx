@@ -42,7 +42,7 @@ const ALTERNATE_NAMES = [
 const SITE_TITLE =
   "Dimas Brahmantya Aryasena (Dimas Bas) | Full Stack & Web Developer";
 const SITE_DESCRIPTION =
-  "Portfolio of Dimas Brahmantya Aryasena (Dimas Bas), Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in South Jakarta, with UI/UX prototyping as a supporting skill. Open to on-site Jakarta, remote, and freelance opportunities.";
+  "Portfolio of Dimas Brahmantya Aryasena (Dimas Bas), Full Stack Developer & Web Developer (Next.js, Laravel, TypeScript) based in Indonesia, with UI/UX prototyping as a supporting skill. Open to on-site, remote, and freelance opportunities.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
     FULL_NAME,
     ...ALTERNATE_NAMES,
     "Dimas Bas portfolio",
-    "Full Stack Developer Jakarta",
-    "Web Developer Jakarta",
+    "Full Stack Developer Indonesia",
+    "Web Developer Indonesia",
     "Next.js Developer",
     "Laravel Developer",
     "Universitas Muhammadiyah Malang",
@@ -136,8 +136,6 @@ const jsonLdPerson = {
   jobTitle: "Full Stack Developer & Web Developer",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "South Jakarta",
-    addressRegion: "Jakarta",
     addressCountry: "ID",
   },
   alumniOf: {

@@ -86,9 +86,9 @@ export function ContactSection({
                 </span>
               </h2>
               <p className="mt-4 text-sm sm:text-[15px] text-[#272B35] leading-relaxed max-w-lg">
-                Based in South Jakarta and open for Full Stack Developer &amp;
-                Web Developer roles (on-site Jakarta, remote, or freelance),
-                with UI/UX prototyping as a supporting skill.
+                Open for Full Stack Developer &amp; Web Developer roles
+                (on-site, remote, or freelance), with UI/UX prototyping as a
+                supporting skill.
               </p>
 
               {/* Spam-Protected Email Copy + Direct Message CTA */}
@@ -240,7 +240,7 @@ export function ContactSection({
           <span className="hidden sm:inline text-[#CBD2DF]" aria-hidden="true">
             |
           </span>
-          <span>Open to On-Site Jakarta &amp; Remote</span>
+          <span>Open to On-Site &amp; Remote</span>
           <MagneticWrap strength={0.16}>
             <button
               type="button"
